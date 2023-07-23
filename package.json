@@ -1,0 +1,24 @@
+{
+  "name": "paystackly",
+  "version": "0.0.1",
+  "description": "A simple to use library writing to simplify the use of the paystack api. Just call the methods on the Paystack Class and you're good to go",
+  "main": "index.js",
+  "dependencies": {
+    "dotenv": "^16.3.1"
+  },
+  "scripts": {
+    "build": "tsc -v && tsc -p tsconfig.json -w"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.3.5",
+    "@types/dotenv": "^8.2.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^20.4.4",
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
+    "typescript": "^5.1.6"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
