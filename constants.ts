@@ -2,7 +2,8 @@ import dotenv from "dotenv";
 import { HTTP_METHODS, PayStackQueryOptions } from "./types";
 dotenv.config();
 const { PAYSTACK_SK } = process.env;
-export const PAYSTACK_PATHS = {
+const PORT = 443;
+export const PAYSTACK_PATHS: { [key in string]: string } = {
   /** MISCELLANOUS */
   getBanks: "/bank",
   getCountries: "/country",
@@ -47,23 +48,23 @@ export const METHODS: { [key in HTTP_METHODS]: HTTP_METHODS } = {
   HEAD: "HEAD",
 };
 
-type Method = keyof typeof PAYSTACK_PATHS;
-const methods: Method[] = Object.keys(PAYSTACK_PATHS) as Method[];
+type PathKeys = keyof typeof PAYSTACK_PATHS;
+const PAYSTACK_PATH_KEYS: PathKeys[] = Object.keys(PAYSTACK_PATHS);
 
 export const getRequestData = (
   requestMethod: keyof typeof METHODS,
   path?: string,
-  body?: any,
-): { [key in Method]: PayStackQueryOptions } => {
-  const requestData: { [key in Method]: PayStackQueryOptions } = {} as any;
-  methods.forEach((method: Method) => {
+  body?: any
+): { [key in PathKeys]: PayStackQueryOptions } => {
+  const requestData: { [key in PathKeys]: PayStackQueryOptions } = {} as any;
+  PAYSTACK_PATH_KEYS.forEach((pathKey: PathKeys) => {
     const fullPath = path
-      ? `${PAYSTACK_PATHS[method]}${path}`
-      : PAYSTACK_PATHS[method];
+      ? `${PAYSTACK_PATHS[pathKey]}${path}`
+      : PAYSTACK_PATHS[pathKey];
 
-    requestData[method] = {
+    requestData[pathKey] = {
       hostname: PAYSTACK_ENDPOINT,
-      port: 443,
+      port: PORT,
       path: fullPath,
       method: requestMethod,
       headers: {
