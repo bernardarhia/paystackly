@@ -5,7 +5,6 @@ import {
   VerifyNumberQueryParams,
   VerifyNumberResponse,
   CardBINResponse,
-  TransactionResponse,
   ChargeAuthorizationPayload,
 } from "../types";
 import querystring from "querystring";
@@ -15,6 +14,7 @@ import { Charges } from "../charge/Charge";
 import { BulkCharges } from "../charge/BulkCharge";
 import { sendRequest } from "../utils";
 import { getRequestData } from "../constants";
+import { TransactionResponse } from "../types/transaction";
 abstract class PayStackBase {
   abstract getBanks(
     queryParams: GetBanksQueryParams,

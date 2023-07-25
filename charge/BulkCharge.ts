@@ -1,5 +1,5 @@
 import { getRequestData } from "../constants";
-import { BulkChargeListsQuery, BulkChargeListsReponse, BulkChargesPayload, BulkChargesResponse } from "../types";
+import { BulkChargeListsQuery, BulkChargeListsReponse, BulkChargesPayload, BulkChargesResponse } from "../types/charge";
 import { sendRequest } from "../utils";
 import querystring from "querystring";
 

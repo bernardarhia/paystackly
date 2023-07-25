@@ -11,7 +11,7 @@ import {
   TransactionTimelineResponse,
   TransactionTotalQueryParams,
   TransactionTotalResponse,
-} from "../types";
+} from "../types/transaction";
 import { sendRequest } from "../utils";
 
 abstract class TransactionBase {

@@ -1,5 +1,5 @@
 import { getRequestData } from "../constants";
-import { TransactionResponse } from "../types";
+import { TransactionResponse } from "../types/transaction";
 import { sendRequest } from "../utils";
 import {
   BaseChargeResponse,
@@ -12,7 +12,7 @@ import {
   SubmitChargeOTPPayload,
   SubmitChargePhonePayload,
   SubmitChargePinPayload,
-} from "../types";
+} from "../types/charge";
 
 export class Charges {
   async chargeWithMobileMoney(

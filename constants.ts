@@ -32,6 +32,7 @@ export const PAYSTACK_PATHS: { [key in string]: string } = {
   /** BULK CHARGES ENDPOINT */
   createBulkCharge: "/bulkcharge",
   listBulkCharges: "/bulkcharge",
+  fetchBulkChargeBatch: "/bulkcharge/:id",
   /** TRANSFER ENDPOINT */
   initializeTransfer: "/transferrecipient",
   createTransfer: "/transfer",

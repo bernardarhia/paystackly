@@ -1,5 +1,5 @@
 import { getRequestData } from "../constants";
-import { CreateFinalizeTransferPayload, CreateTransferPayload, CreateTransferResponse, InitializeTransferPayload, InitializeTransferWithAuthorizationPayload, TransferInitializeResponse } from "../types";
+import { CreateFinalizeTransferPayload, CreateTransferPayload, CreateTransferResponse, InitializeTransferPayload, InitializeTransferWithAuthorizationPayload, TransferInitializeResponse } from "../types/transfer";
 import { sendRequest } from "../utils";
 export class Transfer {
   async initializeWithMobileMoney(
