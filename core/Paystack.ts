@@ -35,7 +35,6 @@ abstract class PayStackBase {
 
 const BaseClasses = [Transaction, Transfer, Charges, BulkCharges, Refund];
 export class PayStack extends PayStackBase {
-  protected token: string;
   readonly transaction: Transaction;
   readonly transfer: Transfer;
   readonly charges: Charges;
