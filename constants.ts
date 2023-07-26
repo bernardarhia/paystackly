@@ -29,7 +29,8 @@ type PATH_KEYS =
   | "refund"
   | "initializeTransfer"
   | "createTransfer"
-  | "finalizeTransfer";
+  | "finalizeTransfer"
+  | "integration";
 
 // Define PAYSTACK_PATHS object type using mapped types
 type PAYSTACK_PATHS_TYPE = { [key in PATH_KEYS]: string };
@@ -71,6 +72,9 @@ export const PAYSTACK_PATHS: PAYSTACK_PATHS_TYPE = {
   initializeTransfer: "/transferrecipient",
   createTransfer: "/transfer",
   finalizeTransfer: "/transfer/finalize_transfer",
+
+  /** INTEGRATIONS ENDPOINT */
+  integration: "/integration/payment_session_timeout"
 } as const;
 
 

@@ -15,6 +15,7 @@ import { formatQueryParams, sendRequest } from "../utils";
 import { getRequestData } from "../constants";
 import { TransactionResponse } from "../types/transaction";
 import { Refund } from "../refund/Refund";
+import { Integration } from "../integration/Integration";
 abstract class PayStackBase {
   abstract getBanks(
     queryParams: GetBanksQueryParams
@@ -33,13 +34,21 @@ abstract class PayStackBase {
   ): Promise<TransactionResponse>;
 }
 
-const BaseClasses = [Transaction, Transfer, Charges, BulkCharges, Refund];
+const BaseClasses = [
+  Transaction,
+  Transfer,
+  Charges,
+  BulkCharges,
+  Refund,
+  Integration,
+];
 export class PayStack extends PayStackBase {
   readonly transaction: Transaction;
   readonly transfer: Transfer;
   readonly charges: Charges;
   readonly bulkCharges: BulkCharges;
   readonly refund: Refund;
+  readonly integration: Integration;
   constructor() {
     super();
     for (const baseClass of BaseClasses) {
