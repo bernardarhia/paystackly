@@ -18,7 +18,7 @@ abstract class BaseRefund {
 export class Refund extends BaseRefund {
   async create(payload: RefundPayload): Promise<RefundResponse> {
     return await sendRequest<RefundResponse>(
-        getRequestData("POST", null, payload).createRefund
+        getRequestData("POST", null, payload).refund
       );
   }
   
@@ -26,16 +26,16 @@ export class Refund extends BaseRefund {
     let formattedQueryString: string = formatQueryParams(queryParams);
 
     return await sendRequest<ListRefundResponseData>(
-        getRequestData("GET", formattedQueryString).listRefund
+        getRequestData("GET", formattedQueryString).refund
       );
   }
-    /**
+  /**
    *
    * @param reference  - reference from refund
    */
   async fetch(param: FetchRefundParam): Promise<FetchReFundReponse> {
     return await sendRequest<FetchReFundReponse>(
-        getRequestData("GET", `/${param.reference}`).fetchRefund
+        getRequestData("GET", `/${param.reference}`).refund
       );
   }
 }

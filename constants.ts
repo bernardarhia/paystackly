@@ -25,12 +25,8 @@ type PATH_KEYS =
   | "submitBirthday"
   | "submitAddress"
   | "checkStatus"
-  | "createBulkCharge"
-  | "listBulkCharges"
-  | "fetchBulkChargeBatch"
-  | "createRefund"
-  | "listRefund"
-  | "fetchRefund"
+  | "bulkCharge"
+  | "refund"
   | "initializeTransfer"
   | "createTransfer"
   | "finalizeTransfer";
@@ -66,19 +62,15 @@ export const PAYSTACK_PATHS: PAYSTACK_PATHS_TYPE = {
   checkStatus: "/charge",
 
   /** BULK CHARGES ENDPOINT */
-  createBulkCharge: "/bulkcharge",
-  listBulkCharges: "/bulkcharge",
-  fetchBulkChargeBatch: "/bulkcharge",
+  bulkCharge: "/bulkcharge",
 
   /** REFUND ENDPOINT*/
-  createRefund: "/refund",
-  listRefund: "/refund",
-  fetchRefund: "refund",
+  refund: "/refund",
 
   /** TRANSFER ENDPOINT */
   initializeTransfer: "/transferrecipient",
   createTransfer: "/transfer",
-  finalizeTransfer: "/finalize_transfer",
+  finalizeTransfer: "/transfer/finalize_transfer",
 } as const;
 
 

@@ -151,9 +151,6 @@ type BulkChargesList = {
 
 export type BulkChargeListsReponse = BasePaystackResponse & BulkChargesList;
 
-export type FetchBulkChargeBatchParam = {
-  id_or_code: string;
-};
 
 export interface FetchBulkChargeBatchResponse extends BasePaystackResponse {
   data: {
@@ -165,5 +162,81 @@ export interface FetchBulkChargeBatchResponse extends BasePaystackResponse {
     pending_charges: number;
     createdAt: string;
     updatedAt: string;
+  };
+}
+export interface FetchChargesInBatch extends BaseQuery{
+  /**
+   * Either one of these values: pending, success or failed
+   */
+  status?: "pending"|"success"|"failed"
+}
+interface BulkChargeItem {
+  integration: number;
+  bulkcharge: number;
+  customer: {
+    id: number;
+    first_name: string | null;
+    last_name: string | null;
+    email: string;
+    customer_code: string;
+    phone: string | null;
+    metadata: any | null;
+    risk_action: string;
+  };
+  authorization: {
+    authorization_code: string;
+    bin: string;
+    last4: string;
+    exp_month: string;
+    exp_year: string;
+    channel: string;
+    card_type: string;
+    bank: string;
+    country_code: string;
+    brand: string;
+    reusable: boolean;
+    account_name: string;
+  };
+  transaction: {
+    id: number;
+    domain: string;
+    status: string;
+    reference: string;
+    amount: number;
+    message: string | null;
+    gateway_response: string;
+    paid_at: string;
+    created_at: string;
+    channel: string;
+    currency: string;
+    ip_address: string | null;
+    metadata: string;
+    log: any | null;
+    fees: any | null;
+    fees_split: any | null;
+    customer: any;
+    authorization: any;
+    plan: any;
+    subaccount: any;
+    paidAt: string;
+    createdAt: string;
+  };
+  domain: string;
+  amount: number;
+  currency: string;
+  status: string;
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface FetchChargesInBatchResponse extends BasePaystackResponse{
+  data: BulkChargeItem[];
+  meta: {
+    total: number;
+    skipped: number;
+    perPage: number;
+    page: number;
+    pageCount: number;
   };
 }

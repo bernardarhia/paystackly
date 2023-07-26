@@ -14,7 +14,49 @@ import {
   SubmitChargePinPayload,
 } from "../types/charge";
 
-export class Charges {
+export abstract class BaseCharges {
+  abstract chargeWithMobileMoney(
+    payload: ChargeWithMobileMoneyPayload
+  ): Promise<BaseChargeResponse | TransactionResponse>;
+
+  abstract chargeWithBank(
+    payload: ChargeWithBankPayload
+  ): Promise<BaseChargeResponse | TransactionResponse>;
+
+  abstract chargeWithUssd(
+    payload: ChargeWithUSSDPayload
+  ): Promise<BaseChargeResponse | TransactionResponse>;
+
+  abstract chargeWithCard(
+    payload: ChargeWithCardPayload
+  ): Promise<BaseChargeResponse | TransactionResponse>;
+
+  abstract submitPin(
+    payload: SubmitChargePinPayload
+  ): Promise<BaseChargeResponse | TransactionResponse>;
+
+  abstract submitOTP(
+    payload: SubmitChargeOTPPayload
+  ): Promise<BaseChargeResponse | TransactionResponse>;
+
+  abstract submitPhone(
+    payload: SubmitChargePhonePayload
+  ): Promise<BaseChargeResponse | TransactionResponse>;
+
+  abstract submitBirthday(
+    payload: SubmitChargeBirthdayPayload
+  ): Promise<BaseChargeResponse | TransactionResponse>;
+
+  abstract submitAddress(
+    payload: SubmitChargeAddressPayload
+  ): Promise<BaseChargeResponse | TransactionResponse>;
+
+  abstract checkStatus(
+    reference: string
+  ): Promise<TransactionResponse>;
+}
+
+export class Charges extends BaseCharges {
   async chargeWithMobileMoney(
     payload: ChargeWithMobileMoneyPayload,
   ): Promise<BaseChargeResponse | TransactionResponse> {
