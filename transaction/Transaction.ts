@@ -1,4 +1,3 @@
-import querystring from "querystring";
 import { getRequestData } from "../constants";
 import {
   ExportTransactionQueryParams,
@@ -12,7 +11,7 @@ import {
   TransactionTotalQueryParams,
   TransactionTotalResponse,
 } from "../types/transaction";
-import { sendRequest } from "../utils";
+import { formatQueryParams, sendRequest } from "../utils";
 
 abstract class TransactionBase {
   abstract initialize(
@@ -38,7 +37,7 @@ abstract class TransactionBase {
 export class Transaction extends TransactionBase {
   async initialize(
     payload: InitializePaymentPayload,
-  ): Promise<InitializePaymentResponse | any> {
+  ): Promise<InitializePaymentResponse> {
     const body: Record<string, string | number | any> = {
       ...payload,
       amount: payload.amount * 100,
@@ -60,11 +59,8 @@ export class Transaction extends TransactionBase {
   async list(
     params: ListTransactionsQuery,
   ): Promise<ListTransactionsResponse | null> {
-    let formattedQueryString: string;
-
-    if (params && Object.keys(params).length) {
-      formattedQueryString = `?${querystring.stringify(params as any)}`;
-    }
+    let formattedQueryString: string = formatQueryParams(params);
+    
     return await sendRequest<ListTransactionsResponse>(
       getRequestData("GET", formattedQueryString).listTransactions,
     );
@@ -91,11 +87,8 @@ export class Transaction extends TransactionBase {
   async total(
     params: TransactionTotalQueryParams,
   ): Promise<TransactionTotalResponse> {
-    let formattedQueryString: string;
+    let formattedQueryString: string = formatQueryParams(params);
 
-    if (params && Object.keys(params).length) {
-      formattedQueryString = `?${querystring.stringify(params as any)}`;
-    }
     return await sendRequest<TransactionTotalResponse>(
       getRequestData("GET", formattedQueryString).transactionTotal,
     );
@@ -103,11 +96,7 @@ export class Transaction extends TransactionBase {
   async export(
     params: ExportTransactionQueryParams,
   ): Promise<ExportTransactionResponse> {
-    let formattedQueryString: string;
-
-    if (params && Object.keys(params).length) {
-      formattedQueryString = `?${querystring.stringify(params as any)}`;
-    }
+    let formattedQueryString: string = formatQueryParams(params);
     return await sendRequest<ExportTransactionResponse>(
       getRequestData("GET", formattedQueryString).exportTransaction,
     );

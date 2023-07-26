@@ -1,6 +1,13 @@
 import https, { RequestOptions } from "https";
-import { PayStackQueryOptions } from "./types";
+import querystring from "querystring";
+import { GetBanksQueryParams, PayStackQueryOptions, VerifyNumberQueryParams } from "./types";
 import { IncomingMessage } from "http";
+import { ListRefundQuery } from "./types/refund";
+import {
+  ExportTransactionQueryParams,
+  ListTransactionsQuery,
+  TransactionTotalQueryParams,
+} from "./types/transaction";
 export function sendRequest<T>(options: PayStackQueryOptions): Promise<T> {
   const body = options?.body ?? {};
   delete options?.body;
@@ -35,4 +42,20 @@ export function sendRequest<T>(options: PayStackQueryOptions): Promise<T> {
 
     req.end();
   });
+}
+
+type FormatQuery =
+  | ListRefundQuery
+  | ListTransactionsQuery
+  | TransactionTotalQueryParams
+  | ExportTransactionQueryParams
+  |VerifyNumberQueryParams
+  | GetBanksQueryParams;
+export function formatQueryParams(params: FormatQuery): string {
+  let formattedQueryString: string = "";
+
+  if (params && Object.keys(params).length) {
+    formattedQueryString = `?${querystring.stringify(params as any)}`;
+  }
+  return formattedQueryString;
 }

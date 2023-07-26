@@ -146,26 +146,7 @@ export interface TransactionTimelineResponse extends BasePaystackResponse {
     };
   }
   
-  export interface TransactionTotalQueryParams {
-    /**
-     * Specify how many records you want to retrieve per page. If not specify we use a default value of 50.
-     */
-    perPage: number;
-    /**
-     * Specify exactly what page you want to retrieve. If not specify we use a default value of 1.
-     */
-  
-    page: number;
-    /**
-     * A timestamp from which to start listing transaction e.g. 2016-09-24T00:00:05.000Z, 2016-09-21
-     */
-  
-    from?: Date;
-    /**
-     * A timestamp at which to stop listing transaction e.g. 2016-09-24T00:00:05.000Z, 2016-09-21
-     */
-  
-    to?: Date;
+  export interface TransactionTotalQueryParams extends BaseQuery {
   }
   export interface TransactionTotalResponse extends BasePaystackResponse {
     data: {
@@ -183,25 +164,7 @@ export interface TransactionTimelineResponse extends BasePaystackResponse {
       }[];
     };
   }
-  export interface ExportTransactionQueryParams {
-    /**
-     * Specify how many records you want to retrieve per page. If not specify we use a default value of 50.
-     */
-    perPage: number;
-    /**
-     * Specify exactly what page you want to retrieve. If not specify we use a default value of 1.
-     */
-  
-    page: number;
-    /**
-     * A timestamp from which to start listing transaction e.g. 2016-09-24T00:00:05.000Z, 2016-09-21
-     */
-  
-    from?: Date;
-    /**
-     * A timestamp at which to stop listing transaction e.g. 2016-09-24T00:00:05.000Z, 2016-09-21
-     */
-    to?: Date;
+  export interface ExportTransactionQueryParams extends BaseQuery {
     /**
      *Specify an ID for the customer whose transactions you want to retrieve
      */

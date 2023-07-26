@@ -1,9 +1,16 @@
 import { getRequestData } from "../constants";
-import { CreateFinalizeTransferPayload, CreateTransferPayload, CreateTransferResponse, InitializeTransferPayload, InitializeTransferWithAuthorizationPayload, TransferInitializeResponse } from "../types/transfer";
+import {
+  CreateFinalizeTransferPayload,
+  CreateTransferPayload,
+  CreateTransferResponse,
+  InitializeTransferPayload,
+  InitializeTransferWithAuthorizationPayload,
+  TransferInitializeResponse,
+} from "../types/transfer";
 import { sendRequest } from "../utils";
 export class Transfer {
   async initializeWithMobileMoney(
-    payload: InitializeTransferPayload,
+    payload: InitializeTransferPayload
   ): Promise<TransferInitializeResponse> {
     return await this.initializeTransferRecipient(payload);
   }
@@ -11,31 +18,31 @@ export class Transfer {
     return await this.initializeTransferRecipient(payload);
   }
   async initializeWithAuthorizationCode(
-    payload: InitializeTransferWithAuthorizationPayload,
+    payload: InitializeTransferWithAuthorizationPayload
   ): Promise<any> {
     return await this.initializeTransferRecipient(payload);
   }
   private async initializeTransferRecipient(
     payload:
       | InitializeTransferWithAuthorizationPayload
-      | InitializeTransferPayload,
+      | InitializeTransferPayload
   ): Promise<TransferInitializeResponse> {
     return await sendRequest<TransferInitializeResponse>(
-      getRequestData("POST", null, payload).initializeTransfer,
+      getRequestData("POST", null, payload).initializeTransfer
     );
   }
   async create(
-    payload: CreateTransferPayload,
+    payload: CreateTransferPayload
   ): Promise<CreateTransferResponse> {
     return await sendRequest<CreateTransferResponse>(
-      getRequestData("POST", null, payload).createTransfer,
+      getRequestData("POST", null, payload).createTransfer
     );
   }
   async finalize(
-    payload: CreateFinalizeTransferPayload,
+    payload: CreateFinalizeTransferPayload
   ): Promise<CreateTransferResponse> {
     return await sendRequest<CreateTransferResponse>(
-      getRequestData("POST", null, payload).finalizeTransfer,
+      getRequestData("POST", null, payload).finalizeTransfer
     );
   }
 }
