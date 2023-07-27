@@ -6,6 +6,8 @@ import {
   InitializePaymentResponse,
   ListTransactionsQuery,
   ListTransactionsResponse,
+  PartialDebitPayload,
+  PartialDebitResponse,
   TransactionResponse,
   TransactionTimelineResponse,
   TransactionTotalQueryParams,
@@ -22,7 +24,7 @@ abstract class TransactionBase {
     params: ListTransactionsQuery,
   ): Promise<ListTransactionsResponse>;
   abstract fetch(id: number | string): Promise<TransactionResponse>;
-  abstract readTimeline(
+  abstract viewTransactionTimeline(
     id: number | string,
   ): Promise<TransactionTimelineResponse>;
   abstract total(
@@ -32,6 +34,7 @@ abstract class TransactionBase {
   abstract export(
     params: ExportTransactionQueryParams,
   ): Promise<ExportTransactionResponse>;
+  abstract partialDebit(payload: PartialDebitPayload): Promise<PartialDebitResponse>
 }
 
 export class Transaction extends TransactionBase {
@@ -79,7 +82,7 @@ export class Transaction extends TransactionBase {
    *
    * @param reference  - id or reference number from transaction
    */
-  async readTimeline(id: string): Promise<TransactionTimelineResponse> {
+  async viewTransactionTimeline(id: string): Promise<TransactionTimelineResponse> {
     return await sendRequest<TransactionTimelineResponse>(
       getRequestData("GET", `/${id}`).readTransactionTimeLine,
     );
@@ -101,4 +104,13 @@ export class Transaction extends TransactionBase {
       getRequestData("GET", formattedQueryString).exportTransaction,
     );
   }
+async partialDebit(payload: PartialDebitPayload): Promise<PartialDebitResponse> {
+  const body: Record<string, string | number | any> = {
+    ...payload,
+    amount: +payload.amount * 100,
+  };
+  return await sendRequest<PartialDebitResponse>(
+    getRequestData("POST", null, body).initializeTransaction,
+  );
+}
 }

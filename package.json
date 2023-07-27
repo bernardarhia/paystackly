@@ -7,7 +7,8 @@
     "dotenv": "^16.3.1"
   },
   "scripts": {
-    "build": "tsc -v && tsc -p tsconfig.json -w"
+    "build": "tsc -v && tsc -p tsconfig.json -w",
+    "lint": "tsc"
   },
   "devDependencies": {
     "@types/chai": "^4.3.5",

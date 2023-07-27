@@ -202,3 +202,38 @@ export interface TransactionTimelineResponse extends BasePaystackResponse {
     expireAt: Date;
   }
   
+  export interface PartialDebitPayload {
+    /**
+     * Authorization Code
+     */
+    authorization_code: string;
+  
+    /**
+     * Specify the currency you want to debit. Allowed values are NGN, GHS, ZAR, or USD.
+     */
+    currency: 'NGN' | 'GHS' | 'ZAR' | 'USD';
+  
+    /**
+     * Amount should be in kobo if currency is NGN, pesewas if currency is GHS, and cents if currency is ZAR.
+     */
+    amount: string;
+  
+    /**
+     * Customer's email address (attached to the authorization code).
+     */
+    email: string;
+  
+    /**
+     * Unique transaction reference. Only -, ., =, and alphanumeric characters allowed.
+     */
+    reference?: string;
+  
+    /**
+     * (Optional) The minimum amount that should be charged. 
+     * This is useful if you want to enforce a minimum transaction amount.
+     */
+    at_least?: string;
+  }
+
+  type PartialDebitResponseExclusion =  "pos_transaction_data" | "source" | "fees_breakdown" | "plan_object" | "subaccount" | "plan" | "paidAt" | "createdAt" | "requested_amount";
+  export interface PartialDebitResponse extends Omit<TransactionResponse, PartialDebitResponseExclusion>{}
