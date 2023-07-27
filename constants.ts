@@ -30,7 +30,8 @@ type PATH_KEYS =
   | "initializeTransfer"
   | "createTransfer"
   | "finalizeTransfer"
-  | "integration";
+  | "integration"
+  | "applePay";
 
 // Define PAYSTACK_PATHS object type using mapped types
 type PAYSTACK_PATHS_TYPE = { [key in PATH_KEYS]: string };
@@ -74,7 +75,10 @@ export const PAYSTACK_PATHS: PAYSTACK_PATHS_TYPE = {
   finalizeTransfer: "/transfer/finalize_transfer",
 
   /** INTEGRATIONS ENDPOINT */
-  integration: "/integration/payment_session_timeout"
+  integration: "/integration/payment_session_timeout",
+  
+  /** APPLE PAY */
+   applePay: "/apple-pay/dmoain"
 } as const;
 
 

@@ -110,7 +110,7 @@ async partialDebit(payload: PartialDebitPayload): Promise<PartialDebitResponse> 
     amount: +payload.amount * 100,
   };
   return await sendRequest<PartialDebitResponse>(
-    getRequestData("POST", null, body).initializeTransaction,
+    getRequestData("POST", "/partial_debit", body).listTransactions,
   );
 }
 }

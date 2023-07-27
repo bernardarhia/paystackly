@@ -16,6 +16,7 @@ import { getRequestData } from "../constants";
 import { TransactionResponse } from "../types/transaction";
 import { Refund } from "../refund/Refund";
 import { Integration } from "../integration/Integration";
+import { ApplePay } from "../apple-pay/ApplePay";
 abstract class PayStackBase {
   abstract getBanks(
     queryParams: GetBanksQueryParams
@@ -41,6 +42,7 @@ const BaseClasses = [
   BulkCharges,
   Refund,
   Integration,
+  ApplePay,
 ];
 export class PayStack extends PayStackBase {
   readonly transaction: Transaction;
@@ -49,6 +51,7 @@ export class PayStack extends PayStackBase {
   readonly bulkCharges: BulkCharges;
   readonly refund: Refund;
   readonly integration: Integration;
+  readonly applePay: ApplePay;
   constructor() {
     super();
     for (const baseClass of BaseClasses) {
