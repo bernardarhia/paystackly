@@ -5,18 +5,17 @@ import {
   VerifyNumberQueryParams,
   VerifyNumberResponse,
   CardBINResponse,
-  ChargeAuthorizationPayload,
 } from "../types";
 import { Transaction } from "../transaction/Transaction";
 import { Transfer } from "../transfer/Transfer";
 import { Charges } from "../charge/Charge";
 import { BulkCharges } from "../charge/BulkCharge";
-import { formatQueryParams, sendRequest } from "../utils";
+import { formatQueryParams, sendRequest, transformToCamelCase } from "../utils";
 import { getRequestData } from "../constants";
-import { TransactionResponse } from "../types/transaction";
 import { Refund } from "../refund/Refund";
 import { Integration } from "../integration/Integration";
 import { ApplePay } from "../apple-pay/ApplePay";
+import { TransactionSplit } from "../transaction-split/TransactionSplit";
 abstract class PayStackBase {
   abstract getBanks(
     queryParams: GetBanksQueryParams
@@ -29,10 +28,6 @@ abstract class PayStackBase {
   ): Promise<VerifyNumberResponse>;
 
   abstract verifyCardBIN(binNumber: string): Promise<CardBINResponse>;
-
-  abstract chargeAuthorization(
-    payload: ChargeAuthorizationPayload
-  ): Promise<TransactionResponse>;
 }
 
 const BaseClasses = [
@@ -43,6 +38,7 @@ const BaseClasses = [
   Refund,
   Integration,
   ApplePay,
+  TransactionSplit,
 ];
 export class PayStack extends PayStackBase {
   readonly transaction: Transaction;
@@ -52,10 +48,11 @@ export class PayStack extends PayStackBase {
   readonly refund: Refund;
   readonly integration: Integration;
   readonly applePay: ApplePay;
+  readonly transactionSplit: TransactionSplit;
   constructor() {
     super();
     for (const baseClass of BaseClasses) {
-      const className = baseClass.name.toLowerCase();
+      const className = transformToCamelCase(baseClass.name);
       this[className] = new baseClass();
     }
   }
@@ -86,18 +83,6 @@ export class PayStack extends PayStackBase {
     let path = `/${binNumber}`;
     return await sendRequest<CardBINResponse>(
       getRequestData("GET", path).verifyCardBIN
-    );
-  }
-
-  async chargeAuthorization(
-    payload: ChargeAuthorizationPayload
-  ): Promise<TransactionResponse> {
-    const body: Record<string, string | number | any> = {
-      ...payload,
-      amount: payload.amount * 100,
-    };
-    return await sendRequest<TransactionResponse>(
-      getRequestData("POST", null, body).chargeAuthorization
     );
   }
 }

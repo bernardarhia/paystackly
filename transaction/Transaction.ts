@@ -1,4 +1,5 @@
 import { getRequestData } from "../constants";
+import { ChargeAuthorizationPayload } from "../types";
 import {
   ExportTransactionQueryParams,
   ExportTransactionResponse,
@@ -24,6 +25,10 @@ abstract class TransactionBase {
     params: ListTransactionsQuery,
   ): Promise<ListTransactionsResponse>;
   abstract fetch(id: number | string): Promise<TransactionResponse>;
+
+  abstract chargeAuthorization(
+    payload: ChargeAuthorizationPayload
+  ): Promise<TransactionResponse>;
   abstract viewTransactionTimeline(
     id: number | string,
   ): Promise<TransactionTimelineResponse>;
@@ -78,6 +83,18 @@ export class Transaction extends TransactionBase {
     );
   }
 
+
+  async chargeAuthorization(
+    payload: ChargeAuthorizationPayload
+  ): Promise<TransactionResponse> {
+    const body: Record<string, string | number | any> = {
+      ...payload,
+      amount: payload.amount * 100,
+    };
+    return await sendRequest<TransactionResponse>(
+      getRequestData("POST", null, body).chargeAuthorization
+    );
+  }
   /**
    *
    * @param reference  - id or reference number from transaction

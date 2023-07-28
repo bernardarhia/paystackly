@@ -31,7 +31,9 @@ type PATH_KEYS =
   | "createTransfer"
   | "finalizeTransfer"
   | "integration"
-  | "applePay";
+  | "applePay"
+  | "transactionSplit"
+  | "subaccount";
 
 // Define PAYSTACK_PATHS object type using mapped types
 type PAYSTACK_PATHS_TYPE = { [key in PATH_KEYS]: string };
@@ -76,11 +78,14 @@ export const PAYSTACK_PATHS: PAYSTACK_PATHS_TYPE = {
 
   /** INTEGRATIONS ENDPOINT */
   integration: "/integration/payment_session_timeout",
-  
-  /** APPLE PAY */
-   applePay: "/apple-pay/dmoain"
-} as const;
 
+  /** APPLE PAY */
+  applePay: "/apple-pay/domain",
+
+  //** TRANSACTION SPLIT */
+  transactionSplit: "/split",
+  subaccount: "/subaccount"
+} as const;
 
 export const PAYSTACK_ENDPOINT = "api.paystack.co";
 export const METHODS: { [key in HTTP_METHODS]: HTTP_METHODS } = {
@@ -92,8 +97,9 @@ export const METHODS: { [key in HTTP_METHODS]: HTTP_METHODS } = {
   HEAD: "HEAD",
 };
 
-
-const PAYSTACK_PATH_KEYS: PATH_KEYS[] = Object.keys(PAYSTACK_PATHS) as PATH_KEYS[];
+const PAYSTACK_PATH_KEYS: PATH_KEYS[] = Object.keys(
+  PAYSTACK_PATHS
+) as PATH_KEYS[];
 
 export const getRequestData = (
   requestMethod: keyof typeof METHODS,

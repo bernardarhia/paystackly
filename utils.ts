@@ -59,3 +59,6 @@ export function formatQueryParams(params: FormatQuery): string {
   }
   return formattedQueryString;
 }
+export function transformToCamelCase(input: string) {
+  return input.replace(/^[A-Z]/, (match) => match.toLowerCase());
+}
