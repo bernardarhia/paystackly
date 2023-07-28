@@ -8,12 +8,11 @@ import {
   ListTransactionsQuery,
   TransactionTotalQueryParams,
 } from "./types/transaction";
-export function sendRequest<T>(options: PayStackQueryOptions): Promise<T> {
+export function sendRequest<T>(options: PayStackQueryOptions): Promise<T| null> {
   const body = options?.body ?? {};
   delete options?.body;
   return new Promise<T>((resolve, reject) => {
     let responseData = "";
-
     const req = https.request(
       options as RequestOptions,
       (res: IncomingMessage) => {
@@ -23,7 +22,7 @@ export function sendRequest<T>(options: PayStackQueryOptions): Promise<T> {
 
         res.on("end", () => {
           try {
-            const parsedData = JSON.parse(responseData) as T;
+            const parsedData = responseData ? JSON.parse(responseData) as T : null;
             resolve(parsedData);
           } catch (error) {
             reject(error);

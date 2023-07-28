@@ -15,9 +15,9 @@ export interface PayStackQueryOptions {
 type BankType = "nuban";
 type PayStackCurrency = "NGN" | "GHS" | "ZAR" | "USD";
 type HTTP_METHODS = "GET" | "HEAD" | "POST" | "PUT" | "PATH" | "DELETE";
-type Country = "ghana"|"nigeria"|"south africa"
-type CardBrand =  "American Express" | "Discover" | " Mastercard" | "Visa"
-type GhanaBankCodes = 
+type Country = "ghana" | "nigeria" | "south africa";
+type CardBrand = "American Express" | "Discover" | " Mastercard" | "Visa";
+type GhanaBankCodes =
   | "030100" /* Absa Bank Ghana Ltd */
   | "280100" /* Access Bank */
   | "080100" /* ADB Bank Limited */
@@ -176,7 +176,7 @@ type NigerianBankCodes =
   | "035" /* Wema Bank */
   | "057" /* Zenith Bank */;
 
-  type SouthAfricanBankCodes =
+type SouthAfricanBankCodes =
   | "632005" /* Absa Bank Limited, South Africa */
   | "430000" /* African Bank Limited */
   | "800000" /* Albaraka Bank */
@@ -207,7 +207,10 @@ type NigerianBankCodes =
   | "431010" /* Ubank Ltd */
   | "588000"; /* VBS Mutual Bank */
 
-  export type BankCodes = GhanaBankCodes | NigerianBankCodes | SouthAfricanBankCodes
+export type BankCodes =
+  | GhanaBankCodes
+  | NigerianBankCodes
+  | SouthAfricanBankCodes;
 export interface BaseGetBankResponse {
   name: string;
   slug: string;
@@ -432,11 +435,8 @@ export interface BasePaymentPayload {
   bearer?: string;
 }
 
-
-
-
-    export interface BaseQuery {
-        /**
+export interface BaseQuery {
+  /**
    * Specify how many records you want to retrieve per page. If not specify we use a default value of 50.
    */
   perPage?: number;
@@ -445,20 +445,27 @@ export interface BasePaymentPayload {
    */
 
   page?: number;
- 
-   /**
+
+  /**
    * A timestamp from which to start listing e.g. 2016-09-24T00:00:05.000Z, 2016-09-21
    */
 
   from?: Date;
 
-    /**
+  /**
    * A timestamp from which to end listing e.g. 2016-09-24T00:00:05.000Z, 2016-09-21
    */
   to?: Date;
-
-    }
-
+}
+export interface PaginationMetadata {
+  meta: {
+    total: number;
+    skipped: number;
+    perPage: number;
+    page: number;
+    pageCount: number;
+  };
+}
 export interface ChargeAuthorizationPayload extends BasePaymentPayload {
   /**
    * Valid authorization code to charge
@@ -473,4 +480,3 @@ export interface ChargeAuthorizationPayload extends BasePaymentPayload {
    */
   queue?: boolean;
 }
-

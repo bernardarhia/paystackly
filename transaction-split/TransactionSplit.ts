@@ -1,4 +1,5 @@
 import { getRequestData } from "../constants";
+import { HTTP_METHODS } from "../types";
 import {
   CreateTransactionSplitPayload,
   CreateTransactionSplitResponse,
@@ -65,7 +66,7 @@ export class TransactionSplit extends BaseTransactionSplit {
     return this.sameRequest<
       UpdateTransactionSplitPayload,
       UpdateTransactionSplit
-    >(payload);
+    >(payload, null, "PUT");
   }
 
   async addSubAccount(
@@ -97,13 +98,14 @@ export class TransactionSplit extends BaseTransactionSplit {
 
   private async sameRequest<P extends { id: string }, T>(
     payload: P,
-    url?: string
+    url?: string,
+    method: HTTP_METHODS = "POST"
   ): Promise<T> {
     const id = payload.id;
     delete payload.id;
     const fullUrl = url && url.length ? `${id}/${url}` : id;
     return await sendRequest<T>(
-      getRequestData("POST", `/${fullUrl}`, payload).chargeAuthorization
+      getRequestData(method, `/${fullUrl}`, payload).chargeAuthorization
     );
   }
 }

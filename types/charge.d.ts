@@ -1,6 +1,6 @@
 /** ===========CHARGE============= */
 
-import { BasePaystackResponse, BaseQuery } from ".";
+import { BasePaystackResponse, BaseQuery, PaginationMetadata } from ".";
 
 export interface BaseChargePayload {
   /**
@@ -129,27 +129,18 @@ export type BulkChargesResponse = BasePaystackResponse & {
 
 export type BulkChargeListsQuery = BaseQuery;
 
-type BulkChargesData = {
+interface BulkChargesData {
   domain: string;
   batch_code: string;
   status: string;
   id: number;
   createdAt: string;
   updatedAt: string;
-};
+}
 
-type BulkChargesList = {
+interface BulkChargeListsReponse extends BasePaystackResponse, PaginationMetadata{
   data: BulkChargesData[];
-  meta: {
-    total: number;
-    skipped: number;
-    perPage: number;
-    page: number;
-    pageCount: number;
-  };
-};
-
-export type BulkChargeListsReponse = BasePaystackResponse & BulkChargesList;
+}
 
 
 export interface FetchBulkChargeBatchResponse extends BasePaystackResponse {
@@ -230,13 +221,6 @@ interface BulkChargeItem {
   updatedAt: string;
 }
 
-export interface FetchChargesInBatchResponse extends BasePaystackResponse{
+export interface FetchChargesInBatchResponse extends BasePaystackResponse, PaginationMetadata{
   data: BulkChargeItem[];
-  meta: {
-    total: number;
-    skipped: number;
-    perPage: number;
-    page: number;
-    pageCount: number;
-  };
 }

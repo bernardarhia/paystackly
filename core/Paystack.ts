@@ -16,6 +16,7 @@ import { Refund } from "../refund/Refund";
 import { Integration } from "../integration/Integration";
 import { ApplePay } from "../apple-pay/ApplePay";
 import { TransactionSplit } from "../transaction-split/TransactionSplit";
+import { SubAccount } from "../subaccounts/SubAccount";
 abstract class PayStackBase {
   abstract getBanks(
     queryParams: GetBanksQueryParams
@@ -39,6 +40,7 @@ const BaseClasses = [
   Integration,
   ApplePay,
   TransactionSplit,
+  SubAccount
 ];
 export class PayStack extends PayStackBase {
   readonly transaction: Transaction;
@@ -49,6 +51,7 @@ export class PayStack extends PayStackBase {
   readonly integration: Integration;
   readonly applePay: ApplePay;
   readonly transactionSplit: TransactionSplit;
+  readonly subAccount: SubAccount;
   constructor() {
     super();
     for (const baseClass of BaseClasses) {

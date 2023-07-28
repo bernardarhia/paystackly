@@ -1,4 +1,4 @@
-import { BasePaystackResponse, BaseQuery, PayStackCurrency } from ".";
+import { BasePaystackResponse, BaseQuery, PaginationMetadata, PayStackCurrency } from ".";
 
 type TransactionSplitBearerType =
   | "subaccount"
@@ -90,15 +90,8 @@ export interface ListTransactionSplitQuery extends BaseQuery {
   sort_by?: string;
 }
 
-export interface ListTransactionSplitResponse extends BasePaystackResponse {
+export interface ListTransactionSplitResponse extends BasePaystackResponse, PaginationMetadata {
   data: BaseTransactionSplitResponse[];
-  meta: {
-    total: number;
-    skipped: number;
-    perPage: number;
-    page: number;
-    pageCount: number;
-  };
 }
 
 export interface FetchTransactionSplitResponse
