@@ -1,5 +1,11 @@
 # paystackly
 
+## 0.0.7
+
+### Patch Changes
+
+- 7eaf8b0: maybe fix
+
 ## 0.0.6
 
 ### Patch Changes
