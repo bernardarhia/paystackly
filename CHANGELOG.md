@@ -1,5 +1,23 @@
 # paystackly
 
+## 0.0.5
+
+### Patch Changes
+
+- a15a3a1: biraj's help
+
+## 0.0.4
+
+### Patch Changes
+
+- 3f1a864: minor fix
+
+## 0.0.3
+
+### Patch Changes
+
+- 834d84b: trying to add all files from dist
+
 ## 0.0.2
 
 ### Patch Changes
