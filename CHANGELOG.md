@@ -1,5 +1,11 @@
 # paystackly
 
+## 0.0.5
+
+### Patch Changes
+
+- a15a3a1: biraj's help
+
 ## 0.0.4
 
 ### Patch Changes
