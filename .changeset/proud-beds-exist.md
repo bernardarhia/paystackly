@@ -1,5 +1,0 @@
----
-"paystackly": patch
----
-
-minor fix

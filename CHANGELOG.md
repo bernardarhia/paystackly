@@ -1,5 +1,11 @@
 # paystackly
 
+## 0.0.4
+
+### Patch Changes
+
+- 3f1a864: minor fix
+
 ## 0.0.3
 
 ### Patch Changes
