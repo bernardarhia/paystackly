@@ -1,5 +1,11 @@
 # paystackly
 
+## 0.2.7
+
+### Patch Changes
+
+- 4e2c292: new trial and proper export
+
 ## 0.2.6
 
 ### Patch Changes
