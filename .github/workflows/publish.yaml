@@ -44,5 +44,4 @@ jobs:
             echo "Changeset published!";
           else
             echo "No changeset published.";
-            exit 1;
             fi
