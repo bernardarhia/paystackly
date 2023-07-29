@@ -1,10 +1,11 @@
 {
     "diff": true,
-    "extension": ["js","ts"],
+    "extension": ["ts"],
     "package": "./package.json",
     "reporter": "spec",
     "slow": "75",
     "timeout": "15000",
     "ui": "bdd",
-    "watch-files": ["tests/**/*.ts"]
+    "watch-files": ["tests/**/*.ts"],
+    "exclude": ["**/*.d.ts"]
   }
