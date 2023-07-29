@@ -1,5 +1,11 @@
 # paystackly
 
+## 0.0.6
+
+### Patch Changes
+
+- 649ff4a: another trial on package types
+
 ## 0.0.5
 
 ### Patch Changes
