@@ -17,7 +17,8 @@
     "dev": "tsc -v && tsc -p tsconfig.json -w",
     "build": "tsc -p tsconfig.json",
     "lint": "tsc",
-    "ci": "npm run lint && npm run test && npm run build"
+    "ci": "npm run lint && npm run test && npm run build",
+    "release": "npm run ci && changeset version && changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.2",
