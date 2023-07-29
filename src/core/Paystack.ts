@@ -18,6 +18,15 @@ import { ApplePay } from "../apple-pay/ApplePay";
 import { TransactionSplit } from "../transaction-split/TransactionSplit";
 import { SubAccount } from "../subaccounts/SubAccount";
 abstract class PayStackBase {
+  abstract transaction: Transaction;
+  abstract transfer: Transfer;
+  abstract charges: Charges;
+  abstract bulkCharges: BulkCharges ;
+  abstract refund: Refund;
+  abstract integration: Integration ;
+  abstract applePay: ApplePay;
+  abstract transactionSplit: TransactionSplit ;
+  abstract subAccount: SubAccount;
   abstract getBanks(
     queryParams: GetBanksQueryParams
   ): Promise<GetBanksResponse>;
