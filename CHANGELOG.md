@@ -1,5 +1,11 @@
 # paystackly
 
+## 0.2.6
+
+### Patch Changes
+
+- c165973: changed types default export into root index file
+
 ## 0.2.5
 
 ### Patch Changes
