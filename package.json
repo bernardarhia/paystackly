@@ -9,7 +9,7 @@
     "dotenv": "^16.3.1"
   },
   "scripts": {
-    "test": "mocha --timeout 20000 --recursive build/tests/**  --exit",
+    "test": "mocha --timeout 20000 --recursive dist/tests/**  --exit",
     "dev": "tsc -v && tsc -p tsconfig.json -w",
     "build": "tsc -p tsconfig.json",
     "lint": "tsc",
