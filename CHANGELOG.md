@@ -1,5 +1,11 @@
 # paystackly
 
+## 0.2.2
+
+### Patch Changes
+
+- 659153c: trying new types method
+
 ## 0.2.1
 
 ### Patch Changes
