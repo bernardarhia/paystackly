@@ -1,0 +1,5 @@
+---
+"paystackly": patch
+---
+
+updated version
