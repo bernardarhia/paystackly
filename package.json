@@ -1,6 +1,6 @@
 {
   "name": "paystackly",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A simple to use library writing to simplify the use of the paystack api. Just call the methods on the Paystack Class and you're good to go",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
