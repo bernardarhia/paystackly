@@ -1,4 +1,28 @@
+# Node.js and npm
 node_modules/
-.env
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnp/
+.pnp.js
+
+# Build output and compiled files
+/dist/
+/lib/
+
+# IDE/Editor specific files
+.vscode/
+.idea/
+*.log
+
+# TypeScript declaration files
+*.d.ts
+
+# OS and editor generated files
+.DS_Store
+Thumbs.db
+
+# Ignore npm package cache
+.npm
+
 test.ts
-dist/*
