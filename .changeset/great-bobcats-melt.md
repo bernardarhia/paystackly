@@ -1,5 +1,0 @@
----
-"paystackly": minor
----
-
-minor change
