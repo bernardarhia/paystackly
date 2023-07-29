@@ -1,2 +1,2 @@
-import { PayStack } from "./Paystack";
-export default PayStack;
+export { PayStack } from "./Paystack";
+export * from "./types";
