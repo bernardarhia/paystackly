@@ -1,5 +1,23 @@
 # paystackly
 
+## 0.2.3
+
+### Patch Changes
+
+- 3bd3977: fixed failing test
+
+## 0.2.2
+
+### Patch Changes
+
+- 659153c: trying new types method
+
+## 0.2.1
+
+### Patch Changes
+
+- c709d24: removed types from shipping to client
+
 ## 0.2.0
 
 ### Minor Changes
