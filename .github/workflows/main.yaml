@@ -9,10 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: npm/action-setup@v2
-        with:
-          version: 7
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3 # Use setup-node instead of npm/action-setup
         with:
           node-version: 16.x
           cache: "npm"
