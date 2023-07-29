@@ -1,5 +1,11 @@
 # paystackly
 
+## 0.2.4
+
+### Patch Changes
+
+- c390050: new fix
+
 ## 0.2.3
 
 ### Patch Changes
