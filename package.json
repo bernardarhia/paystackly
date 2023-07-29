@@ -3,18 +3,11 @@
   "version": "0.0.5",
   "description": "A simple to use library writing to simplify the use of the paystack api. Just call the methods on the Paystack Class and you're good to go",
   "main": "dist/index.js",
-  "types": "types/index.d.ts",
+  "types": "dist/index.d.ts",
   "files": [
     "dist",
     "types"
   ],
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.js"
-    },
-    "./types": "./types/index.d.ts"
-  },
   "private": false,
   "dependencies": {
     "dotenv": "^16.3.1"
