@@ -1,5 +1,11 @@
 # paystackly
 
+## 0.2.5
+
+### Patch Changes
+
+- 88f61b7: something new
+
 ## 0.2.4
 
 ### Patch Changes
