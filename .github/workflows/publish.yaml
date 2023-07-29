@@ -33,7 +33,7 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
-          publishScript: "npm run release" # Modify this to the correct npm release script
+          publish: "npm run release" # Modify this to the correct npm release script
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Add the GITHUB_TOKEN to the environment variables
