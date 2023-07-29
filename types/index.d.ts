@@ -1,34 +1,5 @@
-/// <reference path="./charge.d.ts" />
-/// <reference path="./integration.d.ts" />
-/// <reference path="./refund.d.ts" />
-/// <reference path="./subaccount.d.ts" />
-/// <reference path="./terminal.d.ts" />
-/// <reference path="./transaction.d.ts" />
-/// <reference path="./transaction-split.d.ts" />
-/// <reference path="./transfer.d.ts" />
+/// <reference types="typescript" />
 
-export abstract class PaystackBase {
-  abstract transaction: Transaction;
-  abstract transfer: Transfer;
-  abstract charges: Charges;
-  abstract bulkCharges: BulkCharges ;
-  abstract refund: Refund;
-  abstract integration: Integration ;
-  abstract applePay: ApplePay;
-  abstract transactionSplit: TransactionSplit ;
-  abstract subAccount: SubAccount;
-  abstract getBanks(
-    queryParams: GetBanksQueryParams
-  ): Promise<GetBanksResponse>;
-
-  abstract getCountries(): Promise<GetCountriesResponse[]>;
-
-  abstract verifyNumber(
-    params: VerifyNumberQueryParams
-  ): Promise<VerifyNumberResponse>;
-
-  abstract verifyCardBIN(binNumber: string): Promise<CardBINResponse>;
-}
 export interface BasePaystackResponse {
   status: boolean;
   message: string;

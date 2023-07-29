@@ -5,7 +5,6 @@ import {
   VerifyNumberQueryParams,
   VerifyNumberResponse,
   CardBINResponse,
-  PaystackBase,
 } from "../../types";
 import { Transaction } from "../transaction/Transaction";
 import { Transfer } from "../transfer/Transfer";
@@ -19,6 +18,29 @@ import { ApplePay } from "../apple-pay/ApplePay";
 import { TransactionSplit } from "../transaction-split/TransactionSplit";
 import { SubAccount } from "../subaccounts/SubAccount";
 
+
+export abstract class PaystackBase {
+  abstract transaction: Transaction;
+  abstract transfer: Transfer;
+  abstract charges: Charges;
+  abstract bulkCharges: BulkCharges ;
+  abstract refund: Refund;
+  abstract integration: Integration ;
+  abstract applePay: ApplePay;
+  abstract transactionSplit: TransactionSplit ;
+  abstract subAccount: SubAccount;
+  abstract getBanks(
+    queryParams: GetBanksQueryParams
+  ): Promise<GetBanksResponse>;
+
+  abstract getCountries(): Promise<GetCountriesResponse[]>;
+
+  abstract verifyNumber(
+    params: VerifyNumberQueryParams
+  ): Promise<VerifyNumberResponse>;
+
+  abstract verifyCardBIN(binNumber: string): Promise<CardBINResponse>;
+}
 export class PayStack extends PaystackBase {
   readonly transaction: Transaction = new Transaction;
   readonly transfer: Transfer = new Transfer;
