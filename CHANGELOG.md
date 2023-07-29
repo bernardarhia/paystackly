@@ -1,5 +1,11 @@
 # paystackly
 
+## 0.2.3
+
+### Patch Changes
+
+- 3bd3977: fixed failing test
+
 ## 0.2.2
 
 ### Patch Changes

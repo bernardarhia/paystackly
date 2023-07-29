@@ -1,11 +1,14 @@
 {
   "name": "paystackly",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "A simple to use library writing to simplify the use of the paystack api. Just call the methods on the Paystack Class and you're good to go",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "dist/index.d.ts",
-  "files": ["dist", "index.d.ts"],
+  "files": [
+    "dist",
+    "index.d.ts"
+  ],
   "private": false,
   "dependencies": {
     "dotenv": "^16.3.1"
