@@ -1,5 +1,11 @@
 # paystackly
 
+## 0.2.0
+
+### Minor Changes
+
+- c03fc9d: minor change
+
 ## 0.1.0
 
 ### Minor Changes
