@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { HTTP_METHODS, PayStackQueryOptions } from "../types";
+import { HTTP_METHODS, PayStackQueryOptions } from "./types";
 dotenv.config();
 const { PAYSTACK_SK } = process.env;
 const PORT = 443;
