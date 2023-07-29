@@ -18,9 +18,6 @@ jobs:
   publish:
     needs: build
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash -e # Set the shell option at the job level
     steps:
       - uses: actions/checkout@v3
 
@@ -43,9 +40,9 @@ jobs:
 
       - name: Check if Changeset was published
         run: |
-          if [ "${{ steps.changesets.outputs.published }}" = "true" ]; then
+          if [ "${{ steps.changesets.outputs.published }}" == "true" ]; then
             echo "Changeset published!";
           else
             echo "No changeset published.";
             exit 1;
-          fi
+            fi
