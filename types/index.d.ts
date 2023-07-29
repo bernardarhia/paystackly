@@ -1,11 +1,4 @@
-/// <reference path="./charge.d.ts" />
-/// <reference path="./integration.d.ts" />
-/// <reference path="./refund.d.ts" />
-/// <reference path="./subaccount.d.ts" />
-/// <reference path="./terminal.d.ts" />
-/// <reference path="./transaction.d.ts" />
-/// <reference path="./transaction-split.d.ts" />
-/// <reference path="./transfer.d.ts" />
+/// <reference types="typescript" />
 
 export interface BasePaystackResponse {
   status: boolean;
