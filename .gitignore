@@ -16,7 +16,7 @@ yarn-error.log*
 *.log
 
 # TypeScript declaration files
-*.d.ts
+/types/
 
 # OS and editor generated files
 .DS_Store
@@ -25,4 +25,5 @@ Thumbs.db
 # Ignore npm package cache
 .npm
 
+# Exclude test.ts file from the package
 test.ts
