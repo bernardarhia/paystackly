@@ -1,5 +1,3 @@
-/// <reference types="typescript" />
-
 export interface BasePaystackResponse {
   status: boolean;
   message: string;
