@@ -7,7 +7,7 @@ import {
   ListSubaccountResponse,
   UpdateSubAccountPayload,
   UpdateSubAccountReponse,
-} from "../types/subaccount";
+} from "../../types/subaccount";
 import { formatQueryParams, sendRequest } from "../utils";
 
 abstract class BaseSubaccount {
@@ -42,10 +42,9 @@ export class SubAccount extends BaseSubaccount {
   async update(
     payload: UpdateSubAccountPayload
   ): Promise<UpdateSubAccountReponse> {
-    const id = payload.id;
-    delete payload.id;
+    const { id, ...body } = payload;
     return await sendRequest<UpdateSubAccountReponse>(
-      getRequestData("PUT", `/${id}`, payload).subaccount
+      getRequestData("PUT", `/${id}`, body).subaccount
     );
   }
 }

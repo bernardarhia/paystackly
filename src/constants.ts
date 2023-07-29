@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { HTTP_METHODS, PayStackQueryOptions } from "./types";
+import { HTTP_METHODS, PayStackQueryOptions } from "../types";
 dotenv.config();
 const { PAYSTACK_SK } = process.env;
 const PORT = 443;
@@ -103,7 +103,7 @@ const PAYSTACK_PATH_KEYS: PATH_KEYS[] = Object.keys(
 
 export const getRequestData = (
   requestMethod: keyof typeof METHODS,
-  path?: string,
+  path?: string | null,
   body?: any
 ): { [key in PATH_KEYS]: PayStackQueryOptions } => {
   const requestData: { [key in PATH_KEYS]: PayStackQueryOptions } = {} as any;

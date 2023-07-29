@@ -3,7 +3,7 @@ import {
   FetchIntegrationTimeoutResponse,
   UpdateIntegrationTimeoutPayload,
   UpdateIntegrationTimeoutResponse,
-} from "../types/integration";
+} from "../../types/integration";
 import { sendRequest } from "../utils";
 
 abstract class BaseIntegration {

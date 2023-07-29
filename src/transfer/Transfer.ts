@@ -6,7 +6,7 @@ import {
   InitializeTransferPayload,
   InitializeTransferWithAuthorizationPayload,
   TransferInitializeResponse,
-} from "../types/transfer";
+} from "../../types/transfer";
 import { sendRequest } from "../utils";
 export class Transfer {
   async initializeWithMobileMoney(

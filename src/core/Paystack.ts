@@ -5,7 +5,7 @@ import {
   VerifyNumberQueryParams,
   VerifyNumberResponse,
   CardBINResponse,
-} from "../types";
+} from "../../types";
 import { Transaction } from "../transaction/Transaction";
 import { Transfer } from "../transfer/Transfer";
 import { Charges } from "../charge/Charge";
@@ -30,34 +30,18 @@ abstract class PayStackBase {
 
   abstract verifyCardBIN(binNumber: string): Promise<CardBINResponse>;
 }
-
-const BaseClasses = [
-  Transaction,
-  Transfer,
-  Charges,
-  BulkCharges,
-  Refund,
-  Integration,
-  ApplePay,
-  TransactionSplit,
-  SubAccount
-];
 export class PayStack extends PayStackBase {
-  readonly transaction: Transaction;
-  readonly transfer: Transfer;
-  readonly charges: Charges;
-  readonly bulkCharges: BulkCharges;
-  readonly refund: Refund;
-  readonly integration: Integration;
-  readonly applePay: ApplePay;
-  readonly transactionSplit: TransactionSplit;
-  readonly subAccount: SubAccount;
+  readonly transaction: Transaction = new Transaction;
+  readonly transfer: Transfer = new Transfer;
+  readonly charges: Charges=  new Charges;
+  readonly bulkCharges: BulkCharges = new BulkCharges;
+  readonly refund: Refund = new Refund;
+  readonly integration: Integration = new Integration;
+  readonly applePay: ApplePay = new ApplePay;
+  readonly transactionSplit: TransactionSplit = new TransactionSplit;
+  readonly subAccount: SubAccount = new SubAccount;
   constructor() {
     super();
-    for (const baseClass of BaseClasses) {
-      const className = transformToCamelCase(baseClass.name);
-      this[className] = new baseClass();
-    }
   }
 
   async getBanks(queryParams: GetBanksQueryParams): Promise<GetBanksResponse> {

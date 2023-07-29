@@ -1,14 +1,14 @@
 import https, { RequestOptions } from "https";
 import querystring from "querystring";
-import { GetBanksQueryParams, PayStackQueryOptions, VerifyNumberQueryParams } from "./types";
+import { GetBanksQueryParams, PayStackQueryOptions, VerifyNumberQueryParams } from "../types";
 import { IncomingMessage } from "http";
-import { ListRefundQuery } from "./types/refund";
+import { ListRefundQuery } from "../types/refund";
 import {
   ExportTransactionQueryParams,
   ListTransactionsQuery,
   TransactionTotalQueryParams,
-} from "./types/transaction";
-export function sendRequest<T>(options: PayStackQueryOptions): Promise<T| null> {
+} from "../types/transaction";
+export function sendRequest<T>(options: PayStackQueryOptions): Promise<T> {
   const body = options?.body ?? {};
   delete options?.body;
   return new Promise<T>((resolve, reject) => {
@@ -22,7 +22,7 @@ export function sendRequest<T>(options: PayStackQueryOptions): Promise<T| null> 
 
         res.on("end", () => {
           try {
-            const parsedData = responseData ? JSON.parse(responseData) as T : null;
+            const parsedData = JSON.parse(responseData);
             resolve(parsedData);
           } catch (error) {
             reject(error);
@@ -50,7 +50,7 @@ type FormatQuery =
   | ExportTransactionQueryParams
   |VerifyNumberQueryParams
   | GetBanksQueryParams;
-export function formatQueryParams(params: FormatQuery): string {
+export function formatQueryParams(params?: FormatQuery): string {
   let formattedQueryString: string = "";
 
   if (params && Object.keys(params).length) {

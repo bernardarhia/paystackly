@@ -2,24 +2,37 @@
   "name": "paystackly",
   "version": "0.0.1",
   "description": "A simple to use library writing to simplify the use of the paystack api. Just call the methods on the Paystack Class and you're good to go",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "types/*.d.ts",
   "dependencies": {
     "dotenv": "^16.3.1"
   },
   "scripts": {
-    "build": "tsc -v && tsc -p tsconfig.json -w",
-    "lint": "tsc"
+    "test": "mocha --timeout 20000 --recursive build/tests/**  --exit",
+    "dev": "tsc -v && tsc -p tsconfig.json -w",
+    "build": "tsc -p tsconfig.json",
+    "lint": "tsc",
+    "release": "npm run build && changeset publish"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.26.2",
     "@types/chai": "^4.3.5",
     "@types/dotenv": "^8.2.0",
     "@types/mocha": "^10.0.1",
     "@types/node": "^20.4.4",
     "chai": "^4.3.7",
     "mocha": "^10.2.0",
+    "ts-node": "^10.9.1",
     "typescript": "^5.1.6"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "keywords": [
+    "Paystack",
+    "Paystack api",
+    "Paystack library",
+    "paystack node",
+    "node paystack"
+  ],
+  "author": "Bernard Arhia",
+  "license": "MIT"
 }

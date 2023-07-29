@@ -1,5 +1,5 @@
 import { getRequestData } from "../constants";
-import { ChargeAuthorizationPayload } from "../types";
+import { ChargeAuthorizationPayload } from "../../types";
 import {
   ExportTransactionQueryParams,
   ExportTransactionResponse,
@@ -13,7 +13,7 @@ import {
   TransactionTimelineResponse,
   TransactionTotalQueryParams,
   TransactionTotalResponse,
-} from "../types/transaction";
+} from "../../types/transaction";
 import { formatQueryParams, sendRequest } from "../utils";
 
 abstract class TransactionBase {
@@ -66,7 +66,7 @@ export class Transaction extends TransactionBase {
   }
   async list(
     params: ListTransactionsQuery,
-  ): Promise<ListTransactionsResponse | null> {
+  ): Promise<ListTransactionsResponse> {
     let formattedQueryString: string = formatQueryParams(params);
     
     return await sendRequest<ListTransactionsResponse>(

@@ -6,7 +6,7 @@ import {
   ListRefundQuery,
   FetchRefundParam,
   FetchReFundReponse,
-} from "../types/refund";
+} from "../../types/refund";
 import { formatQueryParams, sendRequest } from "../utils";
 
 abstract class BaseRefund {
