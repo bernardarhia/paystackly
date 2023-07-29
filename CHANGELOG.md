@@ -1,5 +1,11 @@
 # paystackly
 
+## 0.2.1
+
+### Patch Changes
+
+- c709d24: removed types from shipping to client
+
 ## 0.2.0
 
 ### Minor Changes
