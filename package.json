@@ -2,16 +2,16 @@
   "name": "paystackly",
   "version": "0.2.0",
   "description": "A simple to use library writing to simplify the use of the paystack api. Just call the methods on the Paystack Class and you're good to go",
-  "main": "dist/index.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "types": "dist/index.d.ts",
-  "files": ["dist"],
-
+  "files": ["dist", "index.d.ts"],
   "private": false,
   "dependencies": {
     "dotenv": "^16.3.1"
   },
   "scripts": {
-    "test": "mocha --timeout 20000 --recursive dist/tests/**  --exit",
+    "test": "mocha --timeout 20000 --recursive dist/__tests__/**  --exit",
     "dev": "tsc -v && tsc -p tsconfig.json -w",
     "build": "tsc -p tsconfig.json",
     "lint": "tsc",
@@ -37,5 +37,13 @@
     "node paystack"
   ],
   "author": "Bernard Arhia",
-  "license": "MIT"
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    },
+    "./package.json": "./package.json"
+  }
 }

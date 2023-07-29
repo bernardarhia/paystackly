@@ -2,7 +2,7 @@
   "compilerOptions": {
     "lib": ["es5", "es6", "es7", "esnext", "dom"],
     "outDir": "./dist",
-    "target": "es2018",
+    "module": "commonjs" /* Specify what module code is generated. */,
     "removeComments": false,
     "esModuleInterop": true,
     "moduleResolution": "node",
