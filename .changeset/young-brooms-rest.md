@@ -1,0 +1,5 @@
+---
+"paystackly": minor
+---
+
+updated patches
