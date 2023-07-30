@@ -1,5 +1,11 @@
 # paystackly
 
+## 0.5.2
+
+### Patch Changes
+
+- 42e8245: patch
+
 ## 0.5.1
 
 ### Patch Changes
