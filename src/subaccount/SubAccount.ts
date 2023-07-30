@@ -13,6 +13,9 @@ import { formatQueryParams, sendRequest } from "../utils";
 
 
 export class SubAccount extends BaseSubaccount {
+  constructor() {
+    super();
+  }
   async create(
     payload: CreateSubaccountPayload
   ): Promise<CreateSubaccountResponse> {

@@ -1,3 +1,4 @@
+import { BasePaystackErrorResponse, BasePaystackResponse, BasePaystackSuccessResponse, BaseQuery, PaginationMetadata, PayStackCurrency } from "../types";
 
 // TRANSACTION SPLIT
 type TransactionSplitBearerType =
@@ -152,7 +153,7 @@ export interface RemoveSubAccountFromSplitPayload {
 export type RemoveSubAccountFromSplitResponse = BasePaystackResponse;
 
 
-export declare abstract class BaseTransactionSplit {
+export  abstract class BaseTransactionSplit {
   abstract create(
     payload: CreateTransactionSplitPayload
   ): Promise<CreateTransactionSplitResponse>;

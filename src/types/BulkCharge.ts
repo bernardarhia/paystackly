@@ -1,7 +1,7 @@
 
 // ======================= BULK CHARGE ===================
 
-import { BasePaystackErrorResponse, BasePaystackResponse, BasePaystackSuccessResponse, BaseQuery, PaginationMetadata } from "../core/types";
+import { BasePaystackErrorResponse, BasePaystackResponse, BasePaystackSuccessResponse, BaseQuery, PaginationMetadata } from "../types";
 
 export type BulkChargesPayload = {
     authorization: string;
@@ -129,7 +129,7 @@ export type BulkChargesPayload = {
         });
   
 
-export declare abstract class BaseBulkCharges {
+export abstract class BaseBulkCharges {
   abstract initilize(
     payload: BulkChargesPayload[]
   ): Promise<BulkChargesResponse>;

@@ -10,6 +10,9 @@ import {
 } from "../types";
 import { sendRequest } from "../utils";
 export class Transfer extends BaseTransfer {
+  constructor() {
+    super();
+  }
   async initializeWithMobileMoney(
     payload: InitializeTransferPayload
   ): Promise<TransferInitializeResponse> {

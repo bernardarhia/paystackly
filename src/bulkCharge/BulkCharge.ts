@@ -12,6 +12,9 @@ import {
 import { formatQueryParams, sendRequest } from "../utils";
 
 export class BulkCharges extends BaseBulkCharges {
+  constructor() {
+    super();
+  }
   async initilize(payload: BulkChargesPayload[]): Promise<BulkChargesResponse> {
     return await sendRequest<BulkChargesResponse>(
       getRequestData("POST", null, payload).bulkCharge

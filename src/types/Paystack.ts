@@ -501,7 +501,7 @@ export interface BasePaystackResponse {
     queue?: boolean;
   }
   
-  export declare abstract class PaystackBase {
+  export  abstract class PaystackBase {
     abstract transaction: Transaction;
     abstract transfer: Transfer;
     abstract charges: Charges;

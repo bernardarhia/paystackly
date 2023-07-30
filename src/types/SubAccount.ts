@@ -111,7 +111,7 @@ export interface CreateSubaccountPayload {
   
   export type UpdateSubAccountReponse = CreateSubaccountResponse;
   
-  export declare abstract class BaseSubaccount {
+  export  abstract class BaseSubaccount {
     abstract create(
       payload: CreateSubaccountPayload
     ): Promise<CreateSubaccountResponse>;

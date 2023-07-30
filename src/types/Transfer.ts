@@ -1,3 +1,4 @@
+import { BankCodes, BasePaystackErrorResponse, BasePaystackResponse, BasePaystackSuccessResponse, PayStackCurrency } from "../types";
 
 /** ============= TRANSFER ============ */
 type TransferType = "nuban" | "basa" | "mobile_money" | "authorization";

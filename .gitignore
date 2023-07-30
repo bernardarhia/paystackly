@@ -15,9 +15,6 @@ yarn-error.log*
 .idea/
 *.log
 
-# TypeScript declaration files
-/types/
-
 # OS and editor generated files
 .DS_Store
 Thumbs.db

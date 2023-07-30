@@ -1,4 +1,4 @@
-import { BasePaystackErrorResponse, BasePaystackResponse, BasePaystackSuccessResponse, BaseQuery } from "../core/Paystack";
+import { BasePaystackErrorResponse, BasePaystackResponse, BasePaystackSuccessResponse, BaseQuery } from "../types";
 
 // REFUND
 export interface RefundPayload {
@@ -147,7 +147,7 @@ export interface RefundPayload {
         };
       });
   
-     export declare abstract class BaseRefund {
+     export  abstract class BaseRefund {
         abstract create(payload: RefundPayload): Promise<RefundResponse>;
         abstract list(queryParams: ListRefundQuery): Promise<ListRefundResponseData>;
         abstract fetch(param: FetchRefundParam): Promise<FetchReFundReponse>;
