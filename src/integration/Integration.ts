@@ -1,17 +1,13 @@
 import { getRequestData } from "../constants";
 import {
+  BaseIntegration,
   FetchIntegrationTimeoutResponse,
   UpdateIntegrationTimeoutPayload,
   UpdateIntegrationTimeoutResponse,
-} from "./types";
+} from "../types";
 import { sendRequest } from "../utils";
 
-abstract class BaseIntegration {
-  abstract fetchTimeout(): Promise<FetchIntegrationTimeoutResponse>;
-  abstract updateTimeout(
-    payload: UpdateIntegrationTimeoutPayload
-  ): Promise<UpdateIntegrationTimeoutResponse>;
-}
+
 
 export class Integration extends BaseIntegration {
   async fetchTimeout(): Promise<FetchIntegrationTimeoutResponse> {

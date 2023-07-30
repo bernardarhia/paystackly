@@ -1,5 +1,5 @@
 import { getRequestData } from "../constants";
-import { BasePaystackResponse } from "../types";
+import { BaseBulkCharges, BasePaystackResponse } from "../types";
 import {
   BulkChargeListsQuery,
   BulkChargeListsReponse,
@@ -11,21 +11,6 @@ import {
 } from "../types";
 import { formatQueryParams, sendRequest } from "../utils";
 
-abstract class BaseBulkCharges {
-  abstract initilize(
-    payload: BulkChargesPayload[]
-  ): Promise<BulkChargesResponse>;
-  abstract list(query: BulkChargeListsQuery): Promise<BulkChargeListsReponse>;
-  abstract fetchBulkChargeBatch(
-    id_or_code: string
-  ): Promise<FetchBulkChargeBatchResponse>;
-  abstract fetchChargesInBatch(
-    id_or_code: string,
-    query?: FetchChargesInBatch
-  ): Promise<FetchChargesInBatchResponse>;
-  abstract pause(batch_code: string): Promise<BasePaystackResponse>;
-  abstract resume(batch_code: string): Promise<BasePaystackResponse>;
-}
 export class BulkCharges extends BaseBulkCharges {
   async initilize(payload: BulkChargesPayload[]): Promise<BulkChargesResponse> {
     return await sendRequest<BulkChargesResponse>(

@@ -1,4 +1,4 @@
-import { BasePaystackErrorResponse, BasePaystackResponse, BasePaystackSuccessResponse } from "../core/types";
+import { BasePaystackErrorResponse, BasePaystackResponse, BasePaystackSuccessResponse } from "../core/Paystack";
 
 // TERMINAL
 export interface SendTerminalEventPayload {

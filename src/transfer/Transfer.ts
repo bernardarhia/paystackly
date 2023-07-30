@@ -1,5 +1,6 @@
 import { getRequestData } from "../constants";
 import {
+  BaseTransfer,
   CreateFinalizeTransferPayload,
   CreateTransferPayload,
   CreateTransferResponse,
@@ -8,7 +9,7 @@ import {
   TransferInitializeResponse,
 } from "../types";
 import { sendRequest } from "../utils";
-export class Transfer {
+export class Transfer extends BaseTransfer {
   async initializeWithMobileMoney(
     payload: InitializeTransferPayload
   ): Promise<TransferInitializeResponse> {

@@ -1,5 +1,5 @@
 import { getRequestData } from "../constants";
-import { HTTP_METHODS } from "../types";
+import { BaseTransactionSplit, HTTP_METHODS } from "../types";
 import {
   CreateTransactionSplitPayload,
   CreateTransactionSplitResponse,
@@ -14,29 +14,7 @@ import {
 } from "../types";
 import { formatQueryParams, sendRequest } from "../utils";
 
-abstract class BaseTransactionSplit {
-  abstract create(
-    payload: CreateTransactionSplitPayload
-  ): Promise<CreateTransactionSplitResponse>;
-  abstract list(
-    queryParams: ListTransactionSplitQuery
-  ): Promise<ListTransactionSplitResponse>;
-  /**@param id - The id of the split */
-  abstract fetch(id: string): Promise<FetchTransactionSplitResponse>;
-  abstract update(
-    payload: UpdateTransactionSplitPayload
-  ): Promise<UpdateTransactionSplit>;
-  abstract addSubAccount(
-    payload: TransactionSplitSubAccountPayload
-  ): Promise<TransactionSplitSubAccountResponse>;
-  abstract updateSubAccount(
-    payload: TransactionSplitSubAccountPayload
-  ): Promise<TransactionSplitSubAccountResponse>;
-  /**@param id - The id of the split */
-  abstract removeSubAccount(
-    id: string
-  ): Promise<RemoveSubAccountFromSplitResponse>;
-}
+
 export class TransactionSplit extends BaseTransactionSplit {
   async create(
     payload: CreateTransactionSplitPayload

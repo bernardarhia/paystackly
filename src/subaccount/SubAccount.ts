@@ -1,5 +1,6 @@
 import { getRequestData } from "../constants";
 import {
+  BaseSubaccount,
   CreateSubaccountPayload,
   CreateSubaccountResponse,
   FetchSubAccountResponse,
@@ -10,16 +11,7 @@ import {
 } from "../types";
 import { formatQueryParams, sendRequest } from "../utils";
 
-abstract class BaseSubaccount {
-  abstract create(
-    payload: CreateSubaccountPayload
-  ): Promise<CreateSubaccountResponse>;
-  abstract list(query?: ListSubaccountQuery): Promise<ListSubaccountResponse>;
-  abstract fetch(id: string): Promise<FetchSubAccountResponse>;
-  abstract update(
-    payload: UpdateSubAccountPayload
-  ): Promise<UpdateSubAccountReponse>;
-}
+
 export class SubAccount extends BaseSubaccount {
   async create(
     payload: CreateSubaccountPayload

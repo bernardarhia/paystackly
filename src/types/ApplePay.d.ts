@@ -21,3 +21,8 @@ export interface ListApplePayQuery{
    */
   previous: string;
 }
+export declare abstract class BaseApplePay {
+  abstract registerDomain(domainName: string): Promise<BasePaystackResponse>;
+  abstract listDomains(params: ListApplePayQuery): Promise<ListApplePay>;
+  abstract unRegisterDomain(domainName: string): Promise<BasePaystackResponse>;
+}

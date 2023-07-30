@@ -6,14 +6,10 @@ import {
   ListRefundQuery,
   FetchRefundParam,
   FetchReFundReponse,
+  BaseRefund,
 } from "../types";
 import { formatQueryParams, sendRequest } from "../utils";
 
-abstract class BaseRefund {
-  abstract create(payload: RefundPayload): Promise<RefundResponse>;
-  abstract list(queryParams: ListRefundQuery): Promise<ListRefundResponseData>;
-  abstract fetch(param: FetchRefundParam): Promise<FetchReFundReponse>;
-}
 
 export class Refund extends BaseRefund {
   async create(payload: RefundPayload): Promise<RefundResponse> {

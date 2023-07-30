@@ -1,14 +1,13 @@
 import { getRequestData } from "../constants";
-import { ChargeAuthorizationPayload } from "../types";
 import {
+  ChargeAuthorizationPayload,
   ExportTransactionQueryParams,
   ExportTransactionResponse,
-  InitializePaymentPayload,
-  InitializePaymentResponse,
   ListTransactionsQuery,
   ListTransactionsResponse,
   PartialDebitPayload,
   PartialDebitResponse,
+  TransactionBase,
   TransactionResponse,
   TransactionTimelineResponse,
   TransactionTotalQueryParams,
@@ -16,45 +15,7 @@ import {
 } from "../types";
 import { formatQueryParams, sendRequest } from "../utils";
 
-abstract class TransactionBase {
-  abstract initialize(
-    data: InitializePaymentPayload,
-  ): Promise<InitializePaymentResponse>;
-  abstract verify(reference: number | string): Promise<TransactionResponse>;
-  abstract list(
-    params: ListTransactionsQuery,
-  ): Promise<ListTransactionsResponse>;
-  abstract fetch(id: number | string): Promise<TransactionResponse>;
-
-  abstract chargeAuthorization(
-    payload: ChargeAuthorizationPayload
-  ): Promise<TransactionResponse>;
-  abstract viewTransactionTimeline(
-    id: number | string,
-  ): Promise<TransactionTimelineResponse>;
-  abstract total(
-    params: TransactionTotalQueryParams,
-  ): Promise<TransactionTotalResponse>;
-
-  abstract export(
-    params: ExportTransactionQueryParams,
-  ): Promise<ExportTransactionResponse>;
-  abstract partialDebit(payload: PartialDebitPayload): Promise<PartialDebitResponse>
-}
-
 export class Transaction extends TransactionBase {
-  async initialize(
-    payload: InitializePaymentPayload,
-  ): Promise<InitializePaymentResponse> {
-    const body: Record<string, string | number | any> = {
-      ...payload,
-      amount: payload.amount * 100,
-    };
-    return await sendRequest<InitializePaymentResponse>(
-      getRequestData("POST", null, body).initializeTransaction,
-    );
-  }
-
   /**
    *
    * @param reference  - reference from transaction

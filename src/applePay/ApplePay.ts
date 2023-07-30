@@ -1,12 +1,6 @@
 import { getRequestData } from "../constants";
-import { BasePaystackResponse, ListApplePay, ListApplePayQuery } from "../types";
 import { formatQueryParams, sendRequest } from "../utils";
-
-abstract class BaseApplePay {
-  abstract registerDomain(domainName: string): Promise<BasePaystackResponse>;
-  abstract listDomains(params: ListApplePayQuery): Promise<ListApplePay>;
-  abstract unRegisterDomain(domainName: string): Promise<BasePaystackResponse>;
-}
+import {BasePaystackResponse,BaseApplePay, ListApplePayQuery, ListApplePay} from "../types"
 export class ApplePay extends BaseApplePay {
   async registerDomain(domainName: string): Promise<BasePaystackResponse> {
     const body = { domainName };

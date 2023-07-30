@@ -1,4 +1,4 @@
-import { BasePaymentPayload, BasePaystackErrorResponse, BasePaystackResponse, BasePaystackSuccessResponse, BaseQuery, CardBrand, PayStackCurrency } from "../core/types";
+import { BasePaymentPayload, BasePaystackErrorResponse, BasePaystackResponse, BasePaystackSuccessResponse, BaseQuery, CardBrand, ChargeAuthorizationPayload, PayStackCurrency } from "../core/Paystack";
 
 // TRANSACTIONS
 export interface InitializePaymentPayload extends BasePaymentPayload {
@@ -250,3 +250,27 @@ export interface InitializePaymentPayload extends BasePaymentPayload {
     TransactionResponse,
     PartialDebitResponseExclusion
   >;
+
+
+export declare abstract class TransactionBase {
+  abstract verify(reference: number | string): Promise<TransactionResponse>;
+  abstract list(
+    params: ListTransactionsQuery,
+  ): Promise<ListTransactionsResponse>;
+  abstract fetch(id: number | string): Promise<TransactionResponse>;
+
+  abstract chargeAuthorization(
+    payload: ChargeAuthorizationPayload
+  ): Promise<TransactionResponse>;
+  abstract viewTransactionTimeline(
+    id: number | string,
+  ): Promise<TransactionTimelineResponse>;
+  abstract total(
+    params: TransactionTotalQueryParams,
+  ): Promise<TransactionTotalResponse>;
+
+  abstract export(
+    params: ExportTransactionQueryParams,
+  ): Promise<ExportTransactionResponse>;
+  abstract partialDebit(payload: PartialDebitPayload): Promise<PartialDebitResponse>
+}

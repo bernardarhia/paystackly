@@ -1,9 +1,4 @@
 
-
-// TRANSFER
-
-import { BankCodes, BasePaystackErrorResponse, BasePaystackResponse, BasePaystackSuccessResponse, PayStackCurrency } from "../core/types";
-
 /** ============= TRANSFER ============ */
 type TransferType = "nuban" | "basa" | "mobile_money" | "authorization";
 export interface BaseTransferInitializerPayload {
@@ -79,3 +74,22 @@ export type CreateTransferResponse =
         updatedAt: Date;
       };
     });
+
+    // Define an abstract class
+export abstract class BaseTransfer {
+  abstract initializeWithMobileMoney(
+    payload: InitializeTransferPayload
+  ): Promise<TransferInitializeResponse>;
+
+  abstract initializeWithBank(
+    payload: InitializeTransferPayload
+  ): Promise<any>;
+
+  abstract initializeWithAuthorizationCode(
+    payload: InitializeTransferWithAuthorizationPayload
+  ): Promise<any>;
+
+  abstract create(payload: CreateTransferPayload): Promise<CreateTransferResponse>;
+
+  abstract finalize(payload: CreateFinalizeTransferPayload): Promise<CreateTransferResponse>;
+}
