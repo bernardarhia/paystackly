@@ -1,5 +1,11 @@
 # paystackly
 
+## 0.4.2
+
+### Patch Changes
+
+- 7a89d11: added types declarations
+
 ## 0.4.1
 
 ### Patch Changes
