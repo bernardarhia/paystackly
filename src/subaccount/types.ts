@@ -1,3 +1,4 @@
+import { BankCodes, BasePaystackErrorResponse, BasePaystackResponse, BasePaystackSuccessResponse, BaseQuery, PaginationMetadata } from "../types";
 
 // SUB ACCOUNTS
 export interface CreateSubaccountPayload {
