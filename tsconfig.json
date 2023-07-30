@@ -15,8 +15,9 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "downlevelIteration": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "declaration": true
   },
   "include": ["./src/**/*"],
-  "exclude": ["node_modules", "dist"]
+  "exclude": ["node_modules", "dist", "src/types"]
 }
