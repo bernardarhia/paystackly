@@ -1,6 +1,6 @@
-import { getRequestData } from "./constants";
-import { BasePaystackResponse } from "./types";
-import { formatQueryParams, sendRequest } from "./utils";
+import { getRequestData } from "../constants";
+import { BasePaystackResponse } from "../types";
+import { formatQueryParams, sendRequest } from "../utils";
 
 interface ListApplePay extends BasePaystackResponse{
     data: {

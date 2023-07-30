@@ -1,6 +1,6 @@
-import { getRequestData } from "./constants";
-import { TransactionResponse } from "./types";
-import { sendRequest } from "./utils";
+import { getRequestData } from "../constants";
+import { TransactionResponse } from "../types";
+import { sendRequest } from "../utils";
 import {
   BaseChargeResponse,
   ChargeWithBankPayload,
@@ -12,7 +12,7 @@ import {
   SubmitChargeOTPPayload,
   SubmitChargePhonePayload,
   SubmitChargePinPayload,
-} from "./types";
+} from "../types";
 
 export abstract class BaseCharges {
   abstract chargeWithMobileMoney(

@@ -1,2 +1,2 @@
-export { PayStack } from "./Paystack";
+export { PayStack } from "./core/Paystack";
 export * from "./types";

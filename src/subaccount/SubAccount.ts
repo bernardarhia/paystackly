@@ -1,4 +1,4 @@
-import { getRequestData } from "./constants";
+import { getRequestData } from "../constants";
 import {
   CreateSubaccountPayload,
   CreateSubaccountResponse,
@@ -7,8 +7,8 @@ import {
   ListSubaccountResponse,
   UpdateSubAccountPayload,
   UpdateSubAccountReponse,
-} from "./types";
-import { formatQueryParams, sendRequest } from "./utils";
+} from "../types";
+import { formatQueryParams, sendRequest } from "../utils";
 
 abstract class BaseSubaccount {
   abstract create(

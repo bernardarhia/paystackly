@@ -1,5 +1,5 @@
-import { getRequestData } from "./constants";
-import { BasePaystackResponse } from "./types";
+import { getRequestData } from "../constants";
+import { BasePaystackResponse } from "../types";
 import {
   BulkChargeListsQuery,
   BulkChargeListsReponse,
@@ -8,8 +8,8 @@ import {
   FetchBulkChargeBatchResponse,
   FetchChargesInBatch,
   FetchChargesInBatchResponse,
-} from "./types";
-import { formatQueryParams, sendRequest } from "./utils";
+} from "../types";
+import { formatQueryParams, sendRequest } from "../utils";
 
 abstract class BaseBulkCharges {
   abstract initilize(

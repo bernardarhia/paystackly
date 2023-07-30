@@ -1,5 +1,5 @@
-import { getRequestData } from "./constants";
-import { ChargeAuthorizationPayload } from "./types";
+import { getRequestData } from "../constants";
+import { ChargeAuthorizationPayload } from "../types";
 import {
   ExportTransactionQueryParams,
   ExportTransactionResponse,
@@ -13,8 +13,8 @@ import {
   TransactionTimelineResponse,
   TransactionTotalQueryParams,
   TransactionTotalResponse,
-} from "./types";
-import { formatQueryParams, sendRequest } from "./utils";
+} from "../types";
+import { formatQueryParams, sendRequest } from "../utils";
 
 abstract class TransactionBase {
   abstract initialize(
