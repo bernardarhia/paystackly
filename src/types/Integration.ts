@@ -1,4 +1,4 @@
-import { BasePaystackErrorResponse, BasePaystackResponse, BasePaystackSuccessResponse } from "../core/Paystack";
+import { BasePaystackErrorResponse, BasePaystackResponse, BasePaystackSuccessResponse } from "../types";
 
 // INTEGRATIONS
 export type BaseIntegrationResponse =
@@ -14,7 +14,7 @@ export interface UpdateIntegrationTimeoutPayload {
   timeout: number;
 }
 export type UpdateIntegrationTimeoutResponse = BaseIntegrationResponse;
-export declare abstract class BaseIntegration {
+export abstract class BaseIntegration {
   abstract fetchTimeout(): Promise<FetchIntegrationTimeoutResponse>;
   abstract updateTimeout(
     payload: UpdateIntegrationTimeoutPayload

@@ -12,6 +12,9 @@ import { formatQueryParams, sendRequest } from "../utils";
 
 
 export class Refund extends BaseRefund {
+  constructor() {
+    super();
+  }
   async create(payload: RefundPayload): Promise<RefundResponse> {
     return await sendRequest<RefundResponse>(
         getRequestData("POST", null, payload).refund

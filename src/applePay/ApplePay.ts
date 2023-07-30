@@ -2,6 +2,9 @@ import { getRequestData } from "../constants";
 import { formatQueryParams, sendRequest } from "../utils";
 import {BasePaystackResponse,BaseApplePay, ListApplePayQuery, ListApplePay} from "../types"
 export class ApplePay extends BaseApplePay {
+  constructor() {
+    super();
+  }
   async registerDomain(domainName: string): Promise<BasePaystackResponse> {
     const body = { domainName };
     return await sendRequest<BasePaystackResponse>(

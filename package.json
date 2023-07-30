@@ -15,7 +15,7 @@
     "dotenv": "^16.3.1"
   },
   "scripts": {
-    "test": "echo \"No tests available\"",
+    "test": "nyc mocha --timeout 20000 --recursive dist/__tests__/**  --exit",
     "dev": "npm run clean & tsc -v && tsc -p tsconfig.json -w",
     "build": "npm run clean & tsc -v & tsc -p tsconfig.json",
     "lint": "tsc",
@@ -58,8 +58,8 @@
     "type": "Public"
   },
   "homepage": "https://github.com/bernardarhia/paystackly",
-"bugs": {
-  "url": "https://github.com/bernardarhia/paystackly/issues",
-  "email": "bernardarhia@gmail.com"
-}
+  "bugs": {
+    "url": "https://github.com/bernardarhia/paystackly/issues",
+    "email": "bernardarhia@gmail.com"
+  }
 }

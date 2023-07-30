@@ -16,6 +16,9 @@ import {
 import { formatQueryParams, sendRequest } from "../utils";
 
 export class Transaction extends TransactionBase {
+  constructor() {
+    super();
+  }
   /**
    *
    * @param reference  - reference from transaction

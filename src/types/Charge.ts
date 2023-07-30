@@ -1,8 +1,7 @@
 
 /** ===========CHARGE============= */
 
-import { BasePaystackErrorResponse, BasePaystackResponse, BasePaystackSuccessResponse } from "../core/types";
-import { TransactionResponse } from "../types";
+import { TransactionResponse,BasePaystackErrorResponse, BasePaystackResponse, BasePaystackSuccessResponse } from "../types";
 
 export interface BaseChargePayload {
     /**
@@ -114,7 +113,7 @@ export interface BaseChargePayload {
       });
   
 
-export declare abstract class BaseCharges {
+export abstract class BaseCharges {
   abstract chargeWithMobileMoney(
     payload: ChargeWithMobileMoneyPayload
   ): Promise<BaseChargeResponse | TransactionResponse>;

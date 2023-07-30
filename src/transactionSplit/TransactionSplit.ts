@@ -16,6 +16,9 @@ import { formatQueryParams, sendRequest } from "../utils";
 
 
 export class TransactionSplit extends BaseTransactionSplit {
+  constructor() {
+    super();
+  }
   async create(
     payload: CreateTransactionSplitPayload
   ): Promise<CreateTransactionSplitResponse> {

@@ -1,4 +1,4 @@
-import { BasePaymentPayload, BasePaystackErrorResponse, BasePaystackResponse, BasePaystackSuccessResponse, BaseQuery, CardBrand, ChargeAuthorizationPayload, PayStackCurrency } from "../core/Paystack";
+import { BasePaymentPayload, BasePaystackErrorResponse, BasePaystackResponse, BasePaystackSuccessResponse, BaseQuery, CardBrand, ChargeAuthorizationPayload, PayStackCurrency } from "../types";
 
 // TRANSACTIONS
 export interface InitializePaymentPayload extends BasePaymentPayload {
@@ -252,7 +252,7 @@ export interface InitializePaymentPayload extends BasePaymentPayload {
   >;
 
 
-export declare abstract class TransactionBase {
+export abstract class TransactionBase {
   abstract verify(reference: number | string): Promise<TransactionResponse>;
   abstract list(
     params: ListTransactionsQuery,

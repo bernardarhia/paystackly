@@ -15,6 +15,9 @@ import {
 } from "../types";
 
 export class Charges extends BaseCharges {
+  constructor() {
+    super();
+  }
   async chargeWithMobileMoney(
     payload: ChargeWithMobileMoneyPayload,
   ): Promise<BaseChargeResponse | TransactionResponse> {
