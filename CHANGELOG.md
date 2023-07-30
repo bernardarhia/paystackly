@@ -1,5 +1,11 @@
 # paystackly
 
+## 0.5.0
+
+### Minor Changes
+
+- fb798c5: another minor change
+
 ## 0.4.2
 
 ### Patch Changes
