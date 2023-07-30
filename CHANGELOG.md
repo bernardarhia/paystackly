@@ -1,5 +1,11 @@
 # paystackly
 
+## 0.3.0
+
+### Minor Changes
+
+- 17c6698: revumped to new minor version
+
 ## 0.2.7
 
 ### Patch Changes
