@@ -1,5 +1,11 @@
 # paystackly
 
+## 0.4.1
+
+### Patch Changes
+
+- 1fe7678: simple patch
+
 ## 0.4.0
 
 ### Minor Changes
