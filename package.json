@@ -1,7 +1,7 @@
 {
   "name": "paystackly",
+  "description": "A Typescript/Javascript library written on top of paystack.",
   "version": "0.4.2",
-  "description": "A simple to use library writing to simplify the use of the paystack api. Just call the methods on the Paystack Class and you're good to go",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -15,7 +15,7 @@
     "dotenv": "^16.3.1"
   },
   "scripts": {
-    "test": "nyc mocha --timeout 20000 --recursive dist/__tests__/**  --exit",
+    "test": "mocha --timeout 20000 --recursive dist/__tests__/**  --exit",
     "dev": "npm run clean & tsc -v && tsc -p tsconfig.json -w",
     "build": "npm run clean & tsc -v & tsc -p tsconfig.json",
     "lint": "tsc",
@@ -52,5 +52,14 @@
       "import": "./dist/index.mjs"
     },
     "./package.json": "./package.json"
-  }
+  },
+  "repository": {
+    "url": "https://github.com/bernardarhia/paystackly",
+    "type": "Public"
+  },
+  "homepage": "https://github.com/bernardarhia/paystackly",
+"bugs": {
+  "url": "https://github.com/bernardarhia/paystackly/issues",
+  "email": "bernardarhia@gmail.com"
+}
 }

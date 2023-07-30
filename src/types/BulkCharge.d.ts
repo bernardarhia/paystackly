@@ -128,3 +128,19 @@ export type BulkChargesPayload = {
           data: BulkChargeItem[];
         });
   
+
+export declare abstract class BaseBulkCharges {
+  abstract initilize(
+    payload: BulkChargesPayload[]
+  ): Promise<BulkChargesResponse>;
+  abstract list(query: BulkChargeListsQuery): Promise<BulkChargeListsReponse>;
+  abstract fetchBulkChargeBatch(
+    id_or_code: string
+  ): Promise<FetchBulkChargeBatchResponse>;
+  abstract fetchChargesInBatch(
+    id_or_code: string,
+    query?: FetchChargesInBatch
+  ): Promise<FetchChargesInBatchResponse>;
+  abstract pause(batch_code: string): Promise<BasePaystackResponse>;
+  abstract resume(batch_code: string): Promise<BasePaystackResponse>;
+}

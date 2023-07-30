@@ -1,13 +1,7 @@
 import https, { RequestOptions } from "https";
 import querystring from "querystring";
-import { GetBanksQueryParams, PayStackQueryOptions, VerifyNumberQueryParams } from "./types";
 import { IncomingMessage } from "http";
-import { ListRefundQuery } from "./types";
-import {
-  ExportTransactionQueryParams,
-  ListTransactionsQuery,
-  TransactionTotalQueryParams,
-} from "./types";
+import { ExportTransactionQueryParams, GetBanksQueryParams, ListRefundQuery, ListTransactionsQuery, PayStackQueryOptions, TransactionTotalQueryParams, VerifyNumberQueryParams } from "./types";
 export function sendRequest<T>(options: PayStackQueryOptions): Promise<T> {
   const body = options?.body ?? {};
   delete options?.body;
