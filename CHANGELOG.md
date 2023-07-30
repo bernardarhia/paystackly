@@ -1,5 +1,11 @@
 # paystackly
 
+## 0.4.0
+
+### Minor Changes
+
+- 8a82dd3: first official minor update. moved types and files into each separate folders
+
 ## 0.3.0
 
 ### Minor Changes
