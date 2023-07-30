@@ -1,4 +1,4 @@
-import { getRequestData } from "./constants";
+import { getRequestData } from "../constants";
 import {
   RefundResponse,
   RefundPayload,
@@ -6,8 +6,8 @@ import {
   ListRefundQuery,
   FetchRefundParam,
   FetchReFundReponse,
-} from "./types";
-import { formatQueryParams, sendRequest } from "./utils";
+} from "../types";
+import { formatQueryParams, sendRequest } from "../utils";
 
 abstract class BaseRefund {
   abstract create(payload: RefundPayload): Promise<RefundResponse>;

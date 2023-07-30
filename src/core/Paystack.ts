@@ -5,18 +5,18 @@ import {
   VerifyNumberQueryParams,
   VerifyNumberResponse,
   CardBINResponse,
-} from "./types";
-import { Transaction } from "./Transaction";
-import { Transfer } from "./Transfer";
-import { Charges } from "./Charge";
-import { BulkCharges } from "./BulkCharge";
-import { formatQueryParams, sendRequest } from "./utils";
-import { getRequestData } from "./constants";
-import { Refund } from "./Refund";
-import { Integration } from "./Integration";
-import { ApplePay } from "./ApplePay";
-import { TransactionSplit } from "./TransactionSplit";
-import { SubAccount } from "./SubAccount";
+} from "../types";
+import { Transaction } from "../transaction/Transaction";
+import { Transfer } from "../transfer/Transfer";
+import { Charges } from "../charge/Charge";
+import { BulkCharges } from "../bulkCharge/BulkCharge";
+import { formatQueryParams, sendRequest } from "../utils";
+import { getRequestData } from "../constants";
+import { Refund } from "../refund/Refund";
+import { Integration } from "../integration/Integration";
+import { ApplePay } from "../applePay/ApplePay";
+import { TransactionSplit } from "../transactionSplit/TransactionSplit";
+import { SubAccount } from "../subaccount/SubAccount";
 
 
 export abstract class PaystackBase {

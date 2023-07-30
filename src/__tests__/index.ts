@@ -1,6 +1,6 @@
 import { describe, it } from "mocha";
 import { expect } from "chai";
-import { PayStack } from "../Paystack";
+import { PayStack } from "../core/Paystack";
 
 describe("Paystack class", () => {
   const paystack = new PayStack();

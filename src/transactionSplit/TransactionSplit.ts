@@ -1,5 +1,5 @@
-import { getRequestData } from "./constants";
-import { HTTP_METHODS } from "./types";
+import { getRequestData } from "../constants";
+import { HTTP_METHODS } from "../types";
 import {
   CreateTransactionSplitPayload,
   CreateTransactionSplitResponse,
@@ -11,8 +11,8 @@ import {
   TransactionSplitSubAccountResponse,
   UpdateTransactionSplit,
   UpdateTransactionSplitPayload,
-} from "./types";
-import { formatQueryParams, sendRequest } from "./utils";
+} from "../types";
+import { formatQueryParams, sendRequest } from "../utils";
 
 abstract class BaseTransactionSplit {
   abstract create(

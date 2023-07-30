@@ -1,10 +1,10 @@
-import { getRequestData } from "./constants";
+import { getRequestData } from "../constants";
 import {
   FetchIntegrationTimeoutResponse,
   UpdateIntegrationTimeoutPayload,
   UpdateIntegrationTimeoutResponse,
 } from "./types";
-import { sendRequest } from "./utils";
+import { sendRequest } from "../utils";
 
 abstract class BaseIntegration {
   abstract fetchTimeout(): Promise<FetchIntegrationTimeoutResponse>;
