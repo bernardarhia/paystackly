@@ -27,3 +27,5 @@ Thumbs.db
 
 # Exclude test.ts file from the package
 test.ts
+.nyc_output
+coverage

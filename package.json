@@ -14,12 +14,14 @@
     "dotenv": "^16.3.1"
   },
   "scripts": {
-    "test": "mocha --timeout 20000 --recursive dist/__tests__/**  --exit",
-    "dev": "tsc -v && tsc -p tsconfig.json -w",
+    "test": "nyc mocha --timeout 20000 --recursive dist/__tests__/**  --exit",
+    "dev": "npm run clean & tsc -v && tsc -p tsconfig.json -w",
     "build": "tsc -p tsconfig.json",
     "lint": "tsc",
     "ci": "npm run lint && npm run test && npm run build",
-    "release": "npm run ci && changeset version && changeset publish"
+    "release": "npm run ci && changeset version && changeset publish",
+    "report": "nyc -r text -r lcov report",
+    "clean": "rm -rf ./.nyc_output ./node_modules/.cache ./coverage ./dist"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.2",
@@ -29,6 +31,7 @@
     "@types/node": "^20.4.4",
     "chai": "^4.3.7",
     "mocha": "^10.2.0",
+    "nyc": "^15.1.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6"
   },
