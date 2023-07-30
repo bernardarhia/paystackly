@@ -4,11 +4,4 @@
 *
 
 # And these are the files that are allowed.
-!/CHANGELOG.md
-!/LICENSE
-!/README.md
-!/VERSION
-!/package.json
-!/cjs/**/*
-!/esm/**/*
-!/types/**/*
+dist/types
