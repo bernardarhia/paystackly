@@ -16,7 +16,7 @@
     "noFallthroughCasesInSwitch": true,
     "downlevelIteration": true,
     "isolatedModules": true,
-    // "declaration": true
+    "declaration": true
   },
   "include": ["./src/**/*"],
   "exclude": ["node_modules", "dist"]
