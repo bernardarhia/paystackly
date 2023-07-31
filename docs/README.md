@@ -8,7 +8,7 @@
 </p>
 <br/>
 <p align="center">
-<a href="https://github.com/colinhacks/paystackly/actions?query=branch%3Amaster"><img src="https://github.com/bernardarhia/paystackly/actions/workflows/test.yml/badge.svg?event=push&branch=master" alt="Paystackly CI status" /></a>
+<a href="https://github.com/bernardarhia/paystackly/actions?query=branch%3Amaster"><img src="https://github.com/bernardarhia/paystackly/actions/workflows/main.yaml/badge.svg?event=push&branch=master" alt="Paystackly CI status" /></a>
 <a href="https://twitter.com/Everichbernz" rel="nofollow"><img src="https://img.shields.io/badge/created%20by-@everichbernz-4BBAAB.svg" alt="Created by Bernrd Arhia"></a>
 <a href="https://opensource.org/licenses/MIT" rel="nofollow"><img src="https://img.shields.io/github/license/bernardarhia/paystackly" alt="License"></a>
 <a href="https://www.npmjs.com/package/paystackly" rel="nofollow"><img src="https://img.shields.io/npm/dw/paystackly.svg" alt="npm"></a>
