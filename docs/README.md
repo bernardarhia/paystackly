@@ -60,8 +60,6 @@
   - [Transfer Control](#transfer-control)
   - [Transfer Recipients](#transfer-recipients)
   - [Verification](#verification)
-
-  
 - [Changelog](#changelog)
 
 ## What is Paystackly
@@ -104,57 +102,112 @@ const paystack = new PayStack(SECRET_KEY);
 ```
 
 ### Apple Pay
+
 The Apple Pay API allows you register your application's top-level domain or subdomain and receive payment via Apple Pay. The apple pay object currently supports **three methods**:
 
 `.registerDomain`
 
-**Parameter  -  ``string``**
+**Parameter - `String`**
+
 ```js
 import { Paystack } from "paystackly";
 const paystack = new PayStack(SECRET_KEY);
 
-async function registerApplePayDomain(){
+async function registerApplePayDomain() {
   const response = await paystack.applePay.registerDomain("example-domain");
-  console.log(response)
+  console.log(response);
 }
-registerApplePayDomain()
+registerApplePayDomain();
 ```
+
 `.listDomains`
 
-**Query Parameters  -  ``Object``**
+**Query Parameters - `Object`**
 
-| Property   | Type    | Required | Description                                                                                                 |
-|------------|---------|----------|-------------------------------------------------------------------------------------------------------------|
-| use_cursor | boolean | true      | Flag to enable cursor pagination on the endpoint.                                                           |
-| next       | string  | false      | A cursor that indicates your place in the list. It can be used to fetch the next page of the list.         |
-| previous   | string  | false      | A cursor that indicates your place in the list. It should be used to fetch the previous page of the list after an initial next request. |
+| Property   | Type    | Required | Description                                                                                                                             |
+| ---------- | ------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| use_cursor | boolean | true     | Flag to enable cursor pagination on the endpoint.                                                                                       |
+| next       | string  | false    | A cursor that indicates your place in the list. It can be used to fetch the next page of the list.                                      |
+| previous   | string  | false    | A cursor that indicates your place in the list. It should be used to fetch the previous page of the list after an initial next request. |
 
 ```js
 import { Paystack } from "paystackly";
 const paystack = new PayStack(SECRET_KEY);
 
-async function listApplePayDomains(){
+async function listApplePayDomains() {
   const response = await paystack.applePay.listDomains(queryParams);
-  console.log(response)
+  console.log(response);
 }
-listApplePayDomains()
+listApplePayDomains();
 ```
+
 `.unRegisterDomain`
 
-**Parameter  -  ``string``**
+**Parameter - `String`**
 
 ```js
 import { Paystack } from "paystackly";
 const paystack = new PayStack(SECRET_KEY);
 
-async function unRegisterApplePayDomains(){
+async function unRegisterApplePayDomains() {
   const response = await paystack.applePay.unRegisterDomain("example-domain");
-  console.log(response)
+  console.log(response);
 }
-unRegisterApplePayDomains()
+unRegisterApplePayDomains();
 ```
+
 ### Bulk Charges
 
+The Bulk Charges API allows you create and manage multiple recurring payments from multiple customers at the same time.
+
+`.initialize`
+
+Use `.initialize` to intialize a bulk charge from customers
+
+**Payload - `Array of Objects`**
+
+| Property      | Type    | Required | Description                             |
+|---------------|---------|----------|-----------------------------------------|
+| authorization | string  | true     | Valid authorization code to charge     |
+| amount        | number  | true     | Amount to be charged from the customer |
+| reference     | string  | true     | The reference used to initiate the charge |
+
+```js
+import { Paystack } from "paystackly";
+const paystack = new PayStack(SECRET_KEY);
+
+async function initializeBulkCharge() {
+  const response = await paystack.bulkCharges.initialize(payload);
+  console.log(response);
+}
+initializeBulkCharge();
+```
+
+`.list`
+
+The `.list` method helps you list down all or some of the bulk charges you intialized or completed
+
+**Query params - `Objects`**
+
+| Property | Type      | Required | Description                                                         |
+|----------|-----------|----------|---------------------------------------------------------------------|
+| perPage  | number    | false    | Specify how many records you want to retrieve per page. If not specified, paystack uses a default value of 50. |
+| page     | number    | false    | Specify exactly what page you want to retrieve. If not specified, paystack uses a default value of 1.        |
+| from     | Date      | false    | A timestamp from which to start listing, e.g., 2016-09-24T00:00:05.000Z, 2016-09-21.                    |
+| to       | Date      | false    | A timestamp from which to end listing, e.g., 2016-09-24T00:00:05.000Z, 2016-09-21.                      |
+```js
+import { Paystack } from "paystackly";
+const paystack = new PayStack(SECRET_KEY);
+
+async function listBulkCharges() {
+  const response = await paystack.bulkCharges.list(queryParams); //Note the query Params parameter is optional
+  console.log(response);
+}
+listBulkCharges();
+```
+`.pause`
+
+The pause method allows you to pause/hault a bulk charge
 ### Charge
 
 ### Customers
@@ -186,41 +239,39 @@ unRegisterApplePayDomains()
 ### Terminal
 
 ### Transaction
+
 The Transactions API allows you create and manage payments on your integration.
 Access the Transactions class on the Paystack Class.
 
 Initialize the transaction by calling the initialization methods on the transactions object.
 
 ##### Initialize With Mobile Money
+
 `.initializeWithMobileMoney`
 
 ```ts
 import { Paystack } from "paystackly";
 const paystack = new PayStack(SECRET_KEY);
-const body = {
-
-};
-async function initializeWithMobileMoney(){
+const body = {};
+async function initializeWithMobileMoney() {
   const results = await paystack.transactions.initalizeWithMobileMoney(body);
 }
-initializeWithMobileMoney()
+initializeWithMobileMoney();
 ```
 
 ##### Initialize With Credit Card
-`.initializeWithCreditCard`
 
+`.initializeWithCreditCard`
 
 ```ts
 import { Paystack } from "paystackly";
 const paystack = new PayStack(SECRET_KEY);
 
-async function initializeWithCreditCard(){
+async function initializeWithCreditCard() {
   const results = await paystack.transactions.initalizeWithCreditCard(payload);
 }
-initializeWithCreditCard()
+initializeWithCreditCard();
 ```
-
-
 
 ### Transaction Splits
 
