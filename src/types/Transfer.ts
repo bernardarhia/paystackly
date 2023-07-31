@@ -78,19 +78,6 @@ export type CreateTransferResponse =
 
     // Define an abstract class
 export abstract class BaseTransfer {
-  abstract initializeWithMobileMoney(
-    payload: InitializeTransferPayload
-  ): Promise<TransferInitializeResponse>;
-
-  abstract initializeWithBank(
-    payload: InitializeTransferPayload
-  ): Promise<any>;
-
-  abstract initializeWithAuthorizationCode(
-    payload: InitializeTransferWithAuthorizationPayload
-  ): Promise<any>;
-
-  abstract create(payload: CreateTransferPayload): Promise<CreateTransferResponse>;
-
+  abstract initialize(payload: CreateTransferPayload): Promise<CreateTransferResponse>;
   abstract finalize(payload: CreateFinalizeTransferPayload): Promise<CreateTransferResponse>;
 }

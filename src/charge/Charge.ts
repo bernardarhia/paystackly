@@ -1,6 +1,4 @@
-import { getRequestData } from "../constants";
 import { BaseCharges, TransactionResponse } from "../types";
-import { sendRequest } from "../utils";
 import {
   BaseChargeResponse,
   ChargeWithBankPayload,
@@ -13,99 +11,102 @@ import {
   SubmitChargePhonePayload,
   SubmitChargePinPayload,
 } from "../types";
+import { Http } from "../core/Http";
 
+type PayloadWithAmount<T> = T & { amount?: number };
 export class Charges extends BaseCharges {
+  private endpoint = "/charge";
   constructor() {
     super();
   }
   async chargeWithMobileMoney(
-    payload: ChargeWithMobileMoneyPayload,
+    payload: ChargeWithMobileMoneyPayload
   ): Promise<BaseChargeResponse | TransactionResponse> {
-    const body: Record<string, string | number | any> = {
-      ...payload,
-      amount: payload.amount * 100,
-    };
-
-    return await sendRequest<BaseChargeResponse>(
-      getRequestData("POST", null, body).createCharge,
+    return await this.basePostChargeRequest<ChargeWithMobileMoneyPayload>(
+      this.endpoint,
+      payload
     );
   }
   async chargeWithBank(
-    payload: ChargeWithBankPayload,
+    payload: ChargeWithBankPayload
   ): Promise<BaseChargeResponse | TransactionResponse> {
-    const body: Record<string, string | number | any> = {
-      ...payload,
-      amount: payload.amount * 100,
-    };
-
-    return await sendRequest<BaseChargeResponse>(
-      getRequestData("POST", null, body).createCharge,
+    return await this.basePostChargeRequest<ChargeWithBankPayload>(
+      this.endpoint,
+      payload
     );
   }
   async chargeWithUssd(
-    payload: ChargeWithUSSDPayload,
+    payload: ChargeWithUSSDPayload
   ): Promise<BaseChargeResponse | TransactionResponse> {
-    const body: Record<string, string | number | any> = {
-      ...payload,
-      amount: payload.amount * 100,
-    };
-
-    return await sendRequest<BaseChargeResponse>(
-      getRequestData("POST", null, body).createCharge,
+    return await this.basePostChargeRequest<ChargeWithUSSDPayload>(
+      this.endpoint,
+      payload
     );
   }
   async chargeWithCard(
-    payload: ChargeWithCardPayload,
+    payload: ChargeWithCardPayload
   ): Promise<BaseChargeResponse | TransactionResponse> {
-    const body: Record<string, string | number | any> = {
-      ...payload,
-      amount: payload.amount * 100,
-    };
-
-    return await sendRequest<BaseChargeResponse>(
-      getRequestData("POST", null, body).createCharge,
+    return await this.basePostChargeRequest<ChargeWithCardPayload>(
+      this.endpoint,
+      payload
     );
   }
 
   async submitPin(
-    payload: SubmitChargePinPayload,
+    payload: SubmitChargePinPayload
   ): Promise<BaseChargeResponse | TransactionResponse> {
-    return await sendRequest<BaseChargeResponse>(
-      getRequestData("POST", null, payload).submitPin,
+    return await this.basePostChargeRequest<SubmitChargePinPayload>(
+      `${this.endpoint}/submit_pin`,
+      payload
     );
   }
 
   async submitOTP(
-    payload: SubmitChargeOTPPayload,
+    payload: SubmitChargeOTPPayload
   ): Promise<BaseChargeResponse | TransactionResponse> {
-    return await sendRequest<BaseChargeResponse>(
-      getRequestData("POST", null, payload).submitOTP,
+    return await this.basePostChargeRequest<SubmitChargeOTPPayload>(
+      `${this.endpoint}/submit_otp`,
+      payload
     );
   }
   async submitPhone(
-    payload: SubmitChargePhonePayload,
+    payload: SubmitChargePhonePayload
   ): Promise<BaseChargeResponse | TransactionResponse> {
-    return await sendRequest<BaseChargeResponse>(
-      getRequestData("POST", null, payload).submitPhone,
+    return await this.basePostChargeRequest<SubmitChargePhonePayload>(
+      `${this.endpoint}/submit_phone`,
+      payload
     );
   }
   async submitBirthday(
-    payload: SubmitChargeBirthdayPayload,
+    payload: SubmitChargeBirthdayPayload
   ): Promise<BaseChargeResponse | TransactionResponse> {
-    return await sendRequest<BaseChargeResponse>(
-      getRequestData("POST", null, payload).submitBirthday,
+    return await this.basePostChargeRequest<SubmitChargeBirthdayPayload>(
+      `${this.endpoint}/submit_birthday`,
+      payload
     );
   }
   async submitAddress(
-    payload: SubmitChargeAddressPayload,
+    payload: SubmitChargeAddressPayload
   ): Promise<BaseChargeResponse | TransactionResponse> {
-    return await sendRequest<BaseChargeResponse>(
-      getRequestData("POST", null, payload).submitAddress,
+    return await this.basePostChargeRequest<SubmitChargeAddressPayload>(
+      `${this.endpoint}/submit_address`,
+      payload
     );
   }
   async checkStatus(reference: string): Promise<TransactionResponse> {
-    return await sendRequest<TransactionResponse>(
-      getRequestData("GET", `/${reference}`).checkStatus,
+    return await Http.get<TransactionResponse>(`${this.endpoint}/${reference}`);
+  }
+  async basePostChargeRequest<T>(
+    url: string,
+    payload: PayloadWithAmount<T>
+  ): Promise<BaseChargeResponse | TransactionResponse> {
+    if (payload && "amount" in payload) {
+      payload.amount = (payload?.amount as number) * 100;
+    }
+
+    return await Http.post<T, BaseChargeResponse | TransactionResponse>(
+      url,
+      payload
     );
   }
 }

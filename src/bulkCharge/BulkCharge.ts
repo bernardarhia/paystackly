@@ -1,4 +1,4 @@
-import { getRequestData } from "../constants";
+import { Http } from "../core/Http";
 import { BaseBulkCharges, BasePaystackResponse } from "../types";
 import {
   BulkChargeListsQuery,
@@ -9,21 +9,23 @@ import {
   FetchChargesInBatch,
   FetchChargesInBatchResponse,
 } from "../types";
-import { formatQueryParams, sendRequest } from "../utils";
+import { formatQueryParams } from "../utils";
 
 export class BulkCharges extends BaseBulkCharges {
+  private endpoint = "/bulkcharge";
   constructor() {
     super();
   }
   async initilize(payload: BulkChargesPayload[]): Promise<BulkChargesResponse> {
-    return await sendRequest<BulkChargesResponse>(
-      getRequestData("POST", null, payload).bulkCharge
+    return await Http.post<BulkChargesPayload[], BulkChargesResponse>(
+      this.endpoint,
+      payload
     );
   }
   async list(query: BulkChargeListsQuery): Promise<BulkChargeListsReponse> {
     let formattedQueryString: string = formatQueryParams(query);
-    return await sendRequest<BulkChargeListsReponse>(
-      getRequestData("GET", formattedQueryString).bulkCharge
+    return await Http.get<BulkChargeListsReponse>(
+      `${this.endpoint}${formattedQueryString}`
     );
   }
   /**
@@ -33,8 +35,8 @@ export class BulkCharges extends BaseBulkCharges {
   async fetchBulkChargeBatch(
     id_or_code: string
   ): Promise<FetchBulkChargeBatchResponse> {
-    return await sendRequest<FetchBulkChargeBatchResponse>(
-      getRequestData("GET", `/${id_or_code}`).bulkCharge
+    return await Http.get<FetchBulkChargeBatchResponse>(
+      `${this.endpoint}/${id_or_code}`
     );
   }
   /**
@@ -46,9 +48,8 @@ export class BulkCharges extends BaseBulkCharges {
     queryParams?: FetchChargesInBatch
   ): Promise<FetchChargesInBatchResponse> {
     const query = formatQueryParams(queryParams);
-    const path = `/${id_or_code}/charges${query}`;
-    return await sendRequest<FetchChargesInBatchResponse>(
-      getRequestData("GET", path).bulkCharge
+    return await Http.get<FetchChargesInBatchResponse>(
+      `${this.endpoint}/${id_or_code}/charges${query}`
     );
   }
 
@@ -57,10 +58,8 @@ export class BulkCharges extends BaseBulkCharges {
    * @param batch_code  - The batch code for the bulk charge you want to pause
    */
   async pause(batch_code: string): Promise<BasePaystackResponse> {
-    const path = `/pause/${batch_code}`;
-    return await sendRequest<BasePaystackResponse>(
-      getRequestData("GET", path).bulkCharge
-    );
+    const path = `${this.endpoint}/pause/${batch_code}`;
+    return await Http.get<BasePaystackResponse>(`${path}`);
   }
   /**
    *
@@ -68,8 +67,6 @@ export class BulkCharges extends BaseBulkCharges {
    */
   async resume(batch_code: string): Promise<BasePaystackResponse> {
     const path = `/resume/${batch_code}`;
-    return await sendRequest<BasePaystackResponse>(
-      getRequestData("GET", path).bulkCharge
-    );
+    return await Http.get<BasePaystackResponse>(`${path}`);
   }
 }

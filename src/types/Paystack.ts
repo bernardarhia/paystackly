@@ -389,7 +389,7 @@ export interface BasePaystackResponse {
     };
   }
   
-  export interface BasePaymentPayload {
+  export interface BaseTransactionPayload {
     /**
      * Customer's email address
      *
@@ -486,7 +486,7 @@ export interface BasePaystackResponse {
       pageCount: number;
     };
   }
-  export interface ChargeAuthorizationPayload extends BasePaymentPayload {
+  export interface ChargeAuthorizationPayload extends BaseTransactionPayload {
     /**
      * Valid authorization code to charge
      */
@@ -511,15 +511,15 @@ export interface BasePaystackResponse {
     abstract applePay: ApplePay;
     abstract transactionSplit: TransactionSplit;
     abstract subAccount: SubAccount;
-    abstract getBanks(
-      queryParams: GetBanksQueryParams
-    ): Promise<GetBanksResponse>;
+    // abstract getBanks(
+    //   queryParams: GetBanksQueryParams
+    // ): Promise<GetBanksResponse>;
   
-    abstract getCountries(): Promise<GetCountriesResponse[]>;
+    // abstract getCountries(): Promise<GetCountriesResponse[]>;
   
-    abstract verifyNumber(
-      params: VerifyNumberQueryParams
-    ): Promise<VerifyNumberResponse>;
+    // abstract verifyNumber(
+    //   params: VerifyNumberQueryParams
+    // ): Promise<VerifyNumberResponse>;
   
-    abstract verifyCardBIN(binNumber: string): Promise<CardBINResponse>;
+    // abstract verifyCardBIN(binNumber: string): Promise<CardBINResponse>;
   }

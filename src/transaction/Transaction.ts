@@ -1,8 +1,10 @@
-import { getRequestData } from "../constants";
+import { Http } from "../core/Http";
 import {
+  BaseTransactionPayload,
   ChargeAuthorizationPayload,
   ExportTransactionQueryParams,
   ExportTransactionResponse,
+  InitializeTransactionResponse,
   ListTransactionsQuery,
   ListTransactionsResponse,
   PartialDebitPayload,
@@ -13,28 +15,38 @@ import {
   TransactionTotalQueryParams,
   TransactionTotalResponse,
 } from "../types";
-import { formatQueryParams, sendRequest } from "../utils";
+import { formatQueryParams } from "../utils";
 
 export class Transaction extends TransactionBase {
+  private endpoint = "/transaction";
   constructor() {
     super();
+  }
+
+  async initialize(payload: BaseTransactionPayload): Promise<InitializeTransactionResponse>{
+    try {
+      payload.amount = payload.amount * 100;
+      return await Http.post<BaseTransactionPayload, InitializeTransactionResponse>(
+        `${this.endpoint}/initialize`,
+        payload
+      );
+    } catch (error: any) {
+      return error.response.data;
+    }
   }
   /**
    *
    * @param reference  - reference from transaction
    */
   async verify(reference: string): Promise<TransactionResponse> {
-    return await sendRequest<TransactionResponse>(
-      getRequestData("GET", `/${reference}`).verifyTransaction,
+    return await this.baseRequest<TransactionResponse>(
+      `${this.endpoint}/verify/${reference}`
     );
   }
-  async list(
-    params: ListTransactionsQuery,
-  ): Promise<ListTransactionsResponse> {
+  async list(params: ListTransactionsQuery): Promise<ListTransactionsResponse> {
     let formattedQueryString: string = formatQueryParams(params);
-    
-    return await sendRequest<ListTransactionsResponse>(
-      getRequestData("GET", formattedQueryString).listTransactions,
+    return await this.baseRequest<ListTransactionsResponse>(
+      `${this.endpoint}${formattedQueryString}`
     );
   }
   /**
@@ -42,56 +54,70 @@ export class Transaction extends TransactionBase {
    * @param id  - id of transaction
    */
   async fetch(id: string): Promise<TransactionResponse> {
-    return await sendRequest<TransactionResponse>(
-      getRequestData("GET", `/${id}`).fetchTransaction,
+    return await this.baseRequest<TransactionResponse>(
+      `${this.endpoint}/${id}`
     );
   }
-
 
   async chargeAuthorization(
     payload: ChargeAuthorizationPayload
   ): Promise<TransactionResponse> {
-    const body: Record<string, string | number | any> = {
-      ...payload,
-      amount: payload.amount * 100,
-    };
-    return await sendRequest<TransactionResponse>(
-      getRequestData("POST", null, body).chargeAuthorization
-    );
+    try {
+      payload.amount = payload.amount * 100;
+      return await Http.post<ChargeAuthorizationPayload, TransactionResponse>(
+        `${this.endpoint}/charge_authorization`,
+        payload
+      );
+    } catch (error: any) {
+      return error.response.data;
+    }
   }
   /**
    *
    * @param reference  - id or reference number from transaction
    */
-  async viewTransactionTimeline(id: string): Promise<TransactionTimelineResponse> {
-    return await sendRequest<TransactionTimelineResponse>(
-      getRequestData("GET", `/${id}`).readTransactionTimeLine,
+  async readTransactionTimeline(
+    id: string
+  ): Promise<TransactionTimelineResponse> {
+    return await this.baseRequest<TransactionTimelineResponse>(
+      `${this.endpoint}/timeline/${id}`
     );
   }
   async total(
-    params: TransactionTotalQueryParams,
+    params: TransactionTotalQueryParams
   ): Promise<TransactionTotalResponse> {
     let formattedQueryString: string = formatQueryParams(params);
-
-    return await sendRequest<TransactionTotalResponse>(
-      getRequestData("GET", formattedQueryString).transactionTotal,
+    return await this.baseRequest<TransactionTotalResponse>(
+      `${this.endpoint}/totals${formattedQueryString}`
     );
   }
   async export(
-    params: ExportTransactionQueryParams,
+    params: ExportTransactionQueryParams
   ): Promise<ExportTransactionResponse> {
     let formattedQueryString: string = formatQueryParams(params);
-    return await sendRequest<ExportTransactionResponse>(
-      getRequestData("GET", formattedQueryString).exportTransaction,
+    return await this.baseRequest<ExportTransactionResponse>(
+      `${this.endpoint}/export${formattedQueryString}`
     );
   }
-async partialDebit(payload: PartialDebitPayload): Promise<PartialDebitResponse> {
-  const body: Record<string, string | number | any> = {
-    ...payload,
-    amount: +payload.amount * 100,
-  };
-  return await sendRequest<PartialDebitResponse>(
-    getRequestData("POST", "/partial_debit", body).listTransactions,
-  );
-}
+  async partialDebit(
+    payload: PartialDebitPayload
+  ): Promise<PartialDebitResponse> {
+    try {
+      payload.amount = payload.amount * 100;
+      return await Http.post<PartialDebitPayload, ExportTransactionResponse>(
+        `${this.endpoint}/partial_debit`,
+        payload
+      );
+    } catch (error: any) {
+      return error.response.data;
+    }
+  }
+
+  async baseRequest<R>(url: string): Promise<R> {
+    try {
+      return await Http.get<R>(url);
+    } catch (error: any) {
+      return error.response.data;
+    }
+  }
 }

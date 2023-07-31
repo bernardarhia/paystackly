@@ -10,30 +10,10 @@ type PATH_KEYS =
   | "getCountries"
   | "verifyNumber"
   | "verifyCardBIN"
-  | "initializeTransaction"
-  | "verifyTransaction"
-  | "listTransactions"
-  | "fetchTransaction"
-  | "chargeAuthorization"
-  | "readTransactionTimeLine"
-  | "transactionTotal"
-  | "exportTransaction"
-  | "createCharge"
-  | "submitPin"
-  | "submitOTP"
-  | "submitPhone"
-  | "submitBirthday"
-  | "submitAddress"
-  | "checkStatus"
-  | "bulkCharge"
-  | "refund"
   | "initializeTransfer"
   | "createTransfer"
   | "finalizeTransfer"
-  | "integration"
-  | "applePay"
-  | "transactionSplit"
-  | "subaccount";
+  | "transactionSplit";
 
 // Define PAYSTACK_PATHS object type using mapped types
 type PAYSTACK_PATHS_TYPE = { [key in PATH_KEYS]: string };
@@ -46,45 +26,14 @@ export const PAYSTACK_PATHS: PAYSTACK_PATHS_TYPE = {
   verifyNumber: "/bank/resolve",
   verifyCardBIN: "/decision/bin",
 
-  /** TRANSACTIONS ENDPOINT */
-  initializeTransaction: "/transaction/initialize",
-  verifyTransaction: "/transaction/verify",
-  listTransactions: "/transaction",
-  fetchTransaction: "/transaction",
-  chargeAuthorization: "/transaction/charge_authorization",
-  readTransactionTimeLine: "/transaction/timeline",
-  transactionTotal: "/transaction/totals",
-  exportTransaction: "/transaction/export",
-
-  /** CHARGES ENDPOINT */
-  createCharge: "/charge",
-  submitPin: "/charge/submit_pin",
-  submitOTP: "/charge/submit_otp",
-  submitPhone: "/charge/submit_phone",
-  submitBirthday: "/charge/submit_birthday",
-  submitAddress: "/charge/submit_address",
-  checkStatus: "/charge",
-
-  /** BULK CHARGES ENDPOINT */
-  bulkCharge: "/bulkcharge",
-
-  /** REFUND ENDPOINT*/
-  refund: "/refund",
 
   /** TRANSFER ENDPOINT */
   initializeTransfer: "/transferrecipient",
   createTransfer: "/transfer",
   finalizeTransfer: "/transfer/finalize_transfer",
 
-  /** INTEGRATIONS ENDPOINT */
-  integration: "/integration/payment_session_timeout",
-
-  /** APPLE PAY */
-  applePay: "/apple-pay/domain",
-
   //** TRANSACTION SPLIT */
   transactionSplit: "/split",
-  subaccount: "/subaccount"
 } as const;
 
 export const PAYSTACK_ENDPOINT = "api.paystack.co";
