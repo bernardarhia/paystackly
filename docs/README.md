@@ -35,7 +35,8 @@
 - [Installation](#installation)
 - [PayStack](#payStack)
   - [Transactions](#transactions)
-    - [Initialize](#intialize)
+    - [Initialize With Mobile Money](#intializewithmobilemoney)
+    - [Initialize With Credit Card](#intializewithcreditcard)
     - [Verify](#verify)
 - [Changelog](#changelog)
 
