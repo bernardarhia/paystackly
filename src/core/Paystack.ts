@@ -1,11 +1,9 @@
-import {
-  PaystackBase,
-} from "../types";
+import { PaystackBase } from "../types";
 import { Transaction } from "../transaction/Transaction";
 import { Transfer } from "../transfer/Transfer";
 import { Charges } from "../charge/Charge";
 import { BulkCharges } from "../bulkCharge/BulkCharge";
-import {transformToCamelCase } from "../utils";
+import { transformToCamelCase } from "../utils";
 
 import { Refund } from "../refund/Refund";
 import { Integration } from "../integration/Integration";
@@ -13,8 +11,7 @@ import { ApplePay } from "../applePay/ApplePay";
 import { TransactionSplit } from "../transactionSplit/TransactionSplit";
 import { SubAccount } from "../subaccount/SubAccount";
 import { Http } from "./Http";
-
-
+import { TransferRecipient } from "../transferRecipient/TransferRecipient";
 
 const PaystackClasses = [
   Transaction,
@@ -25,13 +22,14 @@ const PaystackClasses = [
   Integration,
   TransactionSplit,
   SubAccount,
-  ApplePay
-]
+  ApplePay,
+  TransferRecipient,
+];
 // Define the types for the properties
-type PaystackInstance = InstanceType<typeof PaystackClasses[number]>;
+type PaystackInstance = InstanceType<(typeof PaystackClasses)[number]>;
 
 export class PayStack extends PaystackBase {
-  readonly transaction: Transaction ;
+  readonly transaction: Transaction;
   readonly transfer: Transfer;
   readonly charges: Charges;
   readonly bulkCharges: BulkCharges;
@@ -40,6 +38,7 @@ export class PayStack extends PaystackBase {
   readonly applePay: ApplePay;
   readonly transactionSplit: TransactionSplit;
   readonly subAccount: SubAccount;
+  readonly transferRecipient: TransferRecipient;
   [key: string]: PaystackInstance;
 
   constructor(token: string) {
@@ -48,7 +47,7 @@ export class PayStack extends PaystackBase {
     Http.setAuthorization(token);
     for (const baseClass of PaystackClasses) {
       const className = transformToCamelCase(baseClass.name);
-      this[className]  = new baseClass();
+      this[className] = new baseClass();
     }
   }
 }

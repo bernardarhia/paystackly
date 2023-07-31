@@ -12,8 +12,7 @@ type PATH_KEYS =
   | "verifyCardBIN"
   | "initializeTransfer"
   | "createTransfer"
-  | "finalizeTransfer"
-  | "transactionSplit";
+  | "finalizeTransfer";
 
 // Define PAYSTACK_PATHS object type using mapped types
 type PAYSTACK_PATHS_TYPE = { [key in PATH_KEYS]: string };
@@ -32,8 +31,6 @@ export const PAYSTACK_PATHS: PAYSTACK_PATHS_TYPE = {
   createTransfer: "/transfer",
   finalizeTransfer: "/transfer/finalize_transfer",
 
-  //** TRANSACTION SPLIT */
-  transactionSplit: "/split",
 } as const;
 
 export const PAYSTACK_ENDPOINT = "api.paystack.co";

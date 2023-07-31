@@ -64,7 +64,7 @@ class HttpClient {
 
   public async delete<RequestBody, Response>(
     url: string,
-    data: RequestBody
+    data?: RequestBody
   ): Promise<Response> {
     try {
       const response: AxiosResponse<Response> = await this.axiosInstance.delete(

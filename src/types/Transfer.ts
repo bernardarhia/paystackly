@@ -1,49 +1,17 @@
-import { BankCodes, BasePaystackErrorResponse, BasePaystackResponse, BasePaystackSuccessResponse, PayStackCurrency } from "../types";
+import { BasePaystackErrorResponse, BasePaystackResponse, BasePaystackSuccessResponse, PayStackCurrency } from "../types";
 
 /** ============= TRANSFER ============ */
-type TransferType = "nuban" | "basa" | "mobile_money" | "authorization";
+export type TransferType = "nuban" | "basa" | "mobile_money";
 export interface BaseTransferInitializerPayload {
+  /** Recipient Type. It could be one of: nuban, mobile_money or basa */
   type: TransferType;
+
+  /** A name for the recipient */
   name: string;
+  /** Currency for the account receiving the transfer */
   currency: PayStackCurrency;
-}
-export interface InitializeTransferPayload
-  extends BaseTransferInitializerPayload {
-  account_number: string;
-  bank_code: BankCodes;
-  currency: PayStackCurrency;
-}
-export interface InitializeTransferWithAuthorizationPayload
-  extends BaseTransferInitializerPayload {
-  email: string;
-  authorization_code: string;
 }
 
-export type TransferInitializeResponse =
-  | (BasePaystackResponse & BasePaystackErrorResponse)
-  | (BasePaystackSuccessResponse & {
-      data: {
-        active: boolean;
-        createdAt: Date;
-        currency: PayStackCurrency;
-        domain: string;
-        id: number;
-        integration: number;
-        name: string;
-        recipient_code: string;
-        type: TransferType;
-        updatedAt: Date;
-        is_deleted: boolean;
-        isDeleted: boolean;
-        details: {
-          authorization_code: null | string;
-          account_number: string;
-          account_name: string;
-          bank_code: BankCodes;
-          bank_name: string;
-        };
-      };
-    });
 export interface CreateTransferPayload {
   source: "balance";
   amount: number;

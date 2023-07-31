@@ -27,14 +27,10 @@ export class Refund extends BaseRefund {
   }
 
   async list(params: ListRefundQuery): Promise<ListRefundResponseData> {
-    try {
       let formattedQueryString: string = formatQueryParams(params);
       return await Http.get<ListRefundResponseData>(
         `${this.endpoint}${formattedQueryString}`
       );
-    } catch (error: any) {
-      return error.response.data;
-    }
   }
   /**
    *
