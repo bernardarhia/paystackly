@@ -33,6 +33,10 @@
 
 - [What is Paystackly](#what-is-paystackly)
 - [Installation](#installation)
+- [PayStack](#payStack)
+  - [Transactions](#transactions)
+    - [Initialize](#intialize)
+    - [Verify](#verify)
 - [Changelog](#changelog)
 
 ## What is Paystackly
@@ -61,4 +65,37 @@ To install Paystackly:
 
 ```sh
 npm install paystackly
+```
+
+> Every method accessible on the paystackly **paystackly** is asynchronous and therefore can be handled with `async await` or `.then().catch()`
+
+## PayStack
+
+Every single **action** on the paystack api can be accessed from the base **PayStack** class. Initialize the Paystack class and pass in your **SECRET KEY**
+
+```js
+import { Paystack } from "paystackly";
+const paystack = new PayStack(SECRET_KEY);
+```
+
+### Transactions
+
+Access the Transactions class the on Paystack Class.
+
+#### intialize
+
+Initialize the transaction by calling the initialize method on the transactions object.
+
+```ts
+import { Paystack } from "paystackly";
+const paystack = new PayStack(SECRET_KEY);
+const body = {};
+const results = paystack.transactions.initalize(body);
+result
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 ```
