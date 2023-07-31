@@ -34,10 +34,34 @@
 - [What is Paystackly](#what-is-paystackly)
 - [Installation](#installation)
 - [PayStack](#payStack)
+  - [Apple Pay](#apple-pay)
+  - [Bulk Charges](#bulk-charges)
+  - [Charge](#charge)
+  - [Customers](#customers)
+  - [Dedicated Virtual Accounts](#dedicated-virtual-accounts)
+  - [Disputes](#disputes)
+  - [Integration](#integration)
+  - [Miscellaneous](#miscellaneous)
+  - [Payment Pages](#payment-pages)
+  - [Payment Requests](#payment-requests)
+  - [Plans](#plans)
+  - [Products](#products)
+  - [Refund](#refund)
+  - [Settlements](#settlements)
+  - [Subaccounts](#subaccounts)
+  - [Subscriptions](#subscriptions)
+  - [Terminal](#terminal)
+  - [Transaction Splits](#transaction-splits)
   - [Transactions](#transactions)
-    - [Initialize With Mobile Money](#intializewithmobilemoney)
-    - [Initialize With Credit Card](#intializewithcreditcard)
     - [Verify](#verify)
+    - [Initialize With Credit Card](#initialize-with-credit-card)
+    - [Initialize With Mobile Money](#initialize-with-mobile-money)
+  - [Transfer](#transfer)
+  - [Transfer Control](#transfer-control)
+  - [Transfer Recipients](#transfer-recipients)
+  - [Verification](#verification)
+
+  
 - [Changelog](#changelog)
 
 ## What is Paystackly
@@ -79,24 +103,131 @@ import { Paystack } from "paystackly";
 const paystack = new PayStack(SECRET_KEY);
 ```
 
-### Transactions
+### Apple Pay
+The Apple Pay API allows you register your application's top-level domain or subdomain and receive payment via Apple Pay. The apple pay object currently supports **three methods**:
 
-Access the Transactions class the on Paystack Class.
+`.registerDomain`
 
-#### intialize
+**Parameter  -  ``string``**
+```js
+import { Paystack } from "paystackly";
+const paystack = new PayStack(SECRET_KEY);
 
-Initialize the transaction by calling the initialize method on the transactions object.
+async function registerApplePayDomain(){
+  const response = await paystack.applePay.registerDomain("example-domain");
+  console.log(response)
+}
+registerApplePayDomain()
+```
+`.listDomains`
+
+**Query Parameters  -  ``Object``**
+
+| Property   | Type    | Required | Description                                                                                                 |
+|------------|---------|----------|-------------------------------------------------------------------------------------------------------------|
+| use_cursor | boolean | true      | Flag to enable cursor pagination on the endpoint.                                                           |
+| next       | string  | false      | A cursor that indicates your place in the list. It can be used to fetch the next page of the list.         |
+| previous   | string  | false      | A cursor that indicates your place in the list. It should be used to fetch the previous page of the list after an initial next request. |
+
+```js
+import { Paystack } from "paystackly";
+const paystack = new PayStack(SECRET_KEY);
+
+async function listApplePayDomains(){
+  const response = await paystack.applePay.listDomains(queryParams);
+  console.log(response)
+}
+listApplePayDomains()
+```
+`.unRegisterDomain`
+
+**Parameter  -  ``string``**
+
+```js
+import { Paystack } from "paystackly";
+const paystack = new PayStack(SECRET_KEY);
+
+async function unRegisterApplePayDomains(){
+  const response = await paystack.applePay.unRegisterDomain("example-domain");
+  console.log(response)
+}
+unRegisterApplePayDomains()
+```
+### Bulk Charges
+
+### Charge
+
+### Customers
+
+### Dedicated Virtual Accounts
+
+### Disputes
+
+### Integration
+
+### Miscellaneous
+
+### Payment Pages
+
+### Payment Requests
+
+### Plans
+
+### Products
+
+### Refund
+
+### Settlements
+
+### Subaccounts
+
+### Subscriptions
+
+### Terminal
+
+### Transaction
+The Transactions API allows you create and manage payments on your integration.
+Access the Transactions class on the Paystack Class.
+
+Initialize the transaction by calling the initialization methods on the transactions object.
+
+##### Initialize With Mobile Money
+`.initializeWithMobileMoney`
 
 ```ts
 import { Paystack } from "paystackly";
 const paystack = new PayStack(SECRET_KEY);
-const body = {};
-const results = paystack.transactions.initalize(body);
-result
-  .then((data) => {
-    console.log(data);
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+const body = {
+
+};
+async function initializeWithMobileMoney(){
+  const results = await paystack.transactions.initalizeWithMobileMoney(body);
+}
+initializeWithMobileMoney()
 ```
+
+##### Initialize With Credit Card
+`.initializeWithCreditCard`
+
+
+```ts
+import { Paystack } from "paystackly";
+const paystack = new PayStack(SECRET_KEY);
+
+async function initializeWithCreditCard(){
+  const results = await paystack.transactions.initalizeWithCreditCard(payload);
+}
+initializeWithCreditCard()
+```
+
+
+
+### Transaction Splits
+
+### Transfer
+
+### Transfer Control
+
+### Transfer Recipients
+
+### Verification

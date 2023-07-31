@@ -8,7 +8,6 @@ yarn-error.log*
 
 # Build output and compiled files
 /dist/
-/lib/
 
 # IDE/Editor specific files
 .vscode/
