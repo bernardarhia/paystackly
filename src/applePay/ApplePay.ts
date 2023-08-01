@@ -11,11 +11,12 @@ export class ApplePay extends BaseApplePay {
   constructor() {
     super();
   }
-  async registerDomain(domainName: string): Promise<BasePaystackResponse> {
-    const body = { domainName };
-    return await Http.post<typeof body, BasePaystackResponse>(
+  async registerDomain(payload: {
+    domainName: string;
+  }): Promise<BasePaystackResponse> {
+    return await Http.post<typeof payload, BasePaystackResponse>(
       this.endpoint,
-      body
+      payload
     );
   }
   async listDomains(params: ListApplePayQuery): Promise<ListApplePay> {
@@ -24,11 +25,12 @@ export class ApplePay extends BaseApplePay {
       `${this.endpoint}${formattedQueryString}`
     );
   }
-  async unRegisterDomain(domainName: string): Promise<BasePaystackResponse> {
-    const body = { domainName };
-    return await Http.delete<typeof body, BasePaystackResponse>(
+  async unRegisterDomain(payload: {
+    domainName: string;
+  }): Promise<BasePaystackResponse> {
+    return await Http.delete<typeof payload, BasePaystackResponse>(
       this.endpoint,
-      body
+      payload
     );
   }
 }

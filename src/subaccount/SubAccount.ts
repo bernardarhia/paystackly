@@ -30,8 +30,10 @@ export class SubAccount extends BaseSubaccount {
       `${this.endpoint}${formattedQueryString}`
     );
   }
-  async fetch(id: string): Promise<FetchSubAccountResponse> {
-    return await Http.get<FetchSubAccountResponse>(`${this.endpoint}${id}`);
+  async fetch(payload: { id: string }): Promise<FetchSubAccountResponse> {
+    return await Http.get<FetchSubAccountResponse>(
+      `${this.endpoint}${payload.id}`
+    );
   }
   async update(
     payload: UpdateSubAccountPayload

@@ -35,10 +35,9 @@ export class TransactionSplit extends BaseTransactionSplit {
       `${this.endpoint}${formattedQueryString}`
     );
   }
-  /**@param id - The id of the split */
-  async fetch(id: string): Promise<FetchTransactionSplitResponse> {
+  async fetch(payload: { id: string }): Promise<FetchTransactionSplitResponse> {
     return await Http.get<FetchTransactionSplitResponse>(
-      `${this.endpoint}/${id}`
+      `${this.endpoint}/${payload.id}`
     );
   }
 
@@ -73,11 +72,11 @@ export class TransactionSplit extends BaseTransactionSplit {
   }
 
   /**@param id - The id of the split */
-  async removeSubAccount(
-    id: string
-  ): Promise<RemoveSubAccountFromSplitResponse> {
+  async removeSubAccount(payload: {
+    id: string;
+  }): Promise<RemoveSubAccountFromSplitResponse> {
     return await Http.post<null, UpdateTransactionSplit>(
-      `${this.endpoint}/${id}/subaccount/remove`
+      `${this.endpoint}/${payload.id}/subaccount/remove`
     );
   }
 }

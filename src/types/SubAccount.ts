@@ -116,7 +116,7 @@ export interface CreateSubaccountPayload {
       payload: CreateSubaccountPayload
     ): Promise<CreateSubaccountResponse>;
     abstract list(query?: ListSubaccountQuery): Promise<ListSubaccountResponse>;
-    abstract fetch(id: string): Promise<FetchSubAccountResponse>;
+    abstract fetch(payload: {id: string}): Promise<FetchSubAccountResponse>;
     abstract update(
       payload: UpdateSubAccountPayload
     ): Promise<UpdateSubAccountReponse>;

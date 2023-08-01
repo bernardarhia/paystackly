@@ -263,17 +263,17 @@ export type PartialDebitResponse = Omit<
 >;
 
 export abstract class TransactionBase {
-  abstract verify(reference: number | string): Promise<TransactionResponse>;
+  abstract verify(payload: {reference: number | string}): Promise<TransactionResponse>;
   abstract list(
     params: ListTransactionsQuery
   ): Promise<ListTransactionsResponse>;
-  abstract fetch(id: number | string): Promise<TransactionResponse>;
+  abstract fetch(payload: {id: number | string}): Promise<TransactionResponse>;
 
   abstract chargeAuthorization(
     payload: ChargeAuthorizationPayload
   ): Promise<TransactionResponse>;
   abstract readTransactionTimeline(
-    id: number | string
+  payload: {  id: number | string}
   ): Promise<TransactionTimelineResponse>;
   abstract total(
     params: TransactionTotalQueryParams

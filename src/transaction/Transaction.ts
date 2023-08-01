@@ -23,24 +23,22 @@ export class Transaction extends TransactionBase {
     super();
   }
 
-  async initialize(payload: BaseTransactionPayload): Promise<InitializeTransactionResponse>{
+  async initialize(
+    payload: BaseTransactionPayload
+  ): Promise<InitializeTransactionResponse> {
     try {
       payload.amount = payload.amount * 100;
-      return await Http.post<BaseTransactionPayload, InitializeTransactionResponse>(
-        `${this.endpoint}/initialize`,
-        payload
-      );
+      return await Http.post<
+        BaseTransactionPayload,
+        InitializeTransactionResponse
+      >(`${this.endpoint}/initialize`, payload);
     } catch (error: any) {
       return error.response.data;
     }
   }
-  /**
-   *
-   * @param reference  - reference from transaction
-   */
-  async verify(reference: string): Promise<TransactionResponse> {
+  async verify(payload: { reference: string }): Promise<TransactionResponse> {
     return await this.baseRequest<TransactionResponse>(
-      `${this.endpoint}/verify/${reference}`
+      `${this.endpoint}/verify/${payload.reference}`
     );
   }
   async list(params: ListTransactionsQuery): Promise<ListTransactionsResponse> {
@@ -49,13 +47,10 @@ export class Transaction extends TransactionBase {
       `${this.endpoint}${formattedQueryString}`
     );
   }
-  /**
-   *
-   * @param id  - id of transaction
-   */
-  async fetch(id: string): Promise<TransactionResponse> {
+
+  async fetch(payload: { id: string }): Promise<TransactionResponse> {
     return await this.baseRequest<TransactionResponse>(
-      `${this.endpoint}/${id}`
+      `${this.endpoint}/${payload.id}`
     );
   }
 
@@ -72,15 +67,12 @@ export class Transaction extends TransactionBase {
       return error.response.data;
     }
   }
-  /**
-   *
-   * @param reference  - id or reference number from transaction
-   */
-  async readTransactionTimeline(
-    id: string
-  ): Promise<TransactionTimelineResponse> {
+
+  async readTransactionTimeline(payload: {
+    id: string;
+  }): Promise<TransactionTimelineResponse> {
     return await this.baseRequest<TransactionTimelineResponse>(
-      `${this.endpoint}/timeline/${id}`
+      `${this.endpoint}/timeline/${payload.id}`
     );
   }
   async total(
@@ -102,15 +94,14 @@ export class Transaction extends TransactionBase {
   async partialDebit(
     payload: PartialDebitPayload
   ): Promise<PartialDebitResponse> {
-      payload.amount = payload.amount * 100;
-      return await Http.post<PartialDebitPayload, ExportTransactionResponse>(
-        `${this.endpoint}/partial_debit`,
-        payload
-      );
-  
+    payload.amount = payload.amount * 100;
+    return await Http.post<PartialDebitPayload, ExportTransactionResponse>(
+      `${this.endpoint}/partial_debit`,
+      payload
+    );
   }
 
   async baseRequest<R>(url: string): Promise<R> {
-      return await Http.get<R>(url);
+    return await Http.get<R>(url);
   }
 }

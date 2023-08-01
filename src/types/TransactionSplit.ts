@@ -160,8 +160,7 @@ export  abstract class BaseTransactionSplit {
   abstract list(
     queryParams: ListTransactionSplitQuery
   ): Promise<ListTransactionSplitResponse>;
-  /**@param id - The id of the split */
-  abstract fetch(id: string): Promise<FetchTransactionSplitResponse>;
+  abstract fetch(payload: {id: string}): Promise<FetchTransactionSplitResponse>;
   abstract update(
     payload: UpdateTransactionSplitPayload
   ): Promise<UpdateTransactionSplit>;
@@ -173,6 +172,6 @@ export  abstract class BaseTransactionSplit {
   ): Promise<TransactionSplitSubAccountResponse>;
   /**@param id - The id of the split */
   abstract removeSubAccount(
-    id: string
+    payload: {id: string}
   ): Promise<RemoveSubAccountFromSplitResponse>;
 }

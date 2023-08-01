@@ -93,8 +93,10 @@ export class Charges extends BaseCharges {
       payload
     );
   }
-  async checkStatus(reference: string): Promise<TransactionResponse> {
-    return await Http.get(`${this.endpoint}/${reference}`);
+  async checkStatus(payload: {
+    reference: string;
+  }): Promise<TransactionResponse> {
+    return await Http.get(`${this.endpoint}/${payload.reference}`);
   }
   async basePostChargeRequest<T>(
     url: string,

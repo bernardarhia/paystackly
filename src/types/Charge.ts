@@ -151,6 +151,6 @@ export abstract class BaseCharges {
   ): Promise<BaseChargeResponse | TransactionResponse>;
 
   abstract checkStatus(
-    reference: string
+   payload: { reference: string}
   ): Promise<TransactionResponse>;
 }

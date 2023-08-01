@@ -28,45 +28,31 @@ export class BulkCharges extends BaseBulkCharges {
       `${this.endpoint}${formattedQueryString}`
     );
   }
-  /**
-   *
-   * @param id_or_code  - An ID or code for the batch whose charges you want to retrieve.
-   */
-  async fetchBulkChargeBatch(
-    id_or_code: string
-  ): Promise<FetchBulkChargeBatchResponse> {
+  async fetchBulkChargeBatch(payload: {
+    id_or_code: string;
+  }): Promise<FetchBulkChargeBatchResponse> {
     return await Http.get<FetchBulkChargeBatchResponse>(
-      `${this.endpoint}/${id_or_code}`
+      `${this.endpoint}/${payload.id_or_code}`
     );
   }
-  /**
-   *
-   * @param id_or_code  - An ID or code for the batch whose charges you want to retrieve.
-   */
+
   async fetchChargesInBatch(
-    id_or_code: string,
+    payload: { id_or_code: string },
     queryParams?: FetchChargesInBatch
   ): Promise<FetchChargesInBatchResponse> {
     const query = formatQueryParams(queryParams);
     return await Http.get<FetchChargesInBatchResponse>(
-      `${this.endpoint}/${id_or_code}/charges${query}`
+      `${this.endpoint}/${payload.id_or_code}/charges${query}`
     );
   }
 
-  /**
-   *
-   * @param batch_code  - The batch code for the bulk charge you want to pause
-   */
-  async pause(batch_code: string): Promise<BasePaystackResponse> {
-    const path = `${this.endpoint}/pause/${batch_code}`;
+  async pause(payload: { batch_code: string }): Promise<BasePaystackResponse> {
+    const path = `${this.endpoint}/pause/${payload.batch_code}`;
     return await Http.get<BasePaystackResponse>(`${path}`);
   }
-  /**
-   *
-   * @param batch_code  - The batch code for the bulk charge you want to pause
-   */
-  async resume(batch_code: string): Promise<BasePaystackResponse> {
-    const path = `/resume/${batch_code}`;
+
+  async resume(payload: { batch_code: string }): Promise<BasePaystackResponse> {
+    const path = `/resume/${payload.batch_code}`;
     return await Http.get<BasePaystackResponse>(`${path}`);
   }
 }
