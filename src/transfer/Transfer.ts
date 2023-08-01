@@ -1,27 +1,29 @@
-import { getRequestData } from "../constants";
+import { Http } from "../core/Http";
 import {
   BaseTransfer,
   CreateFinalizeTransferPayload,
   CreateTransferPayload,
   CreateTransferResponse,
 } from "../types";
-import { sendRequest } from "../utils";
 export class Transfer extends BaseTransfer {
+  private endpoint = "/transfer";;
   constructor() {
     super();
   }
   async initialize(
     payload: CreateTransferPayload
   ): Promise<CreateTransferResponse> {
-    return await sendRequest<CreateTransferResponse>(
-      getRequestData("POST", null, payload).createTransfer
+    return await Http.post(
+      `${this.endpoint}`,
+      payload
     );
   }
   async finalize(
     payload: CreateFinalizeTransferPayload
   ): Promise<CreateTransferResponse> {
-    return await sendRequest<CreateTransferResponse>(
-      getRequestData("POST", null, payload).finalizeTransfer
+    return await Http.post<CreateFinalizeTransferPayload, CreateTransferResponse>(
+      `${this.endpoint}`,
+      payload
     );
   }
 }

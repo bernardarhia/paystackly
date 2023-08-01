@@ -41,7 +41,8 @@
     "Paystack api",
     "Paystack library",
     "paystack node",
-    "node paystack"
+    "node paystack",
+    "Paystack with typescript"
   ],
   "author": "Bernard Arhia",
   "license": "MIT",
@@ -57,7 +58,7 @@
     "url": "https://github.com/bernardarhia/paystackly",
     "type": "Public"
   },
-  "homepage": "https://github.com/bernardarhia/paystackly",
+  "homepage": "https://bernardarhia.github.io/paystackly",
   "bugs": {
     "url": "https://github.com/bernardarhia/paystackly/issues",
     "email": "bernardarhia@gmail.com"

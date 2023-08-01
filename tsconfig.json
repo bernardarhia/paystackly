@@ -19,5 +19,5 @@
     "declaration": true
   },
   "include": ["./src/**/*"],
-  "exclude": ["node_modules", "dist", "src/types"]
+  "exclude": ["node_modules", "dist"]
 }

@@ -102,22 +102,15 @@ export class Transaction extends TransactionBase {
   async partialDebit(
     payload: PartialDebitPayload
   ): Promise<PartialDebitResponse> {
-    try {
       payload.amount = payload.amount * 100;
       return await Http.post<PartialDebitPayload, ExportTransactionResponse>(
         `${this.endpoint}/partial_debit`,
         payload
       );
-    } catch (error: any) {
-      return error.response.data;
-    }
+  
   }
 
   async baseRequest<R>(url: string): Promise<R> {
-    try {
       return await Http.get<R>(url);
-    } catch (error: any) {
-      return error.response.data;
-    }
   }
 }
