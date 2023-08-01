@@ -15,36 +15,19 @@ import {
 import { formatQueryParams } from "../utils";
 export class TransferRecipient extends BaseTransferRecipient {
   private endpoint = "/transferrecipient";
-
   async create(
     payload: CreateTransferRecipientPayload
   ): Promise<TransferRecipientResponse> {
     return await Http.post<
       CreateTransferRecipientPayload,
       TransferRecipientResponse
-    >(this.endpoint, payload);
-  }
-  async createBulk(
-    payload: CreateBulkTransferRecipientsPayload
-  ): Promise<CreateBulkTransferRecipientsResponse> {
-    return await Http.post<
-      CreateBulkTransferRecipientsPayload,
-      CreateBulkTransferRecipientsResponse
-    >(this.endpoint, payload);
+    >(`${this.endpoint}`, payload);
   }
   async fetch(
     payload: FetchTransferRecipientPayload
   ): Promise<TransferRecipientResponse> {
     return await Http.get<TransferRecipientResponse>(
       `${this.endpoint}/${payload.id}`
-    );
-  }
-  async list(
-    query: ListTransferRecipientQuery
-  ): Promise<ListTransferRecipientResponse> {
-    let formattedQueryString: string = formatQueryParams(query);
-    return await Http.get<ListTransferRecipientResponse>(
-      `${this.endpoint}${formattedQueryString}`
     );
   }
   async update(
@@ -54,14 +37,30 @@ export class TransferRecipient extends BaseTransferRecipient {
     return await Http.put<
       Omit<UpdateTransferRecipientPayload, "id">,
       TransferRecipientResponse
-    >(this.endpoint, body);
+    >(`${this.endpoint}/${id}`, body);
   }
   async delete(
     payload: DeleteTransferRecipientPayload
   ): Promise<DeleteTransferRecipientResponse> {
     return await Http.delete<
-      UpdateTransferRecipientPayload,
-      TransferRecipientResponse
+      DeleteTransferRecipientPayload,
+      DeleteTransferRecipientResponse
     >(`${this.endpoint}/${payload.id}`);
+  }
+  async createBulk(
+    payload: CreateBulkTransferRecipientsPayload
+  ): Promise<CreateBulkTransferRecipientsResponse> {
+    return await Http.post<
+      CreateBulkTransferRecipientsPayload,
+      CreateBulkTransferRecipientsResponse
+    >(`${this.endpoint}/bulk`, payload);
+  }
+  async list(
+    queryParams: ListTransferRecipientQuery
+  ): Promise<ListTransferRecipientResponse> {
+    let formattedQueryString: string = formatQueryParams(queryParams);
+    return Http.get<ListTransferRecipientResponse>(
+      `${this.endpoint}${formattedQueryString}`
+    );
   }
 }

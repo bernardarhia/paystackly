@@ -37,7 +37,7 @@ export interface CreateTransferRecipientPayload
   metadata?: object;
 }
 
-type BaseTransferRecipientReonse = {
+type BaseTransferRecipientResponse = {
   active: boolean;
   createdAt: Date;
   currency: PayStackCurrency;
@@ -48,8 +48,6 @@ type BaseTransferRecipientReonse = {
   recipient_code: string;
   type: TransferType;
   updatedAt: Date;
-  is_deleted: boolean;
-  isDeleted: boolean;
   details: {
     authorization_code: null | string;
     account_number: string;
@@ -61,17 +59,17 @@ type BaseTransferRecipientReonse = {
 export type TransferRecipientResponse =
   | (BasePaystackResponse & BasePaystackErrorResponse)
   | (BasePaystackSuccessResponse & {
-      data: BaseTransferRecipientReonse;
+      data: BaseTransferRecipientResponse & { is_deleted: boolean };
     });
 
 export interface CreateBulkTransferRecipientsPayload {
-  batch: CreateTransferRecipientPayload[];
+  batch: (CreateTransferRecipientPayload & { isDeleted: boolean })[];
 }
 export type CreateBulkTransferRecipientsResponse =
   | (BasePaystackResponse & BasePaystackErrorResponse)
   | (BasePaystackSuccessResponse & {
       data: {
-        success: BaseTransferRecipientReonse[];
+        success: BaseTransferRecipientResponse[];
         errors: string[];
       };
     });
@@ -80,7 +78,7 @@ export interface ListTransferRecipientQuery extends BaseQuery {}
 export type ListTransferRecipientResponse =
   | (BasePaystackResponse & BasePaystackErrorResponse)
   | (BasePaystackSuccessResponse & {
-      data: BaseTransferRecipientReonse[];
+      data: BaseTransferRecipientResponse[];
     } & PaginationMetadata);
 
 export interface FetchTransferRecipientPayload {
