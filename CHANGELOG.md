@@ -1,5 +1,11 @@
 # paystackly
 
+## 0.5.4
+
+### Patch Changes
+
+- 7f002d6: simple mod
+
 ## 0.5.3
 
 ### Patch Changes

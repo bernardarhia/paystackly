@@ -1,5 +1,0 @@
----
-"paystackly": patch
----
-
-simple mod
