@@ -19,8 +19,8 @@ export class ApplePay extends BaseApplePay {
       payload
     );
   }
-  async listDomains(params: ListApplePayQuery): Promise<ListApplePay> {
-    let formattedQueryString: string = formatQueryParams(params);
+  async listDomains(query?: ListApplePayQuery): Promise<ListApplePay> {
+    let formattedQueryString: string = formatQueryParams(query);
     return await Http.get<ListApplePay>(
       `${this.endpoint}${formattedQueryString}`
     );

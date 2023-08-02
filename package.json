@@ -33,8 +33,11 @@
     "chai": "^4.3.7",
     "mocha": "^10.2.0",
     "nyc": "^15.1.0",
+    "ts-loader": "^9.4.4",
     "ts-node": "^10.9.1",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
   },
   "keywords": [
     "Paystack",
@@ -58,7 +61,7 @@
     "url": "https://github.com/bernardarhia/paystackly",
     "type": "Public"
   },
-  "homepage": "https://bernardarhia.github.io/paystackly",
+  "homepage": "https://bernardarhia.github.io/paystackly/",
   "bugs": {
     "url": "https://github.com/bernardarhia/paystackly/issues",
     "email": "bernardarhia@gmail.com"

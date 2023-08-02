@@ -22,7 +22,7 @@ export class BulkCharges extends BaseBulkCharges {
       payload
     );
   }
-  async list(query: BulkChargeListsQuery): Promise<BulkChargeListsReponse> {
+  async list(query?: BulkChargeListsQuery): Promise<BulkChargeListsReponse> {
     let formattedQueryString: string = formatQueryParams(query);
     return await Http.get<BulkChargeListsReponse>(
       `${this.endpoint}${formattedQueryString}`

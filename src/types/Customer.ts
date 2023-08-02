@@ -192,7 +192,7 @@ export interface DeactivateAuthorizationPayload {
 export type DeactivateAuthorizationResponse = BasePaystackResponse;
 export abstract class BaseCustomer {
   abstract create(payload: CreateCustomerPayload): Promise<CustomerResponse>;
-  abstract list(query: ListCustomersQuery): Promise<ListCustomersResponse>;
+  abstract list(query?: ListCustomersQuery): Promise<ListCustomersResponse>;
   abstract fetch(param: FetchCustomerParam): Promise<FetchCustomerResponse>;
   abstract update(payload: UpdateCustomerPayload): Promise<UpdateCustomerResponse>;
   abstract validate(payload:ValidateCustomerPayload): Promise<ValidateCustomerResponse>;

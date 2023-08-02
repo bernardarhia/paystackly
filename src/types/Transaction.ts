@@ -260,7 +260,7 @@ export abstract class TransactionBase {
     reference: number | string;
   }): Promise<TransactionResponse>;
   abstract list(
-    params: ListTransactionsQuery
+    query?: ListTransactionsQuery
   ): Promise<ListTransactionsResponse>;
   abstract fetch(payload: {
     id: number | string;
@@ -273,11 +273,11 @@ export abstract class TransactionBase {
     id: number | string;
   }): Promise<TransactionTimelineResponse>;
   abstract total(
-    params: TransactionTotalQueryParams
+    query?: TransactionTotalQueryParams
   ): Promise<TransactionTotalResponse>;
 
   abstract export(
-    params: ExportTransactionQueryParams
+    query?: ExportTransactionQueryParams
   ): Promise<ExportTransactionResponse>;
   abstract partialDebit(
     payload: PartialDebitPayload

@@ -34,7 +34,7 @@ export class Customer extends BaseCustomer {
       `${this.endpoint}/${param.code}`
     );
   }
-  async list(query: ListCustomersQuery): Promise<ListCustomersResponse> {
+  async list(query?: ListCustomersQuery): Promise<ListCustomersResponse> {
     const formattedQuery = formatQueryParams(query);
     const endpoint = `${this.endpoint}${formattedQuery};`;
     return await Http.get<ListCustomersResponse>(endpoint);

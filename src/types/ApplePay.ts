@@ -25,7 +25,7 @@ export abstract class BaseApplePay {
   abstract registerDomain(payload: {
     domainName: string;
   }): Promise<BasePaystackResponse>;
-  abstract listDomains(params: ListApplePayQuery): Promise<ListApplePay>;
+  abstract listDomains(query?: ListApplePayQuery): Promise<ListApplePay>;
   abstract unRegisterDomain(payload: {
     domainName: string;
   }): Promise<BasePaystackResponse>;

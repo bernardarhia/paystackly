@@ -143,6 +143,6 @@ export type FetchReFundReponse = BaseResponse & {
 
 export abstract class BaseRefund {
   abstract create(payload: RefundPayload): Promise<RefundResponse>;
-  abstract list(queryParams: ListRefundQuery): Promise<ListRefundResponseData>;
+  abstract list(queryParams?: ListRefundQuery): Promise<ListRefundResponseData>;
   abstract fetch(param: FetchRefundParam): Promise<FetchReFundReponse>;
 }

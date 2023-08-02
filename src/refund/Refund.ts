@@ -26,8 +26,8 @@ export class Refund extends BaseRefund {
     }
   }
 
-  async list(params: ListRefundQuery): Promise<ListRefundResponseData> {
-      let formattedQueryString: string = formatQueryParams(params);
+  async list(query?: ListRefundQuery): Promise<ListRefundResponseData> {
+      let formattedQueryString: string = formatQueryParams(query);
       return await Http.get<ListRefundResponseData>(
         `${this.endpoint}${formattedQueryString}`
       );

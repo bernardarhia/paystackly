@@ -41,8 +41,8 @@ export class Transaction extends TransactionBase {
       `${this.endpoint}/verify/${payload.reference}`
     );
   }
-  async list(params: ListTransactionsQuery): Promise<ListTransactionsResponse> {
-    let formattedQueryString: string = formatQueryParams(params);
+  async list(query?: ListTransactionsQuery): Promise<ListTransactionsResponse> {
+    let formattedQueryString: string = formatQueryParams(query);
     return await this.baseRequest<ListTransactionsResponse>(
       `${this.endpoint}${formattedQueryString}`
     );
@@ -76,17 +76,17 @@ export class Transaction extends TransactionBase {
     );
   }
   async total(
-    params: TransactionTotalQueryParams
+    query?: TransactionTotalQueryParams
   ): Promise<TransactionTotalResponse> {
-    let formattedQueryString: string = formatQueryParams(params);
+    let formattedQueryString: string = formatQueryParams(query);
     return await this.baseRequest<TransactionTotalResponse>(
       `${this.endpoint}/totals${formattedQueryString}`
     );
   }
   async export(
-    params: ExportTransactionQueryParams
+    query?: ExportTransactionQueryParams
   ): Promise<ExportTransactionResponse> {
-    let formattedQueryString: string = formatQueryParams(params);
+    let formattedQueryString: string = formatQueryParams(query);
     return await this.baseRequest<ExportTransactionResponse>(
       `${this.endpoint}/export${formattedQueryString}`
     );

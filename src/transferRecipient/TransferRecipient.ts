@@ -24,10 +24,10 @@ export class TransferRecipient extends BaseTransferRecipient {
     >(`${this.endpoint}`, payload);
   }
   async fetch(
-    payload: FetchTransferRecipientPayload
+    params: FetchTransferRecipientPayload
   ): Promise<TransferRecipientResponse> {
     return await Http.get<TransferRecipientResponse>(
-      `${this.endpoint}/${payload.id}`
+      `${this.endpoint}/${params.id}`
     );
   }
   async update(
@@ -56,7 +56,7 @@ export class TransferRecipient extends BaseTransferRecipient {
     >(`${this.endpoint}/bulk`, payload);
   }
   async list(
-    queryParams: ListTransferRecipientQuery
+    queryParams?: ListTransferRecipientQuery
   ): Promise<ListTransferRecipientResponse> {
     let formattedQueryString: string = formatQueryParams(queryParams);
     return Http.get<ListTransferRecipientResponse>(

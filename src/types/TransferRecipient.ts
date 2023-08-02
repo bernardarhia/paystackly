@@ -102,10 +102,10 @@ export abstract class BaseTransferRecipient {
     payload: CreateBulkTransferRecipientsPayload
   ): Promise<CreateBulkTransferRecipientsResponse>;
   abstract fetch(
-    payload: FetchTransferRecipientPayload
+    params: FetchTransferRecipientPayload
   ): Promise<FetchTransferRecipientResponse>;
   abstract list(
-    query: ListTransferRecipientQuery
+    query?: ListTransferRecipientQuery
   ): Promise<ListTransferRecipientResponse>;
   abstract update(
     payload: UpdateTransferRecipientPayload
