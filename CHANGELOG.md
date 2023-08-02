@@ -1,5 +1,11 @@
 # paystackly
 
+## 0.5.3
+
+### Patch Changes
+
+- 0d5fe07: bundler added and cleanedup
+
 ## 0.5.2
 
 ### Patch Changes
