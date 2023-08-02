@@ -45,5 +45,3 @@ jobs:
           else
             echo "No changeset published.";
             fi
-      - name: Build and bundle
-        run: npx webpack --config webpack.config.js
