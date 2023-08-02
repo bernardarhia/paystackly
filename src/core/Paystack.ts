@@ -13,6 +13,7 @@ import { SubAccount } from "../subaccount/SubAccount";
 import { Http } from "./Http";
 import { TransferRecipient } from "../transferRecipient/TransferRecipient";
 import { Terminal } from "../terminal/Terminal";
+import { Customer } from "../customer/Customer";
 
 const PaystackClasses = [
   Transaction,
@@ -25,7 +26,8 @@ const PaystackClasses = [
   SubAccount,
   ApplePay,
   TransferRecipient,
-  Terminal
+  Terminal,
+  Customer
 ];
 // Define the types for the properties
 type PaystackInstance = InstanceType<(typeof PaystackClasses)[number]>;
@@ -42,6 +44,7 @@ export class PayStack extends PaystackBase {
   readonly subAccount: SubAccount;
   readonly transferRecipient: TransferRecipient;
   readonly terminal: Terminal;
+  readonly customer: Customer;
   [key: string]: PaystackInstance;
 
   constructor(token: string) {

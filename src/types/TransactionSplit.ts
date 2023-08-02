@@ -1,4 +1,10 @@
-import { BasePaystackErrorResponse, BasePaystackResponse, BasePaystackSuccessResponse, BaseQuery, PaginationMetadata, PayStackCurrency } from "../types";
+import {
+  BasePaystackResponse,
+  BaseQuery,
+  BaseResponse,
+  PaginationMetadata,
+  PayStackCurrency,
+} from "../types";
 
 // TRANSACTION SPLIT
 type TransactionSplitBearerType =
@@ -70,11 +76,9 @@ interface BaseTransactionSplitResponse {
   }[];
   total_subaccounts: number;
 }
-export type CreateTransactionSplitResponse =
-  | (BasePaystackResponse & BasePaystackErrorResponse)
-  | (BasePaystackSuccessResponse & {
-      data: BaseTransactionSplitResponse;
-    });
+export type CreateTransactionSplitResponse = BaseResponse & {
+  data: BaseTransactionSplitResponse;
+};
 
 export interface ListTransactionSplitQuery extends BaseQuery {
   /**
@@ -93,11 +97,10 @@ export interface ListTransactionSplitQuery extends BaseQuery {
   sort_by?: string;
 }
 
-export interface ListTransactionSplitResponse
-  extends BasePaystackResponse,
-    PaginationMetadata {
-  data: BaseTransactionSplitResponse[];
-}
+export type ListTransactionSplitResponse = BaseResponse &
+  PaginationMetadata & {
+    data: BaseTransactionSplitResponse[];
+  };
 
 export type FetchTransactionSplitResponse = CreateTransactionSplitResponse;
 
@@ -152,15 +155,16 @@ export interface RemoveSubAccountFromSplitPayload {
 }
 export type RemoveSubAccountFromSplitResponse = BasePaystackResponse;
 
-
-export  abstract class BaseTransactionSplit {
+export abstract class BaseTransactionSplit {
   abstract create(
     payload: CreateTransactionSplitPayload
   ): Promise<CreateTransactionSplitResponse>;
   abstract list(
     queryParams: ListTransactionSplitQuery
   ): Promise<ListTransactionSplitResponse>;
-  abstract fetch(payload: {id: string}): Promise<FetchTransactionSplitResponse>;
+  abstract fetch(payload: {
+    id: string;
+  }): Promise<FetchTransactionSplitResponse>;
   abstract update(
     payload: UpdateTransactionSplitPayload
   ): Promise<UpdateTransactionSplit>;
@@ -171,7 +175,7 @@ export  abstract class BaseTransactionSplit {
     payload: TransactionSplitSubAccountPayload
   ): Promise<TransactionSplitSubAccountResponse>;
   /**@param id - The id of the split */
-  abstract removeSubAccount(
-    payload: {id: string}
-  ): Promise<RemoveSubAccountFromSplitResponse>;
+  abstract removeSubAccount(payload: {
+    id: string;
+  }): Promise<RemoveSubAccountFromSplitResponse>;
 }

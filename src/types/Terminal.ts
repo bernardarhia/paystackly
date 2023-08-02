@@ -1,8 +1,4 @@
-import {
-  BasePaystackErrorResponse,
-  BasePaystackResponse,
-  BasePaystackSuccessResponse,
-} from "../types";
+import { BasePaystackResponse, BaseResponse } from "../types";
 
 // TERMINAL
 export interface SendTerminalEventPayload {
@@ -30,13 +26,11 @@ export interface SendTerminalEventPayload {
     reference?: string; // The offline reference for the invoice (only for 'invoice' type).
   };
 }
-export type SendEventTerminalResponse =
-  | (BasePaystackResponse & BasePaystackErrorResponse)
-  | (BasePaystackSuccessResponse & {
-      data: {
-        id: string;
-      };
-    });
+export type SendEventTerminalResponse = BaseResponse & {
+  data: {
+    id: string;
+  };
+};
 
 export interface FetchEventStatusPayload {
   /** The ID of the Terminal the event was sent to. */
@@ -44,22 +38,18 @@ export interface FetchEventStatusPayload {
   /** The ID of the event that was sent to the Terminal */
   event_id: string;
 }
-export type FetchEventStatusResponse =
-  | (BasePaystackResponse & BasePaystackErrorResponse)
-  | (BasePaystackSuccessResponse & {
-      data: {
-        delivered: boolean;
-      };
-    });
+export type FetchEventStatusResponse = BaseResponse & {
+  data: {
+    delivered: boolean;
+  };
+};
 
-export type FetchTerminalStatusResponse =
-  | (BasePaystackResponse & BasePaystackErrorResponse)
-  | (BasePaystackSuccessResponse & {
-      data: {
-        online: boolean;
-        available: boolean;
-      };
-    });
+export type FetchTerminalStatusResponse = BaseResponse & {
+  data: {
+    online: boolean;
+    available: boolean;
+  };
+};
 
 interface TerminalData {
   id: number;
@@ -90,22 +80,18 @@ export interface ListTerminalsQuery {
   previous?: string | null;
 }
 
-export type ListTerminalsResponse =
-  | (BasePaystackResponse & BasePaystackErrorResponse)
-  | (BasePaystackErrorResponse & {
-      data: TerminalData[];
-      meta: {
-        next: string | null;
-        previous: string | null;
-        perPage: number;
-      };
-    });
+export type ListTerminalsResponse = BaseResponse & {
+  data: TerminalData[];
+  meta: {
+    next: string | null;
+    previous: string | null;
+    perPage: number;
+  };
+};
 
-export type FetchTerminalRresponse =
-  | (BasePaystackResponse & BasePaystackErrorResponse)
-  | (BasePaystackErrorResponse & {
-      data: TerminalData;
-    });
+export type FetchTerminalRresponse = BaseResponse & {
+  data: TerminalData;
+};
 
 export interface UpdateTerminalPayload {
   /** The ID of the Terminal you want to update */

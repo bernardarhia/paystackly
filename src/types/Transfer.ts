@@ -1,4 +1,4 @@
-import { BasePaystackErrorResponse, BasePaystackResponse, BasePaystackSuccessResponse, PayStackCurrency } from "../types";
+import { BaseResponse, PayStackCurrency } from "../types";
 
 /** ============= TRANSFER ============ */
 export type TransferType = "nuban" | "basa" | "mobile_money";
@@ -24,28 +24,30 @@ export interface CreateFinalizeTransferPayload {
   otp: string;
 }
 
-export type CreateTransferResponse =
-  | (BasePaystackResponse & BasePaystackErrorResponse)
-  | (BasePaystackSuccessResponse & {
-      data: {
-        reference: string;
-        integration: number;
-        domain: string;
-        amount: number;
-        currency: PayStackCurrency;
-        source: "balance";
-        reason: string;
-        recipient: number;
-        status: "success" | "failed" | "abandoned";
-        transfer_code: string;
-        id: number;
-        createdAt: Date;
-        updatedAt: Date;
-      };
-    });
+export type CreateTransferResponse = BaseResponse & {
+  data: {
+    reference: string;
+    integration: number;
+    domain: string;
+    amount: number;
+    currency: PayStackCurrency;
+    source: "balance";
+    reason: string;
+    recipient: number;
+    status: "success" | "failed" | "abandoned";
+    transfer_code: string;
+    id: number;
+    createdAt: Date;
+    updatedAt: Date;
+  };
+};
 
-    // Define an abstract class
+// Define an abstract class
 export abstract class BaseTransfer {
-  abstract initialize(payload: CreateTransferPayload): Promise<CreateTransferResponse>;
-  abstract finalize(payload: CreateFinalizeTransferPayload): Promise<CreateTransferResponse>;
+  abstract initialize(
+    payload: CreateTransferPayload
+  ): Promise<CreateTransferResponse>;
+  abstract finalize(
+    payload: CreateFinalizeTransferPayload
+  ): Promise<CreateTransferResponse>;
 }

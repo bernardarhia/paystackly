@@ -1,9 +1,8 @@
 import {
   BankCodes,
-  BasePaystackErrorResponse,
   BasePaystackResponse,
-  BasePaystackSuccessResponse,
   BaseQuery,
+  BaseResponse,
   BaseTransferInitializerPayload,
   PaginationMetadata,
   PayStackCurrency,
@@ -56,30 +55,24 @@ type BaseTransferRecipientResponse = {
     bank_name: string;
   };
 };
-export type TransferRecipientResponse =
-  | (BasePaystackResponse & BasePaystackErrorResponse)
-  | (BasePaystackSuccessResponse & {
-      data: BaseTransferRecipientResponse & { is_deleted: boolean };
-    });
+export type TransferRecipientResponse = BaseResponse & {
+  data: BaseTransferRecipientResponse & { is_deleted: boolean };
+};
 
 export interface CreateBulkTransferRecipientsPayload {
   batch: (CreateTransferRecipientPayload & { isDeleted: boolean })[];
 }
-export type CreateBulkTransferRecipientsResponse =
-  | (BasePaystackResponse & BasePaystackErrorResponse)
-  | (BasePaystackSuccessResponse & {
-      data: {
-        success: BaseTransferRecipientResponse[];
-        errors: string[];
-      };
-    });
+export type CreateBulkTransferRecipientsResponse = BaseResponse & {
+  data: {
+    success: BaseTransferRecipientResponse[];
+    errors: string[];
+  };
+};
 
 export interface ListTransferRecipientQuery extends BaseQuery {}
-export type ListTransferRecipientResponse =
-  | (BasePaystackResponse & BasePaystackErrorResponse)
-  | (BasePaystackSuccessResponse & {
-      data: BaseTransferRecipientResponse[];
-    } & PaginationMetadata);
+export type ListTransferRecipientResponse = BaseResponse & {
+  data: BaseTransferRecipientResponse[];
+} & PaginationMetadata;
 
 export interface FetchTransferRecipientPayload {
   /** An ID or code for the recipient whose details you want to receive. */

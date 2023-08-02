@@ -1,10 +1,9 @@
 // ======================= BULK CHARGE ===================
 
 import {
-  BasePaystackErrorResponse,
   BasePaystackResponse,
-  BasePaystackSuccessResponse,
   BaseQuery,
+  BaseResponse,
   PaginationMetadata,
 } from "../types";
 
@@ -13,22 +12,20 @@ export type BulkChargesPayload = {
   amount: number;
   reference: string;
 };
-export type BulkChargesResponse =
-  | (BasePaystackResponse & BasePaystackErrorResponse)
-  | (BasePaystackSuccessResponse & {
-      data: {
-        batch_code: string;
-        reference: string;
-        id: number;
-        integration: number;
-        domain: string;
-        status: string;
-        total_charges: number;
-        pending_charges: number;
-        createdAt: string;
-        updatedAt: string;
-      };
-    });
+export type BulkChargesResponse = BaseResponse & {
+  data: {
+    batch_code: string;
+    reference: string;
+    id: number;
+    integration: number;
+    domain: string;
+    status: string;
+    total_charges: number;
+    pending_charges: number;
+    createdAt: string;
+    updatedAt: string;
+  };
+};
 
 export type BulkChargeListsQuery = BaseQuery;
 
@@ -41,12 +38,10 @@ interface BulkChargesData {
   updatedAt: string;
 }
 
-export type BulkChargeListsReponse =
-  | (BasePaystackResponse & BasePaystackErrorResponse)
-  | (BasePaystackSuccessResponse &
-      PaginationMetadata & {
-        data: BulkChargesData[];
-      });
+export type BulkChargeListsReponse = BaseResponse &
+  PaginationMetadata & {
+    data: BulkChargesData[];
+  };
 
 export interface FetchBulkChargeBatchResponse extends BasePaystackResponse {
   data: {
@@ -126,12 +121,10 @@ interface BulkChargeItem {
   updatedAt: string;
 }
 
-export type FetchChargesInBatchResponse =
-  | (BasePaystackResponse & BasePaystackErrorResponse)
-  | (BasePaystackSuccessResponse &
-      PaginationMetadata & {
-        data: BulkChargeItem[];
-      });
+export type FetchChargesInBatchResponse = BaseResponse &
+  PaginationMetadata & {
+    data: BulkChargeItem[];
+  };
 
 export abstract class BaseBulkCharges {
   abstract initilize(

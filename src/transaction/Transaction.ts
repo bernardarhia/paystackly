@@ -95,7 +95,7 @@ export class Transaction extends TransactionBase {
     payload: PartialDebitPayload
   ): Promise<PartialDebitResponse> {
     payload.amount = payload.amount * 100;
-    return await Http.post<PartialDebitPayload, ExportTransactionResponse>(
+    return await Http.post<PartialDebitPayload, PartialDebitResponse>(
       `${this.endpoint}/partial_debit`,
       payload
     );

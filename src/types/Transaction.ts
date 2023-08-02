@@ -1,12 +1,11 @@
 import {
   BaseTransactionPayload,
-  BasePaystackErrorResponse,
   BasePaystackResponse,
-  BasePaystackSuccessResponse,
   BaseQuery,
   CardBrand,
   ChargeAuthorizationPayload,
   PayStackCurrency,
+  BaseResponse,
 } from "../types";
 
 // TRANSACTIONS
@@ -29,15 +28,13 @@ export interface InitializePaymentPayload extends BaseTransactionPayload {
   split_code?: string;
 }
 
-export type InitializeTransactionResponse =
-  | (BasePaystackResponse & BasePaystackErrorResponse)
-  | (BasePaystackSuccessResponse & {
-      data: {
-        authorization_url: string;
-        access_code: string;
-        reference: string;
-      };
-    });
+export type InitializeTransactionResponse = BaseResponse & {
+  data: {
+    authorization_url: string;
+    access_code: string;
+    reference: string;
+  };
+};
 
 export type BaseTransactionResponse = {
   data: {
@@ -110,9 +107,7 @@ export type BaseTransactionResponse = {
     subaccount: any;
   };
 };
-export type TransactionResponse =
-  | (BasePaystackResponse & BasePaystackErrorResponse)
-  | (BasePaystackSuccessResponse & BaseTransactionResponse);
+export type TransactionResponse = BaseResponse & BaseTransactionResponse;
 export interface ListTransactionsQuery extends BaseQuery {
   /**
    * Specify an ID for the customer whose transactions you want to retrieve
@@ -135,11 +130,9 @@ export interface ListTransactionsQuery extends BaseQuery {
 
   amount?: number;
 }
-export type ListTransactionsResponse =
-  | (BasePaystackResponse & BasePaystackErrorResponse)
-  | (BasePaystackSuccessResponse & {
-      data: BaseTransactionResponse[];
-    });
+export type ListTransactionsResponse = BaseResponse & {
+  data: BaseTransactionResponse[];
+};
 
 export interface TransactionTimelineResponse extends BasePaystackResponse {
   data: {
@@ -263,18 +256,22 @@ export type PartialDebitResponse = Omit<
 >;
 
 export abstract class TransactionBase {
-  abstract verify(payload: {reference: number | string}): Promise<TransactionResponse>;
+  abstract verify(payload: {
+    reference: number | string;
+  }): Promise<TransactionResponse>;
   abstract list(
     params: ListTransactionsQuery
   ): Promise<ListTransactionsResponse>;
-  abstract fetch(payload: {id: number | string}): Promise<TransactionResponse>;
+  abstract fetch(payload: {
+    id: number | string;
+  }): Promise<TransactionResponse>;
 
   abstract chargeAuthorization(
     payload: ChargeAuthorizationPayload
   ): Promise<TransactionResponse>;
-  abstract readTransactionTimeline(
-  payload: {  id: number | string}
-  ): Promise<TransactionTimelineResponse>;
+  abstract readTransactionTimeline(payload: {
+    id: number | string;
+  }): Promise<TransactionTimelineResponse>;
   abstract total(
     params: TransactionTotalQueryParams
   ): Promise<TransactionTotalResponse>;
