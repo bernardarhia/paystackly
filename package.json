@@ -19,10 +19,11 @@
     "dev": "npm run clean & tsc -v && tsc -p tsconfig.json -w",
     "build": "npm run clean & tsc -v & tsc -p tsconfig.json",
     "lint": "tsc",
-    "ci": "npm run lint && npm run test && npm run build",
+    "ci": "npm run lint && npm run test && npm run build && npm run bundle",
     "release": "npm run ci && changeset version && changeset publish",
     "report": "nyc -r text -r lcov report",
-    "clean": "rm -rf ./.nyc_output ./node_modules/.cache ./coverage ./dist"
+    "clean": "rm -rf ./.nyc_output ./node_modules/.cache ./coverage ./dist",
+    "bundle": "npx webpack --config webpack.config.js"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.2",

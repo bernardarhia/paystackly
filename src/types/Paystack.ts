@@ -1,13 +1,3 @@
-import { ApplePay } from "../applePay/ApplePay";
-import { BulkCharges } from "../bulkCharge/BulkCharge";
-import { Charges } from "../charge/Charge";
-import { Integration } from "../integration/Integration";
-import { Refund } from "../refund/Refund";
-import { SubAccount } from "../subaccount/SubAccount";
-import { Transaction } from "../transaction/Transaction";
-import { TransactionSplit } from "../transactionSplit/TransactionSplit";
-import { Transfer } from "../transfer/Transfer";
-
 export interface BasePaystackResponse {
   status: boolean;
   message: string;
@@ -510,27 +500,4 @@ export interface ChargeAuthorizationPayload extends BaseTransactionPayload {
    *  Send queue:true to take advantage of our queued charging.
    */
   queue?: boolean;
-}
-
-export abstract class PaystackBase {
-  abstract transaction: Transaction;
-  abstract transfer: Transfer;
-  abstract charges: Charges;
-  abstract bulkCharges: BulkCharges;
-  abstract refund: Refund;
-  abstract integration: Integration;
-  abstract applePay: ApplePay;
-  abstract transactionSplit: TransactionSplit;
-  abstract subAccount: SubAccount;
-  // abstract getBanks(
-  //   queryParams: GetBanksQueryParams
-  // ): Promise<GetBanksResponse>;
-
-  // abstract getCountries(): Promise<GetCountriesResponse[]>;
-
-  // abstract verifyNumber(
-  //   params: VerifyNumberQueryParams
-  // ): Promise<VerifyNumberResponse>;
-
-  // abstract verifyCardBIN(binNumber: string): Promise<CardBINResponse>;
 }
