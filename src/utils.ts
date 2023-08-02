@@ -1,42 +1,4 @@
-import https, { RequestOptions } from "https";
-import querystring from "querystring";
-import { IncomingMessage } from "http";
-import { ExportTransactionQueryParams, GetBanksQueryParams, ListRefundQuery, ListTransactionsQuery, PayStackQueryOptions, TransactionTotalQueryParams, VerifyNumberQueryParams } from "./types";
-export function sendRequest<T>(options: PayStackQueryOptions): Promise<T> {
-  const body = options?.body ?? {};
-  delete options?.body;
-  return new Promise<T>((resolve, reject) => {
-    let responseData = "";
-    const req = https.request(
-      options as RequestOptions,
-      (res: IncomingMessage) => {
-        res.on("data", (chunk: Buffer) => {
-          responseData += chunk.toString();
-        });
-
-        res.on("end", () => {
-          try {
-            const parsedData = JSON.parse(responseData);
-            resolve(parsedData);
-          } catch (error) {
-            reject(error);
-          }
-        });
-      }
-    );
-
-    if (body) {
-      const stringifiedBody = JSON.stringify(body);
-      req.write(stringifiedBody);
-    }
-    req.on("error", (error: Error) => {
-      reject(error);
-    });
-
-    req.end();
-  });
-}
-
+import { ExportTransactionQueryParams, GetBanksQueryParams, ListRefundQuery, ListTransactionsQuery, TransactionTotalQueryParams, VerifyNumberQueryParams } from "./types";
 type FormatQuery =
   | ListRefundQuery
   | ListTransactionsQuery
@@ -46,9 +8,9 @@ type FormatQuery =
   | GetBanksQueryParams;
 export function formatQueryParams(params?: FormatQuery): string {
   let formattedQueryString: string = "";
-
+  const query = new URLSearchParams(params as any);
   if (params && Object.keys(params).length) {
-    formattedQueryString = `?${querystring.stringify(params as any)}`;
+    formattedQueryString = `?${query}`;
   }
   return formattedQueryString;
 }

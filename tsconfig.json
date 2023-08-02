@@ -2,7 +2,8 @@
   "compilerOptions": {
     "lib": ["es5", "es6", "es7", "esnext", "dom"],
     "outDir": "./dist",
-    "module": "commonjs" /* Specify what module code is generated. */,
+    "module": "commonjs",
+    "target": "ES5",
     "removeComments": false,
     "esModuleInterop": true,
     "moduleResolution": "node",
@@ -18,6 +19,6 @@
     "isolatedModules": true,
     "declaration": true
   },
-  "include": ["./src/**/*"],
-  "exclude": ["node_modules", "dist", "src/types"]
+  "include": ["./src/**/*", "webpack.config.js"],
+  "exclude": ["node_modules", "dist"]
 }

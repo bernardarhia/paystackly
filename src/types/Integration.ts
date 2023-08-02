@@ -1,13 +1,12 @@
-import { BasePaystackErrorResponse, BasePaystackResponse, BasePaystackSuccessResponse } from "../types";
+import {  BaseResponse } from "../types";
 
 // INTEGRATIONS
 export type BaseIntegrationResponse =
-  | (BasePaystackResponse & BasePaystackErrorResponse)
-  | (BasePaystackSuccessResponse & {
+BaseResponse & {
       data: {
         payment_session_timeout: number;
       };
-    });
+    };
 export type FetchIntegrationTimeoutResponse = BaseIntegrationResponse;
 
 export interface UpdateIntegrationTimeoutPayload {

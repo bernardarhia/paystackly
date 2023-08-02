@@ -1,4 +1,4 @@
-import { getRequestData } from "../constants";
+import { Http } from "../core/Http";
 import {
   RefundResponse,
   RefundPayload,
@@ -8,24 +8,28 @@ import {
   FetchReFundReponse,
   BaseRefund,
 } from "../types";
-import { formatQueryParams, sendRequest } from "../utils";
-
+import { formatQueryParams } from "../utils";
 
 export class Refund extends BaseRefund {
+  private endpoint = "/refund";
   constructor() {
     super();
   }
   async create(payload: RefundPayload): Promise<RefundResponse> {
-    return await sendRequest<RefundResponse>(
-        getRequestData("POST", null, payload).refund
+    try {
+      return await Http.post<RefundPayload, RefundResponse>(
+        `${this.endpoint}`,
+        payload
       );
+    } catch (error: any) {
+      return error.response.data;
+    }
   }
-  
-  async list(queryParams: ListRefundQuery): Promise<ListRefundResponseData> {
-    let formattedQueryString: string = formatQueryParams(queryParams);
 
-    return await sendRequest<ListRefundResponseData>(
-        getRequestData("GET", formattedQueryString).refund
+  async list(query?: ListRefundQuery): Promise<ListRefundResponseData> {
+      let formattedQueryString: string = formatQueryParams(query);
+      return await Http.get<ListRefundResponseData>(
+        `${this.endpoint}${formattedQueryString}`
       );
   }
   /**
@@ -33,8 +37,12 @@ export class Refund extends BaseRefund {
    * @param reference  - reference from refund
    */
   async fetch(param: FetchRefundParam): Promise<FetchReFundReponse> {
-    return await sendRequest<FetchReFundReponse>(
-        getRequestData("GET", `/${param.reference}`).refund
+    try {
+      return await Http.get<FetchReFundReponse>(
+        `${this.endpoint}/${param.reference}`
       );
+    } catch (error: any) {
+      return error.response.data;
+    }
   }
 }
