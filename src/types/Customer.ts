@@ -1,4 +1,4 @@
-import { BasePaystackResponse, BaseQuery, BaseResponse } from "./Paystack";
+import { Authorization, BasePaystackResponse, BaseQuery, BaseResponse } from "./Paystack";
 
 export interface CreateCustomerPayload {
   /** Customer's email address */
@@ -32,16 +32,7 @@ export type CustomerResponse = BaseResponse & {
   };
 };
 export interface ListCustomersQuery extends BaseQuery {}
-interface Customer {
-  integration: number;
-  first_name: string | null;
-  last_name: string | null;
-  email: string;
-  phone: string | null;
-  metadata: Record<string, any>;
-  domain: string;
-  customer_code: string;
-  risk_action: string;
+interface Customer extends BaseCustomer{
   id: number;
   createdAt: string;
   updatedAt: string;
@@ -57,21 +48,6 @@ export type ListCustomersResponse = BaseResponse & {
 export interface FetchCustomerParam {
   /** An email or customer code for the customer you want to fetch */
   code: string;
-}
-interface Authorization {
-  authorization_code: string;
-  bin: string;
-  last4: string;
-  exp_month: string;
-  exp_year: string;
-  channel: string;
-  card_type: string;
-  bank: string;
-  country_code: string;
-  brand: string;
-  reusable: boolean;
-  signature: string;
-  account_name: string | null;
 }
 
 interface FetchCustomer {

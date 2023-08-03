@@ -2,11 +2,12 @@ import {
   BaseTransactionPayload,
   BasePaystackResponse,
   BaseQuery,
-  CardBrand,
   ChargeAuthorizationPayload,
   PayStackCurrency,
   BaseResponse,
+  Authorization,
 } from "../types";
+import { BaseCustomer } from "./Customer";
 
 // TRANSACTIONS
 export interface InitializePaymentPayload extends BaseTransactionPayload {
@@ -67,30 +68,8 @@ export type BaseTransactionResponse = {
     };
     fees: number;
     fees_split: null | number;
-    authorization: {
-      authorization_code: string;
-      bin: string;
-      last4: string;
-      exp_month: string;
-      exp_year: string;
-      channel: string;
-      card_type: string;
-      bank: string;
-      country_code: string;
-      brand: CardBrand;
-      reusable: boolean;
-      signature: string;
-      account_name: null | string;
-    };
-    customer: {
-      id: number;
-      first_name: null | string;
-      last_name: null | string;
-      email: string;
-      customer_code: string;
-      phone: null | string;
-      metadata: null | Record<string, string | number>;
-      risk_action: string;
+    authorization: Authorization;
+    customer: BaseCustomer & {
       international_format_phone: null | string;
     };
     plan: null | string;
