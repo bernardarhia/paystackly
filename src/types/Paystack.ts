@@ -487,6 +487,33 @@ export interface PaginationMetadata {
     pageCount: number;
   };
 }
+export interface Authorization {
+  authorization_code: string;
+  bin: string;
+  last4: string;
+  exp_month: string;
+  exp_year: string;
+  channel: string;
+  card_type: string;
+  bank: string;
+  country_code: string;
+  brand: string;
+  reusable: boolean;
+  signature: string;
+  account_name: string | null;
+}
+export interface BaseCustomer{
+  id: number;
+  integration: number;
+  first_name: string | null;
+  last_name: string | null;
+  email: string;
+  phone: string | null;
+  metadata: Record<string, any>;
+  domain: string;
+  customer_code: string;
+  risk_action: string;
+}
 export interface ChargeAuthorizationPayload extends BaseTransactionPayload {
   /**
    * Valid authorization code to charge
