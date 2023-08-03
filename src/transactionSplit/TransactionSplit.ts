@@ -1,5 +1,5 @@
-import { getRequestData } from "../constants";
-import { BaseTransactionSplit, HTTP_METHODS } from "../types";
+import { Http } from "../core/Http";
+import { BaseTransactionSplit } from "../types";
 import {
   CreateTransactionSplitPayload,
   CreateTransactionSplitResponse,
@@ -12,80 +12,71 @@ import {
   UpdateTransactionSplit,
   UpdateTransactionSplitPayload,
 } from "../types";
-import { formatQueryParams, sendRequest } from "../utils";
-
+import { formatQueryParams } from "../utils";
 
 export class TransactionSplit extends BaseTransactionSplit {
+  private endpoint = "/split";
   constructor() {
     super();
   }
   async create(
     payload: CreateTransactionSplitPayload
   ): Promise<CreateTransactionSplitResponse> {
-    return await sendRequest<CreateTransactionSplitResponse>(
-      getRequestData("POST", null, payload).transactionSplit
-    );
+    return await Http.post<
+      CreateTransactionSplitPayload,
+      CreateTransactionSplitResponse
+    >(this.endpoint, payload);
   }
   async list(
     queryParams?: ListTransactionSplitQuery
   ): Promise<ListTransactionSplitResponse> {
     let formattedQueryString: string = formatQueryParams(queryParams);
-    return await sendRequest<ListTransactionSplitResponse>(
-      getRequestData("GET", formattedQueryString).transactionSplit
+    return await Http.get<ListTransactionSplitResponse>(
+      `${this.endpoint}${formattedQueryString}`
     );
   }
-  /**@param id - The id of the split */
-  async fetch(id: string): Promise<FetchTransactionSplitResponse> {
-    return await sendRequest<FetchTransactionSplitResponse>(
-      getRequestData("GET", `/${id}`).transactionSplit
+  async fetch(payload: { id: string }): Promise<FetchTransactionSplitResponse> {
+    return await Http.get<FetchTransactionSplitResponse>(
+      `${this.endpoint}/${payload.id}`
     );
   }
 
   async update(
     payload: UpdateTransactionSplitPayload
   ): Promise<UpdateTransactionSplit> {
-    return this.sameRequest<
-      UpdateTransactionSplitPayload,
+    const { id, ...body } = payload;
+    return await Http.put<
+      Omit<UpdateTransactionSplitPayload, "id">,
       UpdateTransactionSplit
-    >(payload, null, "PUT");
+    >(`${this.endpoint}/${id}`, body);
   }
 
   async addSubAccount(
     payload: TransactionSplitSubAccountPayload
   ): Promise<TransactionSplitSubAccountResponse> {
-    return this.sameRequest<
-      TransactionSplitSubAccountPayload,
+    const { id, ...body } = payload;
+    return await Http.post<
+      Omit<TransactionSplitSubAccountPayload, "id">,
       TransactionSplitSubAccountResponse
-    >(payload, "/subaccount/add");
+    >(`${this.endpoint}/${id}/subaccount/add`, body);
   }
 
   async updateSubAccount(
     payload: TransactionSplitSubAccountPayload
   ): Promise<TransactionSplitSubAccountResponse> {
-    return this.sameRequest<
-      TransactionSplitSubAccountPayload,
+    const { id, ...body } = payload;
+    return await Http.post<
+      Omit<TransactionSplitSubAccountPayload, "id">,
       TransactionSplitSubAccountResponse
-    >(payload, "/subaccount/add");
+    >(`${this.endpoint}/${id}/subaccount/add`, body);
   }
 
   /**@param id - The id of the split */
-  async removeSubAccount(
-    id: string
-  ): Promise<RemoveSubAccountFromSplitResponse> {
-    return await sendRequest<UpdateTransactionSplit>(
-      getRequestData("POST", `/${id}/subaccount/remove`).chargeAuthorization
-    );
-  }
-
-  private async sameRequest<P extends { id: string }, T>(
-    payload: P,
-    url: string | null,
-    method: HTTP_METHODS = "POST"
-  ): Promise<T> {
-    const { id, ...body } = payload;
-    const fullUrl = url && url.length ? `${id}/${url}` : id;
-    return await sendRequest<T>(
-      getRequestData(method, `/${fullUrl}`, body).chargeAuthorization
+  async removeSubAccount(payload: {
+    id: string;
+  }): Promise<RemoveSubAccountFromSplitResponse> {
+    return await Http.post<null, UpdateTransactionSplit>(
+      `${this.endpoint}/${payload.id}/subaccount/remove`
     );
   }
 }

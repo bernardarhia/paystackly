@@ -1,52 +1,55 @@
-import { getRequestData } from "../constants";
+import { Http } from "../core/Http";
 import {
   BaseTransfer,
+  BulkTransferPayload,
+  BulkTransferResponse,
   CreateFinalizeTransferPayload,
   CreateTransferPayload,
   CreateTransferResponse,
-  InitializeTransferPayload,
-  InitializeTransferWithAuthorizationPayload,
-  TransferInitializeResponse,
+  FetchTransferPayload,
+  FetchTransferResponse,
+  ListTransferQuery,
+  ListTransferResponse,
+  VerifyTransferPayload,
+  VerifyTransferResponse,
 } from "../types";
-import { sendRequest } from "../utils";
+import { formatQueryParams } from "../utils";
 export class Transfer extends BaseTransfer {
+  private endpoint = "/transfer";;
   constructor() {
     super();
   }
-  async initializeWithMobileMoney(
-    payload: InitializeTransferPayload
-  ): Promise<TransferInitializeResponse> {
-    return await this.initializeTransferRecipient(payload);
-  }
-  async initializeWithBank(payload: InitializeTransferPayload): Promise<any> {
-    return await this.initializeTransferRecipient(payload);
-  }
-  async initializeWithAuthorizationCode(
-    payload: InitializeTransferWithAuthorizationPayload
-  ): Promise<any> {
-    return await this.initializeTransferRecipient(payload);
-  }
-  private async initializeTransferRecipient(
-    payload:
-      | InitializeTransferWithAuthorizationPayload
-      | InitializeTransferPayload
-  ): Promise<TransferInitializeResponse> {
-    return await sendRequest<TransferInitializeResponse>(
-      getRequestData("POST", null, payload).initializeTransfer
-    );
-  }
-  async create(
+  async initialize(
     payload: CreateTransferPayload
   ): Promise<CreateTransferResponse> {
-    return await sendRequest<CreateTransferResponse>(
-      getRequestData("POST", null, payload).createTransfer
+    return await Http.post(
+      `${this.endpoint}`,
+      payload
     );
   }
   async finalize(
     payload: CreateFinalizeTransferPayload
   ): Promise<CreateTransferResponse> {
-    return await sendRequest<CreateTransferResponse>(
-      getRequestData("POST", null, payload).finalizeTransfer
+    return await Http.post<CreateFinalizeTransferPayload, CreateTransferResponse>(
+      `${this.endpoint}`,
+      payload
+    );
+  }
+  async verify(payload: VerifyTransferPayload): Promise<VerifyTransferResponse> {
+    return await Http.get<FetchTransferResponse>(`${this.endpoint}/verify/${payload.reference}`)
+  }
+  async fetch(payload: FetchTransferPayload): Promise<FetchTransferResponse> {
+      return await Http.get<FetchTransferResponse>(`${this.endpoint}/${payload.id}`)
+  }
+  async list(query?: ListTransferQuery | undefined): Promise<ListTransferResponse> {
+    const fromattedString = formatQueryParams(query)
+    const url  =`${this.endpoint}${fromattedString}`
+      return await Http.get<ListTransferResponse>(url);
+  }
+  async intializeBulk(payload: BulkTransferPayload): Promise<BulkTransferResponse> {
+    return await Http.post<BulkTransferPayload, BulkTransferResponse>(
+      `${this.endpoint}`,
+      payload
     );
   }
 }

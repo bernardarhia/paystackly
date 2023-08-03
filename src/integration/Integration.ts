@@ -1,28 +1,35 @@
-import { getRequestData } from "../constants";
+import { Http } from "../core/Http";
 import {
   BaseIntegration,
   FetchIntegrationTimeoutResponse,
   UpdateIntegrationTimeoutPayload,
   UpdateIntegrationTimeoutResponse,
 } from "../types";
-import { sendRequest } from "../utils";
-
-
 
 export class Integration extends BaseIntegration {
+  private endpoint = "/integration";
   constructor() {
     super();
   }
   async fetchTimeout(): Promise<FetchIntegrationTimeoutResponse> {
-    return await sendRequest<FetchIntegrationTimeoutResponse>(
-      getRequestData("GET").integration
-    );
+    try {
+      return await Http.get<FetchIntegrationTimeoutResponse>(
+        `${this.endpoint}`
+      );
+    } catch (error: any) {
+      return error.response.data;
+    }
   }
   async updateTimeout(
     payload: UpdateIntegrationTimeoutPayload
   ): Promise<UpdateIntegrationTimeoutResponse> {
-    return await sendRequest<UpdateIntegrationTimeoutResponse>(
-      getRequestData("POST", null, payload).integration
-    );
+    try {
+      return await Http.post<UpdateIntegrationTimeoutPayload, UpdateIntegrationTimeoutResponse>(
+        this.endpoint,
+        payload
+      );
+    } catch (error: any) {
+      return error.response.data;
+    }
   }
 }

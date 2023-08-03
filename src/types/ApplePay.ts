@@ -1,12 +1,12 @@
 import { BasePaystackResponse } from "../types";
 
-export interface ListApplePay extends BasePaystackResponse{
-    data: {
-        domainNames: string[]
-      }
+export interface ListApplePay extends BasePaystackResponse {
+  data: {
+    domainNames: string[];
+  };
 }
-export interface ListApplePayQuery{
-     /**
+export interface ListApplePayQuery {
+  /**
    * Flag to enable cursor pagination on the endpoint.
    */
   use_cursor: boolean;
@@ -22,7 +22,11 @@ export interface ListApplePayQuery{
   previous: string;
 }
 export abstract class BaseApplePay {
-  abstract registerDomain(domainName: string): Promise<BasePaystackResponse>;
-  abstract listDomains(params: ListApplePayQuery): Promise<ListApplePay>;
-  abstract unRegisterDomain(domainName: string): Promise<BasePaystackResponse>;
+  abstract registerDomain(payload: {
+    domainName: string;
+  }): Promise<BasePaystackResponse>;
+  abstract listDomains(query?: ListApplePayQuery): Promise<ListApplePay>;
+  abstract unRegisterDomain(payload: {
+    domainName: string;
+  }): Promise<BasePaystackResponse>;
 }
