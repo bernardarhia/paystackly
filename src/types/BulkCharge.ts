@@ -56,6 +56,8 @@ export interface FetchBulkChargeBatchResponse extends BasePaystackResponse {
   };
 }
 export interface FetchChargesInBatch extends BaseQuery {
+  /** Id or Code of the bulk charge you want to retrieve */
+  id: string;
   /**
    * Either one of these values: pending, success or failed
    */
@@ -132,11 +134,10 @@ export abstract class BaseBulkCharges {
   ): Promise<BulkChargesResponse>;
   abstract list(query: BulkChargeListsQuery): Promise<BulkChargeListsReponse>;
   abstract fetchBulkChargeBatch(payload: {
-    id_or_code: string;
+    id: string;
   }): Promise<FetchBulkChargeBatchResponse>;
   abstract fetchChargesInBatch(
-    payload: { id_or_code: string },
-    query?: FetchChargesInBatch
+    params?: FetchChargesInBatch
   ): Promise<FetchChargesInBatchResponse>;
   abstract pause(payload: {
     batch_code: string;
