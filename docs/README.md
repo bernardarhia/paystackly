@@ -39,13 +39,23 @@
     - [.listDomains](#listdomains)
     - [.unRegisterDomain](#unregisterdomain)
   - [Bulk Charges](#bulk-charges)
-      - [.initialize](#initialize)
-      - [.list](#list)
-      - [.fetchBulkChargeBatch](#fetchbulkchargebatch)
-      - [.fetchChargesInBatch](#fetchchargesinbatch)
-      - [.pause](#pause)
-      - [.resume](#resume)
+    - [.initialize](#initialize)
+    - [.list](#list)
+    - [.fetchBulkChargeBatch](#fetchbulkchargebatch)
+    - [.fetchChargesInBatch](#fetchchargesinbatch)
+    - [.pause](#pause)
+    - [.resume](#resume)
   - [Charge](#charge)
+    - [.chargeWithMobileMoney](#chargewithmobilemoney)
+    - [.chargeWithBank](#chargewithbank)
+    - [.chargeWithUssd](#chargewithussd)
+    - [.chargeWithCard](#chargewithcard)
+    - [.submitPin](#submitpin)
+    - [.submitOTP](#submitotp)
+    - [.submitPhone](#submitphone)
+    - [.submitBirthday](#submitbirthday)
+    - [.submitAddress](#submitaddress)
+    - [.checkStatus](#checkstatus)
   - [Customers](#customers)
   - [Dedicated Virtual Accounts](#dedicated-virtual-accounts)
   - [Disputes](#disputes)
@@ -257,6 +267,24 @@ This endpoint retrieves the charges associated with a specified batch code. Pagi
 | from     | Date      | false    | A timestamp from which to start listing, e.g., 2016-09-24T00:00:05.000Z, 2016-09-21.                    |
 | to       | Date      | false    | A timestamp from which to end listing, e.g., 2016-09-24T00:00:05.000Z, 2016-09-21.                      |
 ### Charge
+###### `.chargeWithMobileMoney`
+
+###### `.chargeWithBank`
+
+###### `.chargeWithUssd`
+
+###### `.chargeWithCard`
+
+###### `.submitPin`
+
+###### `.submitOTP`
+
+###### `.submitPhone`
+
+###### `.submitBirthday`
+
+###### `.submitAddress`
+###### `.checkStatus`
 
 ### Customers
 
