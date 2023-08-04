@@ -35,7 +35,16 @@
 - [Installation](#installation)
 - [PayStack](#payStack)
   - [Apple Pay](#apple-pay)
+    - [.registerDomain](#registerdomain)
+    - [.listDomains](#listdomains)
+    - [.unRegisterDomain](#unregisterdomain)
   - [Bulk Charges](#bulk-charges)
+      - [.initialize](#initialize)
+      - [.list](#list)
+      - [.fetchBulkChargeBatch](#fetchbulkchargebatch)
+      - [.fetchChargesInBatch](#fetchchargesinbatch)
+      - [.pause](#pause)
+      - [.resume](#resume)
   - [Charge](#charge)
   - [Customers](#customers)
   - [Dedicated Virtual Accounts](#dedicated-virtual-accounts)
@@ -105,24 +114,36 @@ const paystack = new PayStack(SECRET_KEY);
 
 The Apple Pay API allows you register your application's top-level domain or subdomain and receive payment via Apple Pay. The apple pay object currently supports **three methods**:
 
-`.registerDomain`
+`.registerDomains`
+`.listDomains`
+`.unRegisterDomains`
 
-**Parameter - `String`**
+Access the ApplePay class on the Base **PayStack** class
 
 ```js
 import { Paystack } from "paystackly";
-const paystack = new PayStack(SECRET_KEY);
 
-async function registerApplePayDomain() {
-  const response = await paystack.applePay.registerDomain("example-domain");
-  console.log(response);
-}
-registerApplePayDomain();
+const paystack = new PayStack(SECRET_KEY);
+const applePay = paystack.applePay;
+
 ```
 
-`.listDomains`
+###### `.registerDomain`
 
-**Query Parameters - `Object`**
+Register Domain allows you to add/register domains and transact using apple pay.
+
+**Parameter - `Object`**
+
+| Property   | Type   | Required | Description    |
+|------------|--------|----------|----------------|
+| domainName | string | true     | The domain name |
+
+
+###### `.listDomains`
+
+Get all registered domains using the `.listDomains` method 
+
+**Parameters - `Object`**
 
 | Property   | Type    | Required | Description                                                                                                                             |
 | ---------- | ------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------- |
@@ -130,41 +151,35 @@ registerApplePayDomain();
 | next       | string  | false    | A cursor that indicates your place in the list. It can be used to fetch the next page of the list.                                      |
 | previous   | string  | false    | A cursor that indicates your place in the list. It should be used to fetch the previous page of the list after an initial next request. |
 
-```js
-import { Paystack } from "paystackly";
-const paystack = new PayStack(SECRET_KEY);
+###### `.unRegisterDomain`
 
-async function listApplePayDomains() {
-  const response = await paystack.applePay.listDomains(queryParams);
-  console.log(response);
-}
-listApplePayDomains();
-```
+Remove/Unregister registered domains using the `.unregisterDomains`
 
-`.unRegisterDomain`
+**Parameter - `Object`**
 
-**Parameter - `String`**
+| Property   | Type   | Required | Description    |
+|------------|--------|----------|----------------|
+| domainName | string | true     | The domain name |
 
-```js
-import { Paystack } from "paystackly";
-const paystack = new PayStack(SECRET_KEY);
-
-async function unRegisterApplePayDomains() {
-  const response = await paystack.applePay.unRegisterDomain("example-domain");
-  console.log(response);
-}
-unRegisterApplePayDomains();
-```
 
 ### Bulk Charges
 
 The Bulk Charges API allows you create and manage multiple recurring payments from multiple customers at the same time.
 
-`.initialize`
+```js
+import { Paystack } from "paystackly";
 
-Use `.initialize` to intialize a bulk charge from customers
+const paystack = new PayStack(SECRET_KEY);
+const applePay = paystack.bulkCharges;
 
-**Payload - `Array of Objects`**
+```
+
+###### `.initialize`
+
+Use `.initialize` to intialize a bulk charge from customers. 
+Send an array of objects with authorization codes and amount (in kobo if currency is NGN, pesewas, if currency is GHS, and cents if currency is ZAR) so we can process transactions as a batch.
+
+**Parameter - `Array of Objects`**
 
 | Property      | Type    | Required | Description                             |
 |---------------|---------|----------|-----------------------------------------|
@@ -172,22 +187,12 @@ Use `.initialize` to intialize a bulk charge from customers
 | amount        | number  | true     | Amount to be charged from the customer |
 | reference     | string  | true     | The reference used to initiate the charge |
 
-```js
-import { Paystack } from "paystackly";
-const paystack = new PayStack(SECRET_KEY);
 
-async function initializeBulkCharge() {
-  const response = await paystack.bulkCharges.initialize(payload);
-  console.log(response);
-}
-initializeBulkCharge();
-```
-
-`.list`
+###### `.list`
 
 The `.list` method helps you list down all or some of the bulk charges you intialized or completed
 
-**Query params - `Objects`**
+**Parameter - `Objects`**
 
 | Property | Type      | Required | Description                                                         |
 |----------|-----------|----------|---------------------------------------------------------------------|
@@ -195,19 +200,62 @@ The `.list` method helps you list down all or some of the bulk charges you intia
 | page     | number    | false    | Specify exactly what page you want to retrieve. If not specified, paystack uses a default value of 1.        |
 | from     | Date      | false    | A timestamp from which to start listing, e.g., 2016-09-24T00:00:05.000Z, 2016-09-21.                    |
 | to       | Date      | false    | A timestamp from which to end listing, e.g., 2016-09-24T00:00:05.000Z, 2016-09-21.                      |
-```js
-import { Paystack } from "paystackly";
-const paystack = new PayStack(SECRET_KEY);
 
-async function listBulkCharges() {
-  const response = await paystack.bulkCharges.list(queryParams); //Note the query Params parameter is optional
-  console.log(response);
-}
-listBulkCharges();
-```
-`.pause`
+###### `.pause`
 
-The pause method allows you to pause/hault a bulk charge
+Pause or hault a charge by calling the `.pause` method
+
+**Parameter - `Objects`**
+
+
+| Property  | Type   | Required | Description         |
+|-----------|--------|----------|---------------------|
+| batch_code| string | true     | The batch code of the bulk charge     |
+
+###### `.resume`
+
+Resume a paused/haulted charge by calling the `.resume` method
+
+**Parameter - `Objects`**
+
+
+| Property  | Type   | Required | Description         |
+|-----------|--------|----------|---------------------|
+| batch_code| string | true     | The batch code of the paused bulk charge     |
+###### `.fetchBulkChargeBatch`
+
+Fetch Bulk Charge in batches 
+
+**Parameter - `Objects`**
+
+
+| Property  | Type   | Required | Description         |
+|-----------|--------|----------|---------------------|
+| id | string | true     | An ID or code for the charge whose batches you want to retrieve.     |
+###### `.fetchBulkChargeBatch`
+
+Fetch Bulk Charge in batches 
+
+**Parameter - `Objects`**
+
+
+| Property  | Type   | Required | Description         |
+|-----------|--------|----------|---------------------|
+| id | string | true     | An ID or code for the charge whose batches you want to retrieve.     |
+###### `.fetchChargesInBatch`
+
+This endpoint retrieves the charges associated with a specified batch code. Pagination parameters are available. You can also filter by status.
+
+**Parameters - `Objects`**
+
+
+| Property | Type      | Required | Description                                                         |
+|----------|-----------|----------|---------------------------------------------------------------------|
+| id | string | true     | An ID or code for the batch whose charges you want to retrieve.     |
+| perPage  | number    | false    | Specify how many records you want to retrieve per page. If not specified, paystack uses a default value of 50. |
+| page     | number    | false    | Specify exactly what page you want to retrieve. If not specified, paystack uses a default value of 1.        |
+| from     | Date      | false    | A timestamp from which to start listing, e.g., 2016-09-24T00:00:05.000Z, 2016-09-21.                    |
+| to       | Date      | false    | A timestamp from which to end listing, e.g., 2016-09-24T00:00:05.000Z, 2016-09-21.                      |
 ### Charge
 
 ### Customers
@@ -249,29 +297,11 @@ Initialize the transaction by calling the initialization methods on the transact
 
 `.initializeWithMobileMoney`
 
-```ts
-import { Paystack } from "paystackly";
-const paystack = new PayStack(SECRET_KEY);
-const body = {};
-async function initializeWithMobileMoney() {
-  const results = await paystack.transactions.initalizeWithMobileMoney(body);
-}
-initializeWithMobileMoney();
-```
 
 ##### Initialize With Credit Card
 
 `.initializeWithCreditCard`
 
-```ts
-import { Paystack } from "paystackly";
-const paystack = new PayStack(SECRET_KEY);
-
-async function initializeWithCreditCard() {
-  const results = await paystack.transactions.initalizeWithCreditCard(payload);
-}
-initializeWithCreditCard();
-```
 
 ### Transaction Splits
 
