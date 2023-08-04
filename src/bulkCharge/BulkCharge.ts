@@ -29,20 +29,20 @@ export class BulkCharges extends BaseBulkCharges {
     );
   }
   async fetchBulkChargeBatch(payload: {
-    id_or_code: string;
+    id: string;
   }): Promise<FetchBulkChargeBatchResponse> {
     return await Http.get<FetchBulkChargeBatchResponse>(
-      `${this.endpoint}/${payload.id_or_code}`
+      `${this.endpoint}/${payload.id}`
     );
   }
 
   async fetchChargesInBatch(
-    payload: { id_or_code: string },
-    queryParams?: FetchChargesInBatch
+    params: FetchChargesInBatch
   ): Promise<FetchChargesInBatchResponse> {
-    const query = formatQueryParams(queryParams);
+    const {id, ...query} = params
+    const formattedQuery = formatQueryParams(query);
     return await Http.get<FetchChargesInBatchResponse>(
-      `${this.endpoint}/${payload.id_or_code}/charges${query}`
+      `${this.endpoint}/${id}/charges${formattedQuery}`
     );
   }
 
