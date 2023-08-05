@@ -11,7 +11,7 @@ import {
   ListTransferRecipientResponse,
   TransferRecipientResponse,
   UpdateTransferRecipientPayload,
-} from "../types";
+} from "./type";
 import { formatQueryParams } from "../utils";
 export class TransferRecipient extends BaseTransferRecipient {
   private endpoint = "/transferrecipient";

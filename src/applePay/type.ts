@@ -21,12 +21,14 @@ export interface ListApplePayQuery {
    */
   previous: string;
 }
+export type RegisterDomainReponse = BasePaystackResponse;
+export type UnRegisterDomainReponse = BasePaystackResponse;
 export abstract class BaseApplePay {
   abstract registerDomain(payload: {
     domainName: string;
-  }): Promise<BasePaystackResponse>;
+  }): Promise<RegisterDomainReponse>;
   abstract listDomains(query?: ListApplePayQuery): Promise<ListApplePay>;
   abstract unRegisterDomain(payload: {
     domainName: string;
-  }): Promise<BasePaystackResponse>;
+  }): Promise<UnRegisterDomainReponse>;
 }

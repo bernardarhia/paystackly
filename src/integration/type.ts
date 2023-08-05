@@ -1,4 +1,4 @@
-import {  BaseResponse } from "../types";
+import { BaseResponse } from "../types";
 
 // INTEGRATIONS
 export type BaseIntegrationResponse =

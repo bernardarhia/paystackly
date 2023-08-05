@@ -1,11 +1,7 @@
 import { formatQueryParams } from "../utils";
-import {
-  BasePaystackResponse,
-  BaseApplePay,
-  ListApplePayQuery,
-  ListApplePay,
-} from "../types";
 import { Http } from "../core/Http";
+import { BaseApplePay, ListApplePay, ListApplePayQuery, RegisterDomainReponse, UnRegisterDomainReponse } from "./type";
+
 export class ApplePay extends BaseApplePay {
   private endpoint = "/apple-pay/domain";
   constructor() {
@@ -13,8 +9,8 @@ export class ApplePay extends BaseApplePay {
   }
   async registerDomain(payload: {
     domainName: string;
-  }): Promise<BasePaystackResponse> {
-    return await Http.post<typeof payload, BasePaystackResponse>(
+  }): Promise<RegisterDomainReponse> {
+    return await Http.post<typeof payload, RegisterDomainReponse>(
       this.endpoint,
       payload
     );
@@ -27,8 +23,8 @@ export class ApplePay extends BaseApplePay {
   }
   async unRegisterDomain(payload: {
     domainName: string;
-  }): Promise<BasePaystackResponse> {
-    return await Http.delete<typeof payload, BasePaystackResponse>(
+  }): Promise<UnRegisterDomainReponse> {
+    return await Http.delete<typeof payload, UnRegisterDomainReponse>(
       this.endpoint,
       payload
     );

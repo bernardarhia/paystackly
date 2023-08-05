@@ -1,5 +1,5 @@
 import { Http } from "../core/Http";
-import { BaseTransactionSplit } from "../types";
+import { BaseTransactionSplit } from "./type";
 import {
   CreateTransactionSplitPayload,
   CreateTransactionSplitResponse,
@@ -11,7 +11,7 @@ import {
   TransactionSplitSubAccountResponse,
   UpdateTransactionSplit,
   UpdateTransactionSplitPayload,
-} from "../types";
+} from "./type";
 import { formatQueryParams } from "../utils";
 
 export class TransactionSplit extends BaseTransactionSplit {

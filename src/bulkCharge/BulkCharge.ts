@@ -1,5 +1,5 @@
 import { Http } from "../core/Http";
-import { BaseBulkCharges, BasePaystackResponse } from "../types";
+import { BaseBulkCharges } from "./type";
 import {
   BulkChargeListsQuery,
   BulkChargeListsReponse,
@@ -8,8 +8,9 @@ import {
   FetchBulkChargeBatchResponse,
   FetchChargesInBatch,
   FetchChargesInBatchResponse,
-} from "../types";
+} from "./type";
 import { formatQueryParams } from "../utils";
+import { BasePaystackResponse } from "../types";
 
 export class BulkCharges extends BaseBulkCharges {
   private endpoint = "/bulkcharge";

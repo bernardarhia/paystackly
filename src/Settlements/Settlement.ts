@@ -1,11 +1,6 @@
 import { Http } from "../core/Http";
-import {
-  ListSettlementQuery,
-  ListSettlementTransactionQuery,
-  ListSettlementTransactionsResponse,
-  ListSettlementsResponse,
-} from "../types/Settlement";
 import { formatQueryParams } from "../utils";
+import { ListSettlementQuery, ListSettlementTransactionQuery, ListSettlementTransactionsResponse, ListSettlementsResponse } from "./type";
 
 abstract class BaseSettlement {
   abstract list(query?: ListSettlementQuery): Promise<ListSettlementsResponse>;

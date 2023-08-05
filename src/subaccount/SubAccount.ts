@@ -8,7 +8,7 @@ import {
   ListSubaccountResponse,
   UpdateSubAccountPayload,
   UpdateSubAccountReponse,
-} from "../types";
+} from "./type";
 import { formatQueryParams } from "../utils";
 
 export class SubAccount extends BaseSubaccount {

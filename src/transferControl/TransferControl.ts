@@ -8,7 +8,7 @@ import {
   FinalizeDisableOTPResponce,
   ResendOTPPayload,
   ResendOTPResponse,
-} from "../types/TransferControl";
+} from "./type";
 
 export class TransferControl extends BaseTransferControl {
   private endpoint = "/transfer";

@@ -1,5 +1,5 @@
-import { BaseQuery, BaseResponse, PaginationMetadata } from "./Paystack";
-import { BaseTransactionResponse } from "./Transaction";
+import { BaseTransactionResponse } from "../transaction";
+import { BaseQuery, BaseResponse, PaginationMetadata } from "../types";
 
 export interface ListSettlementQuery extends BaseQuery{
     /** Fetch settlements based on their state. Value can be one of success, processing, pending or failed. */

@@ -7,7 +7,7 @@ import {
   FetchRefundParam,
   FetchReFundReponse,
   BaseRefund,
-} from "../types";
+} from "./type";
 import { formatQueryParams } from "../utils";
 
 export class Refund extends BaseRefund {

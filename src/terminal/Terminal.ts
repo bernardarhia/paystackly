@@ -13,7 +13,7 @@ import {
   SendTerminalEventPayload,
   UpdateTerminalPayload,
   UpdateTerminalResponse,
-} from "../types";
+} from "./type";
 import { formatQueryParams } from "../utils";
 
 export class Terminal extends BaseTerminal {
