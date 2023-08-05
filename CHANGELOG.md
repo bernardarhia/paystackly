@@ -1,5 +1,11 @@
 # paystackly
 
+## 1.0.1
+
+### Patch Changes
+
+- 4dbcd73: remove package bundling
+
 ## 1.0.0
 
 ### Major Changes
