@@ -1,5 +1,11 @@
 # paystackly
 
+## 1.0.0
+
+### Major Changes
+
+- 1c013c4: first major version release
+
 ## 0.5.5
 
 ### Patch Changes
