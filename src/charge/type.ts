@@ -66,7 +66,7 @@ export interface ChargeWithUSSDPayload extends BaseChargePayload {
   /**
    * USSD type to charge (don't send if charging an authorization code, bank or card)
    */
-  ussd: Record<string, any>;
+  ussd : Record<string, any>;
 }
 
 export interface SubmitChargePinPayload {

@@ -180,7 +180,7 @@ The Bulk Charges API allows you create and manage multiple recurring payments fr
 import { Paystack } from "paystackly";
 
 const paystack = new PayStack(SECRET_KEY);
-const applePay = paystack.bulkCharges;
+const bulkCharges = paystack.bulkCharges;
 
 ```
 
@@ -267,24 +267,158 @@ This endpoint retrieves the charges associated with a specified batch code. Pagi
 | from     | Date      | false    | A timestamp from which to start listing, e.g., 2016-09-24T00:00:05.000Z, 2016-09-21.                    |
 | to       | Date      | false    | A timestamp from which to end listing, e.g., 2016-09-24T00:00:05.000Z, 2016-09-21.                      |
 ### Charge
+
+The Charge API provides a versatile and user-centric solution, empowering you to tailor the payment channel according to your preferences while initiating a transaction. Accept payment via **mobile money**, **credit card**, **ussd**, **bank** or **authorization code**.
+
+```js
+import { Paystack } from "paystackly";
+
+const paystack = new PayStack(SECRET_KEY);
+const charges = paystack.charges;
+
+```
+
+
 ###### `.chargeWithMobileMoney`
+
+
+Recieve money through mobile money by sending a mobile money alert directly onto the customer's phone
+
+**Parameters - `Objects`**
+
+| Property             | Type                 | Required | Description                                                       |
+|----------------------|----------------------|----------|-------------------------------------------------------------------|
+| email                | string               | true     | Customer's email address                                         |
+| amount               | number               | true     | Amount you're charging the cunstomer. Amount should be in kobo if currency is NGN, pesewas if GHS, and cents if ZAR |
+| mobile_money         | object               | true     | Mobile details|
+| mobile_money.phone   | string               | true     | Phone number for mobile money payment                            |
+| mobile_money.provider| string               | true     | Provider for mobile money payment                                |
+| pin                  | string               | false    | 4-digit PIN (send with a non-reusable authorization code)         |
+| metadata             | object               | false    | A JSON object                                                     |
+| reference            | string               | false    | Unique transaction reference. Only -, .`, = and alphanumeric characters allowed. |
+| device_id            | string               | false    | Unique identifier of the device a user uses in making payment. Only -, .`, = and alphanumeric characters allowed. |
 
 ###### `.chargeWithBank`
 
+Recieve money through the bank by sending a mobile money alert directly onto the customer's phone.
+ 
+<b style='color: red'>NB:</b> This enpoint/method is accessible to Nigerians only for now...
+
+**Parameters - `Objects`**
+
+
+| Property          | Type               | Required | Description                                                        |
+|-------------------|--------------------|----------|--------------------------------------------------------------------|
+| email             | string             | true     | Customer's email address                                          |
+| amount            | number             | true     | Amount should be in kobo if currency is NGN, pesewas if GHS, and cents if ZAR |
+| bank              | object             | true     | Bank account to charge |
+| bank.account_number | string            | true     | Bank account number to charge                                      |
+| bank.code         | string             | true     | Bank code. Get bank codes from here -[Bank Code](#bankcode)                                                          |
+| pin               | string             | false    | 4-digit PIN (send with a non-reusable authorization code)          |
+| metadata          | object             | false    | A JSON object                                                      |
+| reference         | string             | false    | Unique transaction reference. Only -, .`, = and alphanumeric characters allowed. |
+| device_id         | string             | false    | Unique identifier of the device a user uses in making payment. Only -, .`, = and alphanumeric characters allowed. |
+
+
 ###### `.chargeWithUssd`
+
+Charge customers using ssd codes.
+ 
+<b style='color: red'>NB:</b> This enpoint/method is accessible to Nigerians only for now...
+
+**Parameters - `Objects`**
+
+| Property    | Type               | Required | Description                                                        |
+|-------------|--------------------|----------|--------------------------------------------------------------------|
+| email       | string             | true     | Customer's email address                                          |
+| amount      | number             | true     | Amount should be in kobo if currency is NGN, pesewas if GHS, and cents if ZAR |
+| ussd        | object| true     | USSD type to charge|
+| ussd.type        | object| true     | USSD type can be Only 737, 770, 822, 894, 909, 919, 966, 966_GBPAY|
+| pin         | string             | false    | 4-digit PIN (send with a non-reusable authorization code)          |
+| metadata    | object| false    | A JSON object                                                      |
+| reference   | string             | false    | Unique transaction reference. Only -, .`, = and alphanumeric characters allowed. |
+| device_id   | string             | false    | Unique identifier of the device a user uses in making payment. Only -, .`, = and alphanumeric characters allowed. |
 
 ###### `.chargeWithCard`
 
+Charge customers with credit cards (credit and debit). This deducts the charge amount directly from the customer's card.
+
+**Parameters - `Objects`**
+
+| Property         | Type               | Required | Description                                                       |
+|------------------|--------------------|----------|-------------------------------------------------------------------|
+| email            | string             | true     | Customer's email address                                         |
+| amount           | number             | true     | Amount should be in kobo if currency is NGN, pesewas if GHS, and cents if ZAR |
+| card             | object             | true     | Card details                                                      |
+| card.number      | string             | true     | Card number                                                       |
+| card.cvv         | string             | true     | Card verification value (CVV)                                     |
+| card.expiry_year | string             | true     | Expiry year of the card                                           |
+| card.expiry_month| string             | true     | Expiry month of the card                                          |
+| pin              | string             | false    | 4-digit PIN (send with a non-reusable authorization code)         |
+| metadata         | Record<string, any>| false    | A JSON object                                                     |
+| reference        | string             | false    | Unique transaction reference. Only -, .`, = and alphanumeric characters allowed. |
+| device_id        | string             | false    | Unique identifier of the device a user uses in making payment. Only -, .`, = and alphanumeric characters allowed. |
+
+
+<b>Once a charge has been initiated, paystack verifies the charged account using pin, OTP, phone number, birthday or an address</b>
+
 ###### `.submitPin`
+
+**Parameters - `Objects`**
+
+| Property  | Type   | Required | Description                   |
+|-----------|--------|----------|-------------------------------|
+| pin       | string | true     | Pin for the charge            |
+| reference | string | true     | Unique transaction reference  |
 
 ###### `.submitOTP`
 
+**Parameters - `Objects`**
+
+| Property  | Type   | Required | Description                   |
+|-----------|--------|----------|-------------------------------|
+| otp       | string | true     | OTP for the charge            |
+| reference | string | true     | Unique transaction reference  |
+
 ###### `.submitPhone`
+
+**Parameters - `Objects`**
+
+| Property  | Type   | Required | Description                   |
+|-----------|--------|----------|-------------------------------|
+| phone     | string | true     | Phone number for the charge   |
+| reference | string | true     | Unique transaction reference  |
 
 ###### `.submitBirthday`
 
+**Parameters - `Objects`**
+
+| Property  | Type   | Required | Description                   |
+|-----------|--------|----------|-------------------------------|
+| birthday  | Date   | true     | Birthday for the charge       |
+| reference | string | true     | Unique transaction reference  |
+
 ###### `.submitAddress`
+
+**Parameters - `Objects`**
+
+| Property  | Type   | Required | Description                   |
+|-----------|--------|----------|-------------------------------|
+| address   | string | true     | Address for the charge        |
+| reference | string | true     | Unique transaction reference  |
+| city      | string | true     | City for the charge           |
+| state     | string | true     | State for the charge          |
+| zipcode   | string | true     | Zipcode for the charge        |
 ###### `.checkStatus`
+
+Check the status of charged transaction using the `.checkStatus`
+
+**Parameters - `Objects`**
+
+
+| Property  | Type   | Required | Description                   |
+|-----------|--------|----------|-------------------------------|
+| reference | string | true     | Unique transaction reference from the charged response  |
 
 ### Customers
 
