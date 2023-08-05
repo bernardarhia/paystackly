@@ -1,5 +1,11 @@
 # paystackly
 
+## 0.5.5
+
+### Patch Changes
+
+- 073d287: added minifier
+
 ## 0.5.4
 
 ### Patch Changes
