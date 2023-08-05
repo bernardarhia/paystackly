@@ -1,6 +1,7 @@
 /** ===========CHARGE============= */
 
-import { TransactionResponse, BaseResponse } from "../types";
+import { TransactionResponse } from "../transaction";
+import {  BaseResponse } from "../types";
 
 export interface BaseChargePayload {
   /**

@@ -1,5 +1,4 @@
 import { Http } from "../core/Http";
-import { BasePaystackResponse } from "../types";
 import {
   BaseCustomer,
   BlackListCusomerPayload,
@@ -18,7 +17,7 @@ import {
   ValidateCustomerResponse,
   WhiteListCustomerPayload,
   WhiteListCustomerResponse,
-} from "../types/Customer";
+} from "./type";
 import { formatQueryParams } from "../utils";
 
 export class Customer extends BaseCustomer {
@@ -50,7 +49,7 @@ export class Customer extends BaseCustomer {
   }
   async validate(
     payload: ValidateCustomerPayload
-  ): Promise<BasePaystackResponse> {
+  ): Promise<ValidateCustomerResponse> {
     const { code, ...body } = payload;
     return await Http.post<
       Omit<ValidateCustomerPayload, "code">,

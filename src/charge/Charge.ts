@@ -1,4 +1,4 @@
-import { BaseCharges, TransactionResponse } from "../types";
+import { BaseCharges } from "./type";
 import {
   BaseChargeResponse,
   ChargeWithBankPayload,
@@ -10,8 +10,9 @@ import {
   SubmitChargeOTPPayload,
   SubmitChargePhonePayload,
   SubmitChargePinPayload,
-} from "../types";
+} from "./type";
 import { Http } from "../core/Http";
+import { TransactionResponse } from "../transaction";
 
 type PayloadWithAmount<T> = T & { amount?: number };
 export class Charges extends BaseCharges {

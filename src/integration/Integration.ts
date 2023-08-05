@@ -4,7 +4,7 @@ import {
   FetchIntegrationTimeoutResponse,
   UpdateIntegrationTimeoutPayload,
   UpdateIntegrationTimeoutResponse,
-} from "../types";
+} from "./type";
 
 export class Integration extends BaseIntegration {
   private endpoint = "/integration";

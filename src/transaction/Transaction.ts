@@ -1,7 +1,5 @@
 import { Http } from "../core/Http";
 import {
-  BaseTransactionPayload,
-  ChargeAuthorizationPayload,
   ExportTransactionQueryParams,
   ExportTransactionResponse,
   InitializeTransactionResponse,
@@ -14,8 +12,9 @@ import {
   TransactionTimelineResponse,
   TransactionTotalQueryParams,
   TransactionTotalResponse,
-} from "../types";
+} from "./type";
 import { formatQueryParams } from "../utils";
+import { BaseTransactionPayload, ChargeAuthorizationPayload } from "../types";
 
 export class Transaction extends TransactionBase {
   private endpoint = "/transaction";

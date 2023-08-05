@@ -3,7 +3,7 @@ import dotenv from "dotenv"
 dotenv.config()
 import { describe, it } from "mocha";
 import { expect } from "chai";
-import { PayStack } from "../core/Paystack";
+import { PayStack } from "../core";
 const {PAYSTACK_SK = ""} = process.env
 describe("Paystack class", () => {
   const paystack = new PayStack(PAYSTACK_SK);

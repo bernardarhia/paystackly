@@ -12,7 +12,7 @@ import {
   ListTransferResponse,
   VerifyTransferPayload,
   VerifyTransferResponse,
-} from "../types";
+} from "./type";
 import { formatQueryParams } from "../utils";
 export class Transfer extends BaseTransfer {
   private endpoint = "/transfer";;

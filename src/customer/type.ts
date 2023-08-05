@@ -1,4 +1,4 @@
-import { Authorization, BasePaystackResponse, BaseQuery, BaseResponse } from "./Paystack";
+import { Authorization, BasePaystackResponse, BaseQuery, BaseResponse } from "../types";
 
 export interface CreateCustomerPayload {
   /** Customer's email address */

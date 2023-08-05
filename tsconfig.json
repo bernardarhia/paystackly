@@ -16,9 +16,10 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "downlevelIteration": true,
+    "noImplicitAny": true,
     "isolatedModules": true,
     "declaration": true
   },
-  "include": ["./src/**/*"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["./src/**/*", "webpack.config.js"],
+  "exclude": ["node_modules", "dist", "src/types", "src/test.ts"]
 }

@@ -1,2 +1,15 @@
-export { PayStack } from "./core/Paystack";
-export * from "./types";
+export { PayStack } from "./core";
+export * from "./applePay"
+export * from "./bulkCharge"
+export * from "./charge"
+export * from "./customer"
+export * from "./integration"
+export * from "./refund"
+export * from "./settlement"
+export * from "./subaccount"
+export * from "./terminal"
+export * from "./transaction"
+export * from "./transfer"
+export * from "./transactionSplit"
+export * from "./transferControl"
+export * from "./transferRecipient"
