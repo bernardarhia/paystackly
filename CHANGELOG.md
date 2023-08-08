@@ -1,5 +1,11 @@
 # paystackly
 
+## 1.1.0
+
+### Minor Changes
+
+- 8656728: added verification
+
 ## 1.0.1
 
 ### Patch Changes
