@@ -291,9 +291,11 @@ export interface BasePaystackResponse {
      */
     currency?: PayStackCurrency;
   }
+
   export interface GetBanksResponse extends BasePaystackResponse {
     data: BaseGetBankResponse[];
   }
+  
   export interface GetCountriesResponse extends BasePaystackResponse {
     id: number;
     active_for_dashboard_onboarding: boolean;

@@ -13,6 +13,7 @@ import { Http } from "./Http";
 import { TransferRecipient } from "../transferRecipient/TransferRecipient";
 import { Terminal } from "../terminal/Terminal";
 import { Customer } from "../customer/Customer";
+import { Verification } from "../verification/Verification";
 
 const PaystackClasses = [
   Transaction,
@@ -26,7 +27,8 @@ const PaystackClasses = [
   ApplePay,
   TransferRecipient,
   Terminal,
-  Customer
+  Customer,
+  Verification
 ];
 abstract class PaystackBase {
   abstract transaction: Transaction;
@@ -38,17 +40,7 @@ abstract class PaystackBase {
   abstract applePay: ApplePay;
   abstract transactionSplit: TransactionSplit;
   abstract subAccount: SubAccount;
-  // abstract getBanks(
-  //   queryParams: GetBanksQueryParams
-  // ): Promise<GetBanksResponse>;
-
-  // abstract getCountries(): Promise<GetCountriesResponse[]>;
-
-  // abstract verifyNumber(
-  //   params: VerifyNumberQueryParams
-  // ): Promise<VerifyNumberResponse>;
-
-  // abstract verifyCardBIN(binNumber: string): Promise<CardBINResponse>;
+  abstract verification: Verification
 }
 // Define the types for the properties
 type PaystackInstance = InstanceType<(typeof PaystackClasses)[number]>;
@@ -66,6 +58,7 @@ export class PayStack extends PaystackBase {
   readonly transferRecipient: TransferRecipient;
   readonly terminal: Terminal;
   readonly customer: Customer;
+  readonly verification: Verification;
   [key: string]: PaystackInstance;
 
   constructor(token: string) {
