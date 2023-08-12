@@ -21,11 +21,15 @@ class HttpClient {
     url: string,
     config?: AxiosRequestConfig
   ): Promise<Response> {
-    const response: AxiosResponse<Response> = await this.axiosInstance.get(
-      url,
-      config
-    );
-    return response.data;
+    try {      
+      const response: AxiosResponse<Response> = await this.axiosInstance.get(
+        url,
+        config
+      );
+      return response.data;
+    } catch (error: any) {
+      return error.response.data;
+    }
   }
 
   public async post<RequestBody, Response>(
