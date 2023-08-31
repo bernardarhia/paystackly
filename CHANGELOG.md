@@ -1,5 +1,11 @@
 # paystackly
 
+## 1.1.2
+
+### Patch Changes
+
+- 3015874: fix type issue with success and error responses
+
 ## 1.1.1
 
 ### Patch Changes
