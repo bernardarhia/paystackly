@@ -7,15 +7,16 @@ export interface BasePaystackResponse {
     message: string;
   }
   
-  export interface BasePaystackSuccessResponse {
+  export interface BasePaystackSuccessResponse<T> {
     status: true;
     message: string;
+      data: T
   }
   
   // TODO: properly format BaseResponse to work how you want it to
-  export type BaseResponse =
-    | (BasePaystackResponse & BasePaystackErrorResponse)
-    | BasePaystackSuccessResponse;
+  export type BaseResponse<T> =
+ BasePaystackResponse & (BasePaystackErrorResponse
+    | BasePaystackSuccessResponse<T>);
   
   export interface PayStackQueryOptions {
     hostname: string;

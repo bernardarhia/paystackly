@@ -1,5 +1,11 @@
 # paystackly
 
+## 1.1.1
+
+### Patch Changes
+
+- 4b08a04: minor error handling
+
 ## 1.1.0
 
 ### Minor Changes
