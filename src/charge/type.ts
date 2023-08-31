@@ -102,13 +102,13 @@ type ChargeDataStatus =
   | "send_otp"
   | "send_address"
   | "send_birthday";
-export type BaseChargeResponse = BaseResponse & {
+export type BaseChargeResponse = BaseResponse< {
   data: {
     reference: string;
     status: ChargeDataStatus;
     display_text: string;
   };
-};
+}>;
 
 export abstract class BaseCharges {
   abstract chargeWithMobileMoney(

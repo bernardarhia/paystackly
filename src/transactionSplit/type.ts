@@ -76,9 +76,9 @@ import {
     }[];
     total_subaccounts: number;
   }
-  export type CreateTransactionSplitResponse = BaseResponse & {
+  export type CreateTransactionSplitResponse = BaseResponse< {
     data: BaseTransactionSplitResponse;
-  };
+  }>;
   
   export interface ListTransactionSplitQuery extends BaseQuery {
     /**
@@ -97,10 +97,10 @@ import {
     sort_by?: string;
   }
   
-  export type ListTransactionSplitResponse = BaseResponse &
+  export type ListTransactionSplitResponse = BaseResponse<
     PaginationMetadata & {
       data: BaseTransactionSplitResponse[];
-    };
+    }>;
   
   export type FetchTransactionSplitResponse = CreateTransactionSplitResponse;
   

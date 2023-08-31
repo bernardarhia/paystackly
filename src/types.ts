@@ -372,13 +372,13 @@ export interface BasePaystackResponse {
   
   export type VerifyNumberResponse =
     | (BasePaystackResponse & BasePaystackErrorResponse)
-    | (BasePaystackSuccessResponse & {
+    | (BasePaystackSuccessResponse<{
         data: {
           account_number: string;
           account_name: string;
           bank_id: number;
         };
-      });
+      }>);
   
   export interface CardBINResponse extends BasePaystackResponse {
     data: {

@@ -1,11 +1,4 @@
-import {
-  BankCodes,
-  BasePaystackErrorResponse,
-  BasePaystackResponse,
-  BasePaystackSuccessResponse,
-  CardBrand,
-} from "../types";
-
+import { BankCodes, BaseResponse, CardBrand } from "../types";
 export interface ResolveAccountQuery {
   /**
    * Account number
@@ -17,17 +10,15 @@ export interface ResolveAccountQuery {
   bank_code: BankCodes;
 }
 
-export type ResolveAccountResponse =
-  | (BasePaystackResponse & BasePaystackErrorResponse)
-  | (BasePaystackSuccessResponse & {
-      data: {
-        account_number: string;
-        account_name: string;
-        bank_id: number;
-      };
-    });
+export type ResolveAccountResponse = BaseResponse<{
+  data: {
+    account_number: string;
+    account_name: string;
+    bank_id: number;
+  };
+}>;
 
-export interface CardBINResponse extends BasePaystackResponse {
+export type CardBINResponse = BaseResponse<{
   data: {
     bin: string;
     brand: CardBrand;
@@ -38,7 +29,7 @@ export interface CardBINResponse extends BasePaystackResponse {
     bank: string;
     linked_bank_id: number;
   };
-}
+}>;
 
 export interface ValidateAccountPayload {
   /** Customer's first and last name registered with their bank */
@@ -63,14 +54,12 @@ export interface ValidateAccountPayload {
   document_number?: string;
 }
 
-export type ValidateAccountResponse =
-  | (BasePaystackSuccessResponse & BasePaystackErrorResponse)
-  | (BasePaystackSuccessResponse & {
-      data: {
-        verified: boolean;
-        verificationMessage: string;
-      };
-    });
+export type ValidateAccountResponse = BaseResponse<{
+  data: {
+    verified: boolean;
+    verificationMessage: string;
+  };
+}>;
 
 export abstract class BaseVerification {
   //     abstract getBanks(
@@ -89,5 +78,7 @@ export abstract class BaseVerification {
   abstract verifyCardBIN(params: {
     binNumber: string;
   }): Promise<CardBINResponse>;
-  abstract validationAccount(payload: ValidateAccountPayload): Promise<ValidateAccountResponse>;
+  abstract validationAccount(
+    payload: ValidateAccountPayload
+  ): Promise<ValidateAccountResponse>;
 }

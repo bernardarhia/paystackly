@@ -30,7 +30,7 @@ export interface RefundPayload {
   merchant_note?: string;
 }
 
-export type RefundResponse = BaseResponse & {
+export type RefundResponse = BaseResponse<{
   data: {
     transaction: {
       id: number;
@@ -75,7 +75,7 @@ export type RefundResponse = BaseResponse & {
     createdAt: string;
     updatedAt: string;
   };
-};
+}>;
 
 export interface ListRefundQuery extends BaseQuery {
   /**
@@ -109,15 +109,15 @@ export interface ListRefundResponseData {
   status: string;
 }
 
-export type ListRefundResponse = BaseResponse & {
+export type ListRefundResponse = BaseResponse<{
   data: ListRefundResponseData[];
-};
+}>;
 
 export interface FetchRefundParam {
   reference: string;
 }
 
-export type FetchReFundReponse = BaseResponse & {
+export type FetchReFundReponse = BaseResponse<{
   data: {
     integration: number;
     transaction: number;
@@ -139,7 +139,7 @@ export type FetchReFundReponse = BaseResponse & {
     createdAt: string;
     updatedAt: string;
   };
-};
+}>;
 
 export abstract class BaseRefund {
   abstract create(payload: RefundPayload): Promise<RefundResponse>;

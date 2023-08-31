@@ -29,13 +29,13 @@ import {
     split_code?: string;
   }
   
-  export type InitializeTransactionResponse = BaseResponse & {
+  export type InitializeTransactionResponse = BaseResponse<{
     data: {
       authorization_url: string;
       access_code: string;
       reference: string;
     };
-  };
+  }>;
   
   export type BaseTransactionResponse = {
     data: {
@@ -86,7 +86,7 @@ import {
       subaccount: any;
     };
   };
-  export type TransactionResponse = BaseResponse & BaseTransactionResponse;
+  export type TransactionResponse = BaseResponse<null> & BaseTransactionResponse;
   export interface ListTransactionsQuery extends BaseQuery {
     /**
      * Specify an ID for the customer whose transactions you want to retrieve
@@ -109,9 +109,9 @@ import {
   
     amount?: number;
   }
-  export type ListTransactionsResponse = BaseResponse & {
+  export type ListTransactionsResponse = BaseResponse<{
     data: BaseTransactionResponse[];
-  };
+  }>;
   
   export interface TransactionTimelineResponse extends BasePaystackResponse {
     data: {

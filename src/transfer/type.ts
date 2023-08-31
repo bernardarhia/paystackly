@@ -1,4 +1,9 @@
-import { BaseQuery, BaseResponse, PaginationMetadata, PayStackCurrency } from "../types";
+import {
+  BaseQuery,
+  BaseResponse,
+  PaginationMetadata,
+  PayStackCurrency,
+} from "../types";
 
 /** ============= TRANSFER ============ */
 export type TransferType = "nuban" | "basa" | "mobile_money";
@@ -20,9 +25,9 @@ export interface CreateFinalizeTransferPayload {
   transfer_code: string;
   otp: string;
 }
-export type CreateTransferResponse = BaseResponse & {
+export type CreateTransferResponse = BaseResponse<{
   data: Transfer;
-};
+}>;
 
 interface Transfer {
   domain: string;
@@ -37,7 +42,7 @@ interface Transfer {
   id: number;
   createdAt: Date;
   updatedAt: Date;
-};
+}
 
 interface TransferRecipient {
   domain: string;
@@ -82,38 +87,37 @@ interface QueuedTransfersResponse {
   data: QueuedTransfer[];
 }
 
-
-export type FinalizeTransferResponse = BaseResponse & BaseFinalizeTransferResponse
-export interface BulkTransferPayload{
-  source: Pick<CreateTransferPayload, "source">,
+export type FinalizeTransferResponse = BaseResponse<null> &
+  BaseFinalizeTransferResponse;
+export interface BulkTransferPayload {
+  source: Pick<CreateTransferPayload, "source">;
   currency: PayStackCurrency;
-  transfers:  Omit<CreateTransferPayload, "source" | "currency" | "type">[]
+  transfers: Omit<CreateTransferPayload, "source" | "currency" | "type">[];
 }
-export type BulkTransferResponse = BaseResponse & QueuedTransfersResponse;
+export type BulkTransferResponse = BaseResponse<null> & QueuedTransfersResponse;
 
-export interface ListTransferQuery extends BaseQuery{
+export interface ListTransferQuery extends BaseQuery {
   /** Filter by customer ID */
-  customer?:string;
+  customer?: string;
 }
 
-export type ListTransferResponse = BaseResponse & {
-  data:( Transfer & {recipient: TransferRecipient})[]
-  meta: PaginationMetadata
-}
-export interface FetchTransferPayload  {
+export type ListTransferResponse = BaseResponse<{
+  data: (Transfer & { recipient: TransferRecipient })[];
+} & PaginationMetadata>;
+export interface FetchTransferPayload {
   /** he transfer ID or code you want to fetch */
   id: string;
 }
-export type FetchTransferResponse = BaseResponse & {
-data: ( Transfer & {recipient: TransferRecipient})
-}
-export interface VerifyTransferPayload  {
+export type FetchTransferResponse = BaseResponse<{
+  data: Transfer & { recipient: TransferRecipient };
+}>;
+export interface VerifyTransferPayload {
   /** he transfer ID or code you want to fetch */
   reference: string;
 }
-export type VerifyTransferResponse = BaseResponse & {
-data: ( Transfer & {recipient: TransferRecipient})
-}
+export type VerifyTransferResponse = BaseResponse<{
+  data: Transfer & { recipient: TransferRecipient };
+}>;
 export abstract class BaseTransfer {
   abstract initialize(
     payload: CreateTransferPayload
@@ -121,8 +125,12 @@ export abstract class BaseTransfer {
   abstract finalize(
     payload: CreateFinalizeTransferPayload
   ): Promise<CreateTransferResponse>;
-  abstract intializeBulk(payload: BulkTransferPayload): Promise<BulkTransferResponse>
-  abstract list(query?: ListTransferQuery): Promise<ListTransferResponse>
-  abstract fetch(payload: FetchTransferPayload): Promise<FetchTransferResponse>
-  abstract verify(payload: VerifyTransferPayload): Promise<VerifyTransferResponse>
+  abstract intializeBulk(
+    payload: BulkTransferPayload
+  ): Promise<BulkTransferResponse>;
+  abstract list(query?: ListTransferQuery): Promise<ListTransferResponse>;
+  abstract fetch(payload: FetchTransferPayload): Promise<FetchTransferResponse>;
+  abstract verify(
+    payload: VerifyTransferPayload
+  ): Promise<VerifyTransferResponse>;
 }

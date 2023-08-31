@@ -26,11 +26,11 @@ export interface SendTerminalEventPayload {
     reference?: string; // The offline reference for the invoice (only for 'invoice' type).
   };
 }
-export type SendEventTerminalResponse = BaseResponse & {
+export type SendEventTerminalResponse = BaseResponse<{
   data: {
     id: string;
   };
-};
+}>;
 
 export interface FetchEventStatusPayload {
   /** The ID of the Terminal the event was sent to. */
@@ -38,18 +38,18 @@ export interface FetchEventStatusPayload {
   /** The ID of the event that was sent to the Terminal */
   event_id: string;
 }
-export type FetchEventStatusResponse = BaseResponse & {
+export type FetchEventStatusResponse = BaseResponse<{
   data: {
     delivered: boolean;
   };
-};
+}>;
 
-export type FetchTerminalStatusResponse = BaseResponse & {
+export type FetchTerminalStatusResponse = BaseResponse<{
   data: {
     online: boolean;
     available: boolean;
   };
-};
+}>;
 
 interface TerminalData {
   id: number;
@@ -80,18 +80,18 @@ export interface ListTerminalsQuery {
   previous?: string | null;
 }
 
-export type ListTerminalsResponse = BaseResponse & {
+export type ListTerminalsResponse = BaseResponse<{
   data: TerminalData[];
   meta: {
     next: string | null;
     previous: string | null;
     perPage: number;
   };
-};
+}>;
 
-export type FetchTerminalRresponse = BaseResponse & {
+export type FetchTerminalRresponse = BaseResponse<{
   data: TerminalData;
-};
+}>;
 
 export interface UpdateTerminalPayload {
   /** The ID of the Terminal you want to update */

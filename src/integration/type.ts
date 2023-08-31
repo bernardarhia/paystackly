@@ -2,11 +2,11 @@ import { BaseResponse } from "../types";
 
 // INTEGRATIONS
 export type BaseIntegrationResponse =
-BaseResponse & {
+BaseResponse< {
       data: {
         payment_session_timeout: number;
       };
-    };
+    }>;
 export type FetchIntegrationTimeoutResponse = BaseIntegrationResponse;
 
 export interface UpdateIntegrationTimeoutPayload {

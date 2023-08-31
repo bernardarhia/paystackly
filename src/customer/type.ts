@@ -18,7 +18,7 @@ export interface CreateCustomerPayload {
    */
   metadata?: Record<string, any>;
 }
-export type CustomerResponse = BaseResponse & {
+export type CustomerResponse = BaseResponse<{
   data: {
     email: string;
     integration: number;
@@ -30,21 +30,21 @@ export type CustomerResponse = BaseResponse & {
     createdAt: string;
     updatedAt: string;
   };
-};
+}>;
 export interface ListCustomersQuery extends BaseQuery {}
 interface Customer extends BaseCustomer{
   id: number;
   createdAt: string;
   updatedAt: string;
 }
-export type ListCustomersResponse = BaseResponse & {
+export type ListCustomersResponse = BaseResponse<{
   data: Customer[];
   meta: {
     next: string | null;
     previous: string | null;
     perPage: number;
   };
-};
+}>;
 export interface FetchCustomerParam {
   /** An email or customer code for the customer you want to fetch */
   code: string;
@@ -75,9 +75,9 @@ interface FetchCustomer {
   identifications: any[] | null;
 }
 
-export type FetchCustomerResponse = BaseResponse & {
+export type FetchCustomerResponse = BaseResponse<{
   data: FetchCustomer;
-};
+}>;
 
 
 export interface UpdateCustomerPayload
@@ -93,7 +93,7 @@ interface Photo {
   isPrimary: boolean;
 }
 
-export type UpdateCustomerResponse = BaseResponse & {
+export type UpdateCustomerResponse = BaseResponse<{
   data: {
     integration: number;
     first_name: string;
@@ -114,7 +114,7 @@ export type UpdateCustomerResponse = BaseResponse & {
     createdAt: string;
     updatedAt: string;
   };
-};
+}>;
 
 export interface ValidateCustomerPayload
   extends Omit<UpdateCustomerPayload, "phone" | "metadata"> {
@@ -157,8 +157,8 @@ export interface WhiteListCustomerPayload {
 }
 
 export interface BlackListCusomerPayload extends WhiteListCustomerPayload {}
-export type WhiteListCustomerResponse = BaseResponse & Customer;
-export type BlackListCustomerResponse = BaseResponse & Customer;
+export type WhiteListCustomerResponse = BaseResponse<Customer>;
+export type BlackListCustomerResponse = BaseResponse<Customer>;
 
 export interface DeactivateAuthorizationPayload {
   /** Authorization code to be deactivated */
