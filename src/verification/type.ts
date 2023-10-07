@@ -11,15 +11,12 @@ export interface ResolveAccountQuery {
 }
 
 export type ResolveAccountResponse = BaseResponse<{
-  data: {
     account_number: string;
     account_name: string;
     bank_id: number;
-  };
 }>;
 
 export type CardBINResponse = BaseResponse<{
-  data: {
     bin: string;
     brand: CardBrand;
     sub_brand: string;
@@ -28,7 +25,6 @@ export type CardBINResponse = BaseResponse<{
     card_type: string;
     bank: string;
     linked_bank_id: number;
-  };
 }>;
 
 export interface ValidateAccountPayload {
@@ -55,10 +51,8 @@ export interface ValidateAccountPayload {
 }
 
 export type ValidateAccountResponse = BaseResponse<{
-  data: {
     verified: boolean;
     verificationMessage: string;
-  };
 }>;
 
 export abstract class BaseVerification {

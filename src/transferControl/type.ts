@@ -8,9 +8,7 @@ interface BalanceEntry {
   currency: string;
   balance: number;
 }
-export type Balance = BaseResponse<{
-  data: BalanceEntry[];
-}>;
+export type Balance = BaseResponse<BalanceEntry[]>;
 
 interface LedgerBalanceEntry {
   integration: number;
@@ -25,11 +23,7 @@ interface LedgerBalanceEntry {
   createdAt: string;
   updatedAt: string;
 }
-export type BalanceLedger = BaseResponse<
-  {
-    data: LedgerBalanceEntry[];
-  } & PaginationMetadata
->;
+export type BalanceLedger = BaseResponse<LedgerBalanceEntry[] & PaginationMetadata>;
 
 export interface ResendOTPPayload {
   /** Transfer code */
