@@ -1,5 +1,11 @@
 # paystackly
 
+## 1.1.3
+
+### Patch Changes
+
+- 4ccb137: fixed inconsistencies in types
+
 ## 1.1.2
 
 ### Patch Changes
