@@ -1,4 +1,4 @@
-import { BasePaystackResponse, BaseResponse } from "../types";
+import { BasePaystackResponse, BaseResponse, PaginationMetadata } from "../types";
 
 // TERMINAL
 export interface SendTerminalEventPayload {
@@ -27,9 +27,7 @@ export interface SendTerminalEventPayload {
   };
 }
 export type SendEventTerminalResponse = BaseResponse<{
-  data: {
     id: string;
-  };
 }>;
 
 export interface FetchEventStatusPayload {
@@ -39,16 +37,12 @@ export interface FetchEventStatusPayload {
   event_id: string;
 }
 export type FetchEventStatusResponse = BaseResponse<{
-  data: {
     delivered: boolean;
-  };
 }>;
 
 export type FetchTerminalStatusResponse = BaseResponse<{
-  data: {
     online: boolean;
     available: boolean;
-  };
 }>;
 
 interface TerminalData {
@@ -80,18 +74,9 @@ export interface ListTerminalsQuery {
   previous?: string | null;
 }
 
-export type ListTerminalsResponse = BaseResponse<{
-  data: TerminalData[];
-  meta: {
-    next: string | null;
-    previous: string | null;
-    perPage: number;
-  };
-}>;
+export type ListTerminalsResponse = BaseResponse< TerminalData[] & PaginationMetadata>;
 
-export type FetchTerminalRresponse = BaseResponse<{
-  data: TerminalData;
-}>;
+export type FetchTerminalRresponse = BaseResponse<TerminalData>;
 
 export interface UpdateTerminalPayload {
   /** The ID of the Terminal you want to update */

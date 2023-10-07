@@ -1,10 +1,6 @@
-import { BasePaystackResponse } from "../types";
+import { BasePaystackResponse, BaseResponse } from "../types";
 
-export interface ListApplePay extends BasePaystackResponse {
-  data: {
-    domainNames: string[];
-  };
-}
+export type ListApplePay  =  BaseResponse<{domainNames: string[]}>
 export interface ListApplePayQuery {
   /**
    * Flag to enable cursor pagination on the endpoint.

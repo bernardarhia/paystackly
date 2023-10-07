@@ -27,11 +27,7 @@ interface Settlement {
   updatedAt: string;
 }
 
-export type ListSettlementsResponse = BaseResponse<
-  {
-    data: Settlement[];
-  } & PaginationMetadata
->;
+export type ListSettlementsResponse = BaseResponse<Settlement[] & PaginationMetadata>;
 
 export interface ListSettlementTransactionQuery extends BaseQuery {
   /** The settlement ID in which you want to fetch its transactions */
@@ -39,7 +35,5 @@ export interface ListSettlementTransactionQuery extends BaseQuery {
 }
 
 export type ListSettlementTransactionsResponse = BaseResponse<
-  {
-    data: BaseTransactionResponse[];
-  } & PaginationMetadata
+ BaseTransactionResponse[] & PaginationMetadata
 >;

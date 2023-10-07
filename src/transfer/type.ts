@@ -25,9 +25,7 @@ export interface CreateFinalizeTransferPayload {
   transfer_code: string;
   otp: string;
 }
-export type CreateTransferResponse = BaseResponse<{
-  data: Transfer;
-}>;
+export type CreateTransferResponse = BaseResponse<Transfer>;
 
 interface Transfer {
   domain: string;
@@ -64,15 +62,14 @@ interface TransferRecipient {
   createdAt: string;
   updatedAt: string;
 }
-
-interface BaseFinalizeTransferResponse {
-  data: Transfer & {
+interface Data {
     source_details: any;
     failures: any;
     titan_code: string | null;
     transferred_at: Date | null;
-  };
-}
+  }
+
+interface BaseFinalizeTransferResponse extends Transfer, Data {}
 
 interface QueuedTransfer {
   reference: string;
@@ -87,37 +84,30 @@ interface QueuedTransfersResponse {
   data: QueuedTransfer[];
 }
 
-export type FinalizeTransferResponse = BaseResponse<null> &
-  BaseFinalizeTransferResponse;
+export type FinalizeTransferResponse = BaseResponse<BaseFinalizeTransferResponse>
 export interface BulkTransferPayload {
   source: Pick<CreateTransferPayload, "source">;
   currency: PayStackCurrency;
   transfers: Omit<CreateTransferPayload, "source" | "currency" | "type">[];
 }
-export type BulkTransferResponse = BaseResponse<null> & QueuedTransfersResponse;
+export type BulkTransferResponse = BaseResponse<QueuedTransfersResponse>
 
 export interface ListTransferQuery extends BaseQuery {
   /** Filter by customer ID */
   customer?: string;
 }
 
-export type ListTransferResponse = BaseResponse<{
-  data: (Transfer & { recipient: TransferRecipient })[];
-} & PaginationMetadata>;
+export type ListTransferResponse = BaseResponse< (Transfer & { recipient: TransferRecipient })[] & PaginationMetadata>;
 export interface FetchTransferPayload {
   /** he transfer ID or code you want to fetch */
   id: string;
 }
-export type FetchTransferResponse = BaseResponse<{
-  data: Transfer & { recipient: TransferRecipient };
-}>;
+export type FetchTransferResponse = BaseResponse<Transfer & { recipient: TransferRecipient }>;
 export interface VerifyTransferPayload {
   /** he transfer ID or code you want to fetch */
   reference: string;
 }
-export type VerifyTransferResponse = BaseResponse<{
-  data: Transfer & { recipient: TransferRecipient };
-}>;
+export type VerifyTransferResponse = BaseResponse< Transfer & { recipient: TransferRecipient }>;
 export abstract class BaseTransfer {
   abstract initialize(
     payload: CreateTransferPayload

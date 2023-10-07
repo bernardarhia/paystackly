@@ -13,18 +13,16 @@ export type BulkChargesPayload = {
   reference: string;
 };
 export type BulkChargesResponse = BaseResponse<{
-  data: {
-    batch_code: string;
-    reference: string;
-    id: number;
-    integration: number;
-    domain: string;
-    status: string;
-    total_charges: number;
-    pending_charges: number;
-    createdAt: string;
-    updatedAt: string;
-  };
+  batch_code: string;
+  reference: string;
+  id: number;
+  integration: number;
+  domain: string;
+  status: string;
+  total_charges: number;
+  pending_charges: number;
+  createdAt: string;
+  updatedAt: string;
 }>;
 
 export type BulkChargeListsQuery = BaseQuery;
@@ -38,21 +36,19 @@ interface BulkChargesData {
   updatedAt: string;
 }
 
-export type BulkChargeListsReponse = BaseResponse<{
-  data: BulkChargesData[];
-} &  PaginationMetadata> 
-export interface FetchBulkChargeBatchResponse extends BasePaystackResponse {
-  data: {
-    domain: string;
-    batch_code: string;
-    status: string;
-    id: number;
-    total_charges: number;
-    pending_charges: number;
-    createdAt: string;
-    updatedAt: string;
-  };
-}
+export type BulkChargeListsReponse = BaseResponse<
+  BulkChargesData[] & PaginationMetadata
+>;
+export type FetchBulkChargeBatchResponse = BaseResponse<{
+  domain: string;
+  batch_code: string;
+  status: string;
+  id: number;
+  total_charges: number;
+  pending_charges: number;
+  createdAt: string;
+  updatedAt: string;
+}>;
 export interface FetchChargesInBatch extends BaseQuery {
   /** Id or Code of the bulk charge you want to retrieve */
   id: string;
@@ -121,10 +117,9 @@ interface BulkChargeItem {
   updatedAt: string;
 }
 
-export type FetchChargesInBatchResponse = BaseResponse<{
-  data: BulkChargeItem[];
-} &
-  PaginationMetadata>;
+export type FetchChargesInBatchResponse = BaseResponse<
+  BulkChargeItem[] & PaginationMetadata
+>;
 
 export abstract class BaseBulkCharges {
   abstract initilize(

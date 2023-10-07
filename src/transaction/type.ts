@@ -1,6 +1,5 @@
 import {
     BaseTransactionPayload,
-    BasePaystackResponse,
     BaseQuery,
     ChargeAuthorizationPayload,
     PayStackCurrency,
@@ -30,11 +29,9 @@ import {
   }
   
   export type InitializeTransactionResponse = BaseResponse<{
-    data: {
       authorization_url: string;
       access_code: string;
       reference: string;
-    };
   }>;
   
   export type BaseTransactionResponse = {
@@ -109,12 +106,9 @@ import {
   
     amount?: number;
   }
-  export type ListTransactionsResponse = BaseResponse<{
-    data: BaseTransactionResponse[];
-  }>;
+  export type ListTransactionsResponse = BaseResponse< BaseTransactionResponse[]>;
   
-  export interface TransactionTimelineResponse extends BasePaystackResponse {
-    data: {
+  export type TransactionTimelineResponse  =  BaseResponse <{
       time_spent: number;
       attempts: number;
       authentication: null | any;
@@ -128,12 +122,10 @@ import {
         message: string;
         time: number;
       }[];
-    };
-  }
+  }>
   
   export interface TransactionTotalQueryParams extends BaseQuery {}
-  export interface TransactionTotalResponse extends BasePaystackResponse {
-    data: {
+  export type TransactionTotalResponse  =  BaseResponse<{
       total_transactions: number;
       unique_customers: number;
       total_volume: number;
@@ -146,8 +138,7 @@ import {
         currency: PayStackCurrency;
         amount: number;
       }[];
-    };
-  }
+  }>
   export interface ExportTransactionQueryParams extends BaseQuery {
     /**
      *Specify an ID for the customer whose transactions you want to retrieve
@@ -179,12 +170,9 @@ import {
     payment_page?: number;
   }
   
-  export interface ExportTransactionResponse extends BasePaystackResponse {
-    data: {
+  export type ExportTransactionResponse  =  BaseResponse< {
       path: string;
-    };
-    expireAt: Date;
-  }
+  } & {expireAt: Date;}>
   
   export interface PartialDebitPayload {
     /**

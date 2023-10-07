@@ -97,10 +97,7 @@ import {
     sort_by?: string;
   }
   
-  export type ListTransactionSplitResponse = BaseResponse<
-    PaginationMetadata & {
-      data: BaseTransactionSplitResponse[];
-    }>;
+  export type ListTransactionSplitResponse = BaseResponse<PaginationMetadata & BaseTransactionSplitResponse[]>;
   
   export type FetchTransactionSplitResponse = CreateTransactionSplitResponse;
   

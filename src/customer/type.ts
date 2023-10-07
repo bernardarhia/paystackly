@@ -1,4 +1,4 @@
-import { Authorization, BasePaystackResponse, BaseQuery, BaseResponse } from "../types";
+import { Authorization, BasePaystackResponse, BaseQuery, BaseResponse, PaginationMetadata } from "../types";
 
 export interface CreateCustomerPayload {
   /** Customer's email address */
@@ -19,7 +19,6 @@ export interface CreateCustomerPayload {
   metadata?: Record<string, any>;
 }
 export type CustomerResponse = BaseResponse<{
-  data: {
     email: string;
     integration: number;
     domain: string;
@@ -29,7 +28,6 @@ export type CustomerResponse = BaseResponse<{
     identifications: any[] | null;
     createdAt: string;
     updatedAt: string;
-  };
 }>;
 export interface ListCustomersQuery extends BaseQuery {}
 interface Customer extends BaseCustomer{
@@ -37,14 +35,8 @@ interface Customer extends BaseCustomer{
   createdAt: string;
   updatedAt: string;
 }
-export type ListCustomersResponse = BaseResponse<{
-  data: Customer[];
-  meta: {
-    next: string | null;
-    previous: string | null;
-    perPage: number;
-  };
-}>;
+export type ListCustomersResponse = BaseResponse<
+  Customer[] & PaginationMetadata>;
 export interface FetchCustomerParam {
   /** An email or customer code for the customer you want to fetch */
   code: string;
@@ -75,9 +67,7 @@ interface FetchCustomer {
   identifications: any[] | null;
 }
 
-export type FetchCustomerResponse = BaseResponse<{
-  data: FetchCustomer;
-}>;
+export type FetchCustomerResponse = BaseResponse< FetchCustomer>;
 
 
 export interface UpdateCustomerPayload
@@ -94,7 +84,6 @@ interface Photo {
 }
 
 export type UpdateCustomerResponse = BaseResponse<{
-  data: {
     integration: number;
     first_name: string;
     last_name: string;
@@ -113,7 +102,6 @@ export type UpdateCustomerResponse = BaseResponse<{
     authorizations: any[];
     createdAt: string;
     updatedAt: string;
-  };
 }>;
 
 export interface ValidateCustomerPayload

@@ -47,24 +47,18 @@ import { BankCodes, BasePaystackResponse, BaseQuery, BaseResponse, PaginationMet
       bank_name: string;
     };
   };
-  export type TransferRecipientResponse = BaseResponse< {
-    data: BaseTransferRecipientResponse & { is_deleted: boolean };
-  }>;
+  export type TransferRecipientResponse = BaseResponse<BaseTransferRecipientResponse & { is_deleted: boolean }>;
   
   export interface CreateBulkTransferRecipientsPayload {
     batch: (CreateTransferRecipientPayload & { isDeleted: boolean })[];
   }
   export type CreateBulkTransferRecipientsResponse = BaseResponse<{
-    data: {
-      success: BaseTransferRecipientResponse[];
-      errors: string[];
-    };
+    success: BaseTransferRecipientResponse[]
+    errors: string[]
   }>;
   
   export interface ListTransferRecipientQuery extends BaseQuery {}
-  export type ListTransferRecipientResponse = BaseResponse<{
-    data: BaseTransferRecipientResponse[];
-  } & PaginationMetadata>;
+  export type ListTransferRecipientResponse = BaseResponse<BaseTransferRecipientResponse[] & PaginationMetadata>;
   
   export interface FetchTransferRecipientPayload {
     /** An ID or code for the recipient whose details you want to receive. */

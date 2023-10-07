@@ -76,15 +76,10 @@ import {
     updatedAt: Date;
   }
   
-  export type CreateSubaccountResponse = BaseResponse<{
-    data: SubaccountData;
-  }>;
+  export type CreateSubaccountResponse = BaseResponse<SubaccountData>;
   
   export interface ListSubaccountQuery extends BaseQuery {}
-  export type ListSubaccountResponse = BaseResponse<
-    PaginationMetadata & {
-      data: SubaccountData[];
-    }>;
+  export type ListSubaccountResponse = BaseResponse<PaginationMetadata & SubaccountData[]>;
   
   export type FetchSubAccountResponse = CreateSubaccountResponse;
   

@@ -1,7 +1,7 @@
 /** ===========CHARGE============= */
 
 import { TransactionResponse } from "../transaction";
-import {  BaseResponse } from "../types";
+import { BaseResponse } from "../types";
 
 export interface BaseChargePayload {
   /**
@@ -102,12 +102,10 @@ type ChargeDataStatus =
   | "send_otp"
   | "send_address"
   | "send_birthday";
-export type BaseChargeResponse = BaseResponse< {
-  data: {
-    reference: string;
-    status: ChargeDataStatus;
-    display_text: string;
-  };
+export type BaseChargeResponse = BaseResponse<{
+  reference: string;
+  status: ChargeDataStatus;
+  display_text: string;
 }>;
 
 export abstract class BaseCharges {
