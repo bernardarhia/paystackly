@@ -1,3 +1,5 @@
+import { BaseResponse } from "../types";
+
 export abstract class BaseDedicatedVirtualAccount {
   abstract create(payload: any): Promise<any>;
   abstract assign(payload: any): Promise<any>;
@@ -7,5 +9,14 @@ export abstract class BaseDedicatedVirtualAccount {
   abstract deactivate(params: any): Promise<any>;
   abstract splitTransaction(payload: any): Promise<any>;
   abstract removeSplitTransaction(payload: any): Promise<any>;
-  abstract fetchBankProviders(): Promise<any>;
+  abstract fetchBankProviders(): Promise<FetchBankProvidersResponse>;
 }
+
+export type FetchBankProvidersResponse = BaseResponse<
+  {
+    provider_slug: string;
+    bank_id: number;
+    bank_name: string;
+    id: number;
+  }[]
+>;
