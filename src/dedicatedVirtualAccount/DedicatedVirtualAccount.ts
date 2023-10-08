@@ -1,6 +1,7 @@
 import { Http } from "../core/Http";
 import {
   BaseDedicatedVirtualAccount,
+  DeactivateDedicatedAccountParams,
   FetchBankProvidersResponse,
   RemoveSplitTransactionPayload,
   RemoveSplitTransactionResponse,
@@ -32,6 +33,14 @@ export class DedicatedVirtualAccount extends BaseDedicatedVirtualAccount {
     return await Http.post<SplitTransactionPayload, SplitTransactionResponse>(
       `${this.endpoint}/split`,
       payload
+    );
+  }
+
+  async deactivate(
+    params: DeactivateDedicatedAccountParams
+  ): Promise<SplitTransactionResponse> {
+    return await Http.delete<null, SplitTransactionResponse>(
+      `${this.endpoint}/${params.dedicated_account_id}`
     );
   }
 }
