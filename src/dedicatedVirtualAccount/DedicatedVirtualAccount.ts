@@ -2,6 +2,8 @@ import { Http } from "../core/Http";
 import {
   BaseDedicatedVirtualAccount,
   FetchBankProvidersResponse,
+  RemoveSplitTransactionPayload,
+  RemoveSplitTransactionResponse,
 } from "./type";
 
 export class DedicatedVirtualAccount extends BaseDedicatedVirtualAccount {
@@ -11,5 +13,13 @@ export class DedicatedVirtualAccount extends BaseDedicatedVirtualAccount {
     return await Http.get<FetchBankProvidersResponse>(
       `${this.endpoint}/available_providers`
     );
+  }
+  async removeSplitTransaction(
+    payload: RemoveSplitTransactionPayload
+  ): Promise<RemoveSplitTransactionResponse> {
+    return await Http.delete<
+      RemoveSplitTransactionPayload,
+      RemoveSplitTransactionResponse
+    >(`${this.endpoint}/split`, payload);
   }
 }
