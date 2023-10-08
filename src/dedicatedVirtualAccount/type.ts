@@ -8,7 +8,9 @@ export abstract class BaseDedicatedVirtualAccount {
   abstract queryAccount(params: any): Promise<any>;
   abstract deactivate(params: any): Promise<any>;
   abstract splitTransaction(payload: any): Promise<any>;
-  abstract removeSplitTransaction(payload: any): Promise<any>;
+  abstract removeSplitTransaction(
+    payload: RemoveSplitTransactionPayload
+  ): Promise<RemoveSplitTransactionResponse>;
   abstract fetchBankProviders(): Promise<FetchBankProvidersResponse>;
 }
 
@@ -20,3 +22,20 @@ export type FetchBankProvidersResponse = BaseResponse<
     id: number;
   }[]
 >;
+
+export interface RemoveSplitTransactionPayload {
+  /* Dedicated virtual account number */
+  account_number: string;
+}
+
+export type RemoveSplitTransactionResponse = BaseResponse<{
+  id: number;
+  split_config: Object;
+  account_name: string;
+  account_number: string;
+  currency: string;
+  assigned: boolean;
+  active: boolean;
+  createdAt: string;
+  updatedAt: string;
+}>;
