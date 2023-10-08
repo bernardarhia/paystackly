@@ -2,6 +2,7 @@ import { Http } from "../core/Http";
 import { BasePaystackResponse } from "../types";
 import { formatQueryParams } from "../utils";
 import {
+  AssignDedicatedVirtualAccountPayload,
   BaseDedicatedVirtualAccount,
   DeactivateDedicatedAccountParams,
   FetchBankProvidersResponse,
@@ -74,5 +75,17 @@ export class DedicatedVirtualAccount extends BaseDedicatedVirtualAccount {
     return await Http.get<ListDedicatedVirtualAccountResponse>(
       `${this.endpoint}${formattedQuery}`
     );
+  }
+
+  /**
+   * We currently support Wema Bank and Titan Paystack.
+   */
+  async assign(
+    payload: AssignDedicatedVirtualAccountPayload
+  ): Promise<BasePaystackResponse> {
+    return await Http.post<
+      AssignDedicatedVirtualAccountPayload,
+      BasePaystackResponse
+    >(`${this.endpoint}/assign`, payload);
   }
 }
