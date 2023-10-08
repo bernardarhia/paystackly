@@ -4,6 +4,8 @@ import { formatQueryParams } from "../utils";
 import {
   AssignDedicatedVirtualAccountPayload,
   BaseDedicatedVirtualAccount,
+  CreateDedicatedVirtualAccountPayload,
+  CreateDedicatedVirtualAccountResponse,
   DeactivateDedicatedAccountParams,
   FetchBankProvidersResponse,
   FetchDedicatedVirtualResponse,
@@ -16,6 +18,10 @@ import {
   SplitTransactionResponse,
 } from "./type";
 
+/**
+ * The Dedicated Virtual Account API enables Nigerian merchants to
+ * manage unique payment accounts of their customers.
+ */
 export class DedicatedVirtualAccount extends BaseDedicatedVirtualAccount {
   private endpoint = "/dedicated_account";
 
@@ -87,5 +93,14 @@ export class DedicatedVirtualAccount extends BaseDedicatedVirtualAccount {
       AssignDedicatedVirtualAccountPayload,
       BasePaystackResponse
     >(`${this.endpoint}/assign`, payload);
+  }
+
+  async create(
+    payload: CreateDedicatedVirtualAccountPayload
+  ): Promise<CreateDedicatedVirtualAccountResponse> {
+    return Http.post<
+      CreateDedicatedVirtualAccountPayload,
+      CreateDedicatedVirtualAccountResponse
+    >(this.endpoint, payload);
   }
 }
