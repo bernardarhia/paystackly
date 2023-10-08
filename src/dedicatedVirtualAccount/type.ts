@@ -6,7 +6,9 @@ export abstract class BaseDedicatedVirtualAccount {
   abstract list(payload: any): Promise<any>;
   abstract fetch(params: any): Promise<any>;
   abstract queryAccount(params: any): Promise<any>;
-  abstract deactivate(params: any): Promise<any>;
+  abstract deactivate(
+    params: DeactivateDedicatedAccountParams
+  ): Promise<SplitTransactionResponse>;
   abstract splitTransaction(
     payload: SplitTransactionPayload
   ): Promise<SplitTransactionResponse>;
@@ -94,3 +96,8 @@ export type SplitTransactionResponse = BaseResponse<{
     risk_action: string;
   };
 }>;
+
+export interface DeactivateDedicatedAccountParams {
+  /* ID of dedicated virtual account */
+  dedicated_account_id: number;
+}
