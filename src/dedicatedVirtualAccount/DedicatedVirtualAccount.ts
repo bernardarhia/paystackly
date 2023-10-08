@@ -4,6 +4,8 @@ import {
   FetchBankProvidersResponse,
   RemoveSplitTransactionPayload,
   RemoveSplitTransactionResponse,
+  SplitTransactionPayload,
+  SplitTransactionResponse,
 } from "./type";
 
 export class DedicatedVirtualAccount extends BaseDedicatedVirtualAccount {
@@ -14,6 +16,7 @@ export class DedicatedVirtualAccount extends BaseDedicatedVirtualAccount {
       `${this.endpoint}/available_providers`
     );
   }
+
   async removeSplitTransaction(
     payload: RemoveSplitTransactionPayload
   ): Promise<RemoveSplitTransactionResponse> {
@@ -21,5 +24,14 @@ export class DedicatedVirtualAccount extends BaseDedicatedVirtualAccount {
       RemoveSplitTransactionPayload,
       RemoveSplitTransactionResponse
     >(`${this.endpoint}/split`, payload);
+  }
+
+  async splitTransaction(
+    payload: SplitTransactionPayload
+  ): Promise<SplitTransactionResponse> {
+    return await Http.post<SplitTransactionPayload, SplitTransactionResponse>(
+      `${this.endpoint}/split`,
+      payload
+    );
   }
 }
