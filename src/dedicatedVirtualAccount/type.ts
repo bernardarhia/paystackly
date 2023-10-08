@@ -1,9 +1,16 @@
-import { BasePaystackResponse, BaseResponse } from "../types";
+import {
+  BasePaystackResponse,
+  BaseQuery,
+  BaseResponse,
+  PaginationMetadata,
+} from "../types";
 
 export abstract class BaseDedicatedVirtualAccount {
   abstract create(payload: any): Promise<any>;
   abstract assign(payload: any): Promise<any>;
-  abstract list(payload: any): Promise<any>;
+  abstract list(
+    payload: ListDedicatedVirtualAccountParams
+  ): Promise<ListDedicatedVirtualAccountResponse>;
   abstract fetch(
     params: FetchDedicatedVirtualAccountParam
   ): Promise<FetchDedicatedVirtualResponse>;
@@ -165,3 +172,52 @@ export type FetchDedicatedVirtualResponse = BaseResponse<{
     };
   };
 }>;
+
+export interface ListDedicatedVirtualAccountParams extends BaseQuery {
+  /* Status of the dedicated virtual account */
+  active: boolean;
+
+  /* The currency of the dedicated virtual account. Only NGN is currently allowed */
+  currency: "NGN";
+
+  /* The bank's slug in lowercase, without spaces e.g. wema-bank */
+  provider_slug?: string;
+
+  /* The bank's ID e.g. 035 */
+  bank_id?: string;
+
+  /* The customer's ID */
+  customer?: string;
+}
+
+export type ListDedicatedVirtualAccountResponse = BaseResponse<
+  {
+    customer: {
+      id: number;
+      first_name: string;
+      last_name: string;
+      email: string;
+      customer_code: string;
+      phone: string;
+      risk_action: string;
+      international_format_phone: null | string;
+    };
+    bank: {
+      name: string;
+      id: number;
+      slug: string;
+    };
+    id: number;
+    account_name: string;
+    account_number: string;
+    created_at: string;
+    updated_at: string;
+    currency: string;
+    split_config: {
+      subaccount: string;
+    };
+    active: boolean;
+    assigned: boolean;
+  }[] &
+    PaginationMetadata
+>;
