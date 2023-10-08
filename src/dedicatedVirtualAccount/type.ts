@@ -4,7 +4,9 @@ export abstract class BaseDedicatedVirtualAccount {
   abstract create(payload: any): Promise<any>;
   abstract assign(payload: any): Promise<any>;
   abstract list(payload: any): Promise<any>;
-  abstract fetch(params: any): Promise<any>;
+  abstract fetch(
+    params: FetchDedicatedVirtualAccountParam
+  ): Promise<FetchDedicatedVirtualResponse>;
   abstract queryAccount(
     params: QueryDedicatedAccountParams
   ): Promise<QueryDedicatedAccountResponse>;
@@ -116,3 +118,50 @@ export interface QueryDedicatedAccountParams {
 }
 
 export type QueryDedicatedAccountResponse = BasePaystackResponse;
+
+export type FetchDedicatedVirtualAccountParam =
+  DeactivateDedicatedAccountParams;
+
+export type FetchDedicatedVirtualResponse = BaseResponse<{
+  transactions: unknown[];
+  subscriptions: unknown[];
+  authorizations: unknown[];
+  first_name: null | string;
+  last_name: null | string;
+  email: string;
+  phone: null | string;
+  metadata: null | Object;
+  domain: string;
+  customer_code: string;
+  risk_action: string;
+  id: number;
+  integration: number;
+  createdAt: string;
+  updatedAt: string;
+  created_at: string;
+  updated_at: string;
+  total_transactions: number;
+  total_transaction_value: unknown[];
+  dedicated_account: {
+    id: number;
+    account_name: string;
+    account_number: string;
+    created_at: string;
+    updated_at: string;
+    currency: string;
+    active: boolean;
+    assigned: boolean;
+    provider: {
+      id: number;
+      provider_slug: string;
+      bank_id: number;
+      bank_name: string;
+    };
+    assignment: {
+      assignee_id: number;
+      assignee_type: string;
+      account_type: string;
+      integration: number;
+    };
+  };
+}>;
