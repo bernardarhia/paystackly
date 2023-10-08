@@ -6,7 +6,9 @@ import {
 } from "../types";
 
 export abstract class BaseDedicatedVirtualAccount {
-  abstract create(payload: any): Promise<any>;
+  abstract create(
+    payload: CreateDedicatedVirtualAccountPayload
+  ): Promise<CreateDedicatedVirtualAccountResponse>;
   abstract assign(
     payload: AssignDedicatedVirtualAccountPayload
   ): Promise<AssignDedicatedVirtualAccountResponse>;
@@ -260,3 +262,60 @@ export interface AssignDedicatedVirtualAccountPayload {
 }
 
 export type AssignDedicatedVirtualAccountResponse = BasePaystackResponse;
+
+export interface CreateDedicatedVirtualAccountPayload {
+  /* Customer ID or code */
+  customer: string;
+
+  /* The bank slug for preferred bank. To get a list of available banks, use the List Banks endpoint, passing pay_with_bank_transfer=true query parameter */
+  preferred_bank?: string;
+
+  /* Subaccount code of the account you want to split the transaction with */
+  subaccount?: string;
+
+  /* Split code consisting of the lists of accounts you want to split the transaction with */
+  split_code?: string;
+
+  /* Customer's first name */
+  first_name?: string;
+
+  /* Customer's last name */
+  last_name?: string;
+
+  /* Customer's phone number */
+  phone?: string;
+}
+
+export type CreateDedicatedVirtualAccountResponse = BaseResponse<{
+  bank: {
+    name: string;
+    id: number;
+    slug: string;
+  };
+  account_name: string;
+  account_number: string;
+  assigned: boolean;
+  currency: string;
+  metadata: null | Object;
+  active: boolean;
+  id: number;
+  created_at: string;
+  updated_at: string;
+  assignment: {
+    integration: number;
+    assignee_id: number;
+    assignee_type: string;
+    expired: boolean;
+    account_type: string;
+    assigned_at: string;
+  };
+  customer: {
+    id: number;
+    first_name: string;
+    last_name: string;
+    email: string;
+    customer_code: string;
+    phone: string;
+    risk_action: string;
+  };
+}>;
