@@ -5,6 +5,7 @@ import {
   BaseDedicatedVirtualAccount,
   DeactivateDedicatedAccountParams,
   FetchBankProvidersResponse,
+  FetchDedicatedVirtualResponse,
   QueryDedicatedAccountParams,
   RemoveSplitTransactionPayload,
   RemoveSplitTransactionResponse,
@@ -53,6 +54,14 @@ export class DedicatedVirtualAccount extends BaseDedicatedVirtualAccount {
     const formattedQuery = formatQueryParams(params);
     return await Http.get<BasePaystackResponse>(
       `${this.endpoint}/requery${formattedQuery}`
+    );
+  }
+
+  async fetch(
+    params: DeactivateDedicatedAccountParams
+  ): Promise<FetchDedicatedVirtualResponse> {
+    return await Http.get<FetchDedicatedVirtualResponse>(
+      `${this.endpoint}/${params.dedicated_account_id}`
     );
   }
 }
