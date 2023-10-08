@@ -1,8 +1,11 @@
 import { Http } from "../core/Http";
+import { BasePaystackResponse } from "../types";
+import { formatQueryParams } from "../utils";
 import {
   BaseDedicatedVirtualAccount,
   DeactivateDedicatedAccountParams,
   FetchBankProvidersResponse,
+  QueryDedicatedAccountParams,
   RemoveSplitTransactionPayload,
   RemoveSplitTransactionResponse,
   SplitTransactionPayload,
@@ -41,6 +44,15 @@ export class DedicatedVirtualAccount extends BaseDedicatedVirtualAccount {
   ): Promise<SplitTransactionResponse> {
     return await Http.delete<null, SplitTransactionResponse>(
       `${this.endpoint}/${params.dedicated_account_id}`
+    );
+  }
+
+  async queryAccount(
+    params: QueryDedicatedAccountParams
+  ): Promise<BasePaystackResponse> {
+    const formattedQuery = formatQueryParams(params);
+    return await Http.get<BasePaystackResponse>(
+      `${this.endpoint}/requery${formattedQuery}`
     );
   }
 }
