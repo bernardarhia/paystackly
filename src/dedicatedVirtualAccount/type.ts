@@ -1,11 +1,13 @@
-import { BaseResponse } from "../types";
+import { BasePaystackResponse, BaseResponse } from "../types";
 
 export abstract class BaseDedicatedVirtualAccount {
   abstract create(payload: any): Promise<any>;
   abstract assign(payload: any): Promise<any>;
   abstract list(payload: any): Promise<any>;
   abstract fetch(params: any): Promise<any>;
-  abstract queryAccount(params: any): Promise<any>;
+  abstract queryAccount(
+    params: QueryDedicatedAccountParams
+  ): Promise<QueryDedicatedAccountResponse>;
   abstract deactivate(
     params: DeactivateDedicatedAccountParams
   ): Promise<SplitTransactionResponse>;
@@ -101,3 +103,16 @@ export interface DeactivateDedicatedAccountParams {
   /* ID of dedicated virtual account */
   dedicated_account_id: number;
 }
+
+export interface QueryDedicatedAccountParams {
+  /* Virtual account number to requery */
+  account_number: string;
+
+  /* The bank's slug in lowercase, without spaces e.g. wema-bank */
+  provider_slug: string;
+
+  /* The day the transfer was made in YYYY-MM-DD format */
+  date?: string;
+}
+
+export type QueryDedicatedAccountResponse = BasePaystackResponse;
