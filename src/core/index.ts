@@ -14,6 +14,7 @@ import { TransferRecipient } from "../transferRecipient/TransferRecipient";
 import { Terminal } from "../terminal/Terminal";
 import { Customer } from "../customer/Customer";
 import { Verification } from "../verification/Verification";
+import { Product } from "../product";
 
 const PaystackClasses = [
   Transaction,
@@ -28,7 +29,8 @@ const PaystackClasses = [
   TransferRecipient,
   Terminal,
   Customer,
-  Verification
+  Verification,
+  Product,
 ];
 abstract class PaystackBase {
   abstract transaction: Transaction;
@@ -40,7 +42,8 @@ abstract class PaystackBase {
   abstract applePay: ApplePay;
   abstract transactionSplit: TransactionSplit;
   abstract subAccount: SubAccount;
-  abstract verification: Verification
+  abstract verification: Verification;
+  abstract product: Product;
 }
 // Define the types for the properties
 type PaystackInstance = InstanceType<(typeof PaystackClasses)[number]>;
@@ -59,6 +62,7 @@ export class PayStack extends PaystackBase {
   readonly terminal: Terminal;
   readonly customer: Customer;
   readonly verification: Verification;
+  readonly product: Product;
   [key: string]: PaystackInstance;
 
   constructor(token: string) {
