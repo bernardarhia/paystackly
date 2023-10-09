@@ -32,4 +32,11 @@ export class Plan extends BasePlan {
     const formatedQuery = formatQueryParams(query);
     return Http.get<ListPlansResponse>(`${this.endpoint}${formatedQuery}`);
   }
+
+  async create(payload: PlanPayload): Promise<BasePaystackResponse> {
+    return Http.post<PlanPayload, BasePaystackResponse>(
+      `${this.endpoint}`,
+      payload
+    );
+  }
 }
