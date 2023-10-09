@@ -1,6 +1,7 @@
 import { Http } from "../core/Http";
 import {
   BaseProduct,
+  FetchProductResponse,
   ProductIdParama,
   ProductUpdatePayload,
   ProductUpdateResponse,
@@ -17,5 +18,9 @@ export class Product extends BaseProduct {
       `${this.endpoint}/${param.id}`,
       payload
     );
+  }
+
+  async fetch(param: ProductIdParama): Promise<FetchProductResponse> {
+    return Http.get<FetchProductResponse>(`${this.endpoint}/${param.id}`);
   }
 }
