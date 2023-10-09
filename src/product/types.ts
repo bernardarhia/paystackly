@@ -3,7 +3,7 @@ import { BaseResponse } from "../types";
 export abstract class BaseProduct {
   abstract create(payload: any): Promise<any>;
   abstract list(query: any): Promise<any>;
-  abstract fetch(param: any): Promise<any>;
+  abstract fetch(param: ProductIdParama): Promise<FetchProductResponse>;
   abstract update(
     param: ProductIdParama,
     payload: ProductUpdatePayload
@@ -31,7 +31,7 @@ export interface ProductIdParama {
   id: string;
 }
 
-export type ProductUpdateResponse = BaseResponse<{
+export interface IProductData {
   digital_assets: unknown[];
   integration: number;
   name: string;
@@ -67,4 +67,7 @@ export type ProductUpdateResponse = BaseResponse<{
   id: number;
   createdAt: string;
   updatedAt: string;
-}>;
+}
+
+export type ProductUpdateResponse = BaseResponse<IProductData>;
+export type FetchProductResponse = BaseResponse<IProductData>;
