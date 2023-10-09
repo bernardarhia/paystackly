@@ -1,6 +1,12 @@
 import { Http } from "../core/Http";
 import { BasePaystackResponse } from "../types";
-import { BasePlan, PlanIdParam, PlanPayload, PlanUpdateResponse } from "./type";
+import {
+  BasePlan,
+  FetchPlanResponse,
+  PlanIdParam,
+  PlanPayload,
+  PlanUpdateResponse,
+} from "./type";
 
 export class Plan extends BasePlan {
   private endpoint = "/plan";
@@ -13,5 +19,9 @@ export class Plan extends BasePlan {
       `${this.endpoint}/${param.id_or_code}`,
       payload
     );
+  }
+
+  async fetch(param: PlanIdParam): Promise<FetchPlanResponse> {
+    return Http.get<FetchPlanResponse>(`${this.endpoint}/${param.id_or_code}`);
   }
 }
