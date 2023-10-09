@@ -1,8 +1,8 @@
-import { BaseResponse } from "../types";
+import { BaseQuery, BaseResponse, PaginationMetadata } from "../types";
 
 export abstract class BaseProduct {
   abstract create(payload: any): Promise<any>;
-  abstract list(query: any): Promise<any>;
+  abstract list(query: BaseQuery): Promise<ListProductsResponse>;
   abstract fetch(param: ProductIdParama): Promise<FetchProductResponse>;
   abstract update(
     param: ProductIdParama,
@@ -45,9 +45,7 @@ export interface IProductData {
   files: null | unknown[];
   file_path: null | string;
   is_shippable: boolean;
-  shipping_fields: {
-    delivery_note: string;
-  };
+  shipping_fields: Object;
   unlimited: boolean;
   domain: string;
   active: boolean;
@@ -71,3 +69,6 @@ export interface IProductData {
 
 export type ProductUpdateResponse = BaseResponse<IProductData>;
 export type FetchProductResponse = BaseResponse<IProductData>;
+export type ListProductsResponse = BaseResponse<
+  IProductData[] & PaginationMetadata
+>;
