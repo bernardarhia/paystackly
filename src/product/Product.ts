@@ -5,8 +5,9 @@ import {
   BaseProduct,
   FetchProductResponse,
   ListProductsResponse,
+  ProductCreateResponse,
   ProductIdParama,
-  ProductUpdatePayload,
+  ProductPayload,
   ProductUpdateResponse,
 } from "./types";
 
@@ -15,9 +16,9 @@ export class Product extends BaseProduct {
 
   async update(
     param: ProductIdParama,
-    payload: ProductUpdatePayload
+    payload: ProductPayload
   ): Promise<ProductUpdateResponse> {
-    return Http.put<ProductUpdatePayload, ProductUpdateResponse>(
+    return Http.put<ProductPayload, ProductUpdateResponse>(
       `${this.endpoint}/${param.id}`,
       payload
     );
@@ -30,5 +31,12 @@ export class Product extends BaseProduct {
   async list(query: BaseQuery): Promise<ListProductsResponse> {
     const formattedQuery = formatQueryParams(query);
     return Http.get<ListProductsResponse>(`${this.endpoint}${formattedQuery}`);
+  }
+
+  async create(payload: ProductPayload): Promise<ProductCreateResponse> {
+    return Http.post<ProductPayload, ProductCreateResponse>(
+      `${this.endpoint}`,
+      payload
+    );
   }
 }
