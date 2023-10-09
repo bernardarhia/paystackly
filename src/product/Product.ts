@@ -1,7 +1,10 @@
 import { Http } from "../core/Http";
+import { BaseQuery } from "../types";
+import { formatQueryParams } from "../utils";
 import {
   BaseProduct,
   FetchProductResponse,
+  ListProductsResponse,
   ProductIdParama,
   ProductUpdatePayload,
   ProductUpdateResponse,
@@ -22,5 +25,10 @@ export class Product extends BaseProduct {
 
   async fetch(param: ProductIdParama): Promise<FetchProductResponse> {
     return Http.get<FetchProductResponse>(`${this.endpoint}/${param.id}`);
+  }
+
+  async list(query: BaseQuery): Promise<ListProductsResponse> {
+    const formattedQuery = formatQueryParams(query);
+    return Http.get<ListProductsResponse>(`${this.endpoint}${formattedQuery}`);
   }
 }
