@@ -1,7 +1,12 @@
-import { BasePaystackResponse, BaseResponse } from "../types";
+import {
+  BasePaystackResponse,
+  BaseQuery,
+  BaseResponse,
+  PaginationMetadata,
+} from "../types";
 
 export abstract class BasePlan {
-  abstract list(query: any): Promise<any>;
+  abstract list(query: ListPlansQuery): Promise<ListPlansResponse>;
   abstract create(payload: any): Promise<any>;
   abstract fetch(param: PlanIdParam): Promise<FetchPlanResponse>;
   abstract update(
@@ -65,3 +70,18 @@ export type IPlan = {
 };
 
 export type FetchPlanResponse = BaseResponse<IPlan>;
+
+export interface ListPlansQuery {
+  /* Specify how many records you want to retrieve per page. If not specify we use a default value of 50.*/
+  perPage: number;
+  /* Specify exactly what page you want to retrieve. If not specify we use a default value of 1.*/
+  page: number;
+  /* Filter list by plans with specified status*/
+  status?: string;
+  /* Filter list by plans with specified interval*/
+  interval?: string;
+  /* Filter list by plans with specified amount using the supported currency */
+  amount?: number;
+}
+
+export type ListPlansResponse = BaseResponse<IPlan[] & PaginationMetadata>;
