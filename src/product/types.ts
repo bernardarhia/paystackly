@@ -1,16 +1,16 @@
 import { BaseQuery, BaseResponse, PaginationMetadata } from "../types";
 
 export abstract class BaseProduct {
-  abstract create(payload: any): Promise<any>;
+  abstract create(payload: ProductPayload): Promise<ProductCreateResponse>;
   abstract list(query: BaseQuery): Promise<ListProductsResponse>;
   abstract fetch(param: ProductIdParama): Promise<FetchProductResponse>;
   abstract update(
     param: ProductIdParama,
-    payload: ProductUpdatePayload
+    payload: ProductPayload
   ): Promise<ProductUpdateResponse>;
 }
 
-export interface ProductUpdatePayload {
+export interface ProductPayload {
   /* Name of product */
   name: string;
   /* A description for this product */
@@ -72,3 +72,4 @@ export type FetchProductResponse = BaseResponse<IProductData>;
 export type ListProductsResponse = BaseResponse<
   IProductData[] & PaginationMetadata
 >;
+export type ProductCreateResponse = BaseResponse<IProductData>;
