@@ -1,13 +1,12 @@
 import {
   BasePaystackResponse,
-  BaseQuery,
   BaseResponse,
   PaginationMetadata,
 } from "../types";
 
 export abstract class BasePlan {
   abstract list(query: ListPlansQuery): Promise<ListPlansResponse>;
-  abstract create(payload: any): Promise<any>;
+  abstract create(payload: PlanPayload): Promise<CreatePlanResponse>;
   abstract fetch(param: PlanIdParam): Promise<FetchPlanResponse>;
   abstract update(
     param: PlanIdParam,
@@ -85,3 +84,4 @@ export interface ListPlansQuery {
 }
 
 export type ListPlansResponse = BaseResponse<IPlan[] & PaginationMetadata>;
+export type CreatePlanResponse = BasePaystackResponse;
