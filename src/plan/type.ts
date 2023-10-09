@@ -1,9 +1,9 @@
-import { BasePaystackResponse } from "../types";
+import { BasePaystackResponse, BaseResponse } from "../types";
 
 export abstract class BasePlan {
   abstract list(query: any): Promise<any>;
   abstract create(payload: any): Promise<any>;
-  abstract fetch(param: any): Promise<any>;
+  abstract fetch(param: PlanIdParam): Promise<FetchPlanResponse>;
   abstract update(
     param: PlanIdParam,
     payload: PlanPayload
@@ -43,3 +43,25 @@ export interface PlanPayload {
 }
 
 export type PlanUpdateResponse = BasePaystackResponse;
+
+export type IPlan = {
+  subscriptions: unknown[];
+  integration: number;
+  domain: string;
+  name: string;
+  plan_code: string;
+  description: null | string;
+  amount: number;
+  interval: string;
+  send_invoices: boolean;
+  send_sms: boolean;
+  hosted_page: boolean;
+  hosted_page_url: null | string;
+  hosted_page_summary: null | string;
+  currency: string;
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type FetchPlanResponse = BaseResponse<IPlan>;
