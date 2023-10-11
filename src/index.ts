@@ -15,3 +15,4 @@ export * from "./transferControl";
 export * from "./transferRecipient";
 export * from "./verification";
 export * from "./plan";
+export * from "./dedicatedVirtualAccount";
