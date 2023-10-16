@@ -15,6 +15,8 @@ import { Terminal } from "../terminal/Terminal";
 import { Customer } from "../customer/Customer";
 import { Verification } from "../verification/Verification";
 import { Product } from "../product";
+import { Plan } from "../plan";
+import { DedicatedVirtualAccount } from "../dedicatedVirtualAccount";
 
 const PaystackClasses = [
   Transaction,
@@ -31,6 +33,8 @@ const PaystackClasses = [
   Customer,
   Verification,
   Product,
+  Plan,
+  DedicatedVirtualAccount,
 ];
 abstract class PaystackBase {
   abstract transaction: Transaction;
@@ -44,6 +48,8 @@ abstract class PaystackBase {
   abstract subAccount: SubAccount;
   abstract verification: Verification;
   abstract product: Product;
+  abstract plan: Plan;
+  abstract dedicatedVirtualAccount: DedicatedVirtualAccount;
 }
 // Define the types for the properties
 type PaystackInstance = InstanceType<(typeof PaystackClasses)[number]>;
@@ -63,6 +69,8 @@ export class PayStack extends PaystackBase {
   readonly customer: Customer;
   readonly verification: Verification;
   readonly product: Product;
+  readonly plan: Plan;
+  readonly dedicatedVirtualAccount: DedicatedVirtualAccount;
   [key: string]: PaystackInstance;
 
   constructor(token: string) {

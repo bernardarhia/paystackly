@@ -50,4 +50,11 @@ describe("Paystack class", () => {
   it("should have property product", () => {
     expect(paystack).to.have.property("product");
   });
+  it("should have property plan", () => {
+    expect(paystack).to.have.property("plan");
+  });
+
+  it("should have property dedicatedVirtualAccount", () => {
+    expect(paystack).to.have.property("dedicatedVirtualAccount");
+  });
 });
