@@ -14,6 +14,7 @@ import { TransferRecipient } from "../transferRecipient/TransferRecipient";
 import { Terminal } from "../terminal/Terminal";
 import { Customer } from "../customer/Customer";
 import { Verification } from "../verification/Verification";
+import { Plan } from "../plan";
 import { DedicatedVirtualAccount } from "../dedicatedVirtualAccount";
 
 const PaystackClasses = [
@@ -30,6 +31,7 @@ const PaystackClasses = [
   Terminal,
   Customer,
   Verification,
+  Plan,
   DedicatedVirtualAccount,
 ];
 abstract class PaystackBase {
@@ -43,6 +45,7 @@ abstract class PaystackBase {
   abstract transactionSplit: TransactionSplit;
   abstract subAccount: SubAccount;
   abstract verification: Verification;
+  abstract plan: Plan;
   abstract dedicatedVirtualAccount: DedicatedVirtualAccount;
 }
 // Define the types for the properties
@@ -62,6 +65,7 @@ export class PayStack extends PaystackBase {
   readonly terminal: Terminal;
   readonly customer: Customer;
   readonly verification: Verification;
+  readonly plan: Plan;
   readonly dedicatedVirtualAccount: DedicatedVirtualAccount;
   [key: string]: PaystackInstance;
 
