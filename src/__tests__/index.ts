@@ -47,6 +47,9 @@ describe("Paystack class", () => {
     expect(paystack).to.have.property("integration");
   });
 
+  it("should have property product", () => {
+    expect(paystack).to.have.property("product");
+  });
   it("should have property plan", () => {
     expect(paystack).to.have.property("plan");
   });
