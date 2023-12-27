@@ -22,7 +22,7 @@ export class Charges extends BaseCharges {
   }
   async chargeWithMobileMoney(
     payload: ChargeWithMobileMoneyPayload
-  ): Promise<BaseChargeResponse | TransactionResponse> {
+  ): Promise<BaseChargeResponse> {
     return await this.basePostChargeRequest<ChargeWithMobileMoneyPayload>(
       this.endpoint,
       payload
@@ -30,7 +30,7 @@ export class Charges extends BaseCharges {
   }
   async chargeWithBank(
     payload: ChargeWithBankPayload
-  ): Promise<BaseChargeResponse | TransactionResponse> {
+  ): Promise<BaseChargeResponse> {
     return await this.basePostChargeRequest<ChargeWithBankPayload>(
       this.endpoint,
       payload
@@ -38,7 +38,7 @@ export class Charges extends BaseCharges {
   }
   async chargeWithUssd(
     payload: ChargeWithUSSDPayload
-  ): Promise<BaseChargeResponse | TransactionResponse> {
+  ): Promise<BaseChargeResponse> {
     return await this.basePostChargeRequest<ChargeWithUSSDPayload>(
       this.endpoint,
       payload
@@ -46,7 +46,7 @@ export class Charges extends BaseCharges {
   }
   async chargeWithCard(
     payload: ChargeWithCardPayload
-  ): Promise<BaseChargeResponse | TransactionResponse> {
+  ): Promise<BaseChargeResponse> {
     return await this.basePostChargeRequest<ChargeWithCardPayload>(
       this.endpoint,
       payload
@@ -55,8 +55,8 @@ export class Charges extends BaseCharges {
 
   async submitPin(
     payload: SubmitChargePinPayload
-  ): Promise<BaseChargeResponse | TransactionResponse> {
-    return await this.basePostChargeRequest<SubmitChargePinPayload>(
+  ): Promise<TransactionResponse> {
+    return await this.basePostChargeFinalizeRequest<SubmitChargePinPayload>(
       `${this.endpoint}/submit_pin`,
       payload
     );
@@ -64,32 +64,32 @@ export class Charges extends BaseCharges {
 
   async submitOTP(
     payload: SubmitChargeOTPPayload
-  ): Promise<BaseChargeResponse | TransactionResponse> {
-    return await this.basePostChargeRequest<SubmitChargeOTPPayload>(
+  ): Promise<TransactionResponse> {
+    return await this.basePostChargeFinalizeRequest<SubmitChargeOTPPayload>(
       `${this.endpoint}/submit_otp`,
       payload
     );
   }
   async submitPhone(
     payload: SubmitChargePhonePayload
-  ): Promise<BaseChargeResponse | TransactionResponse> {
-    return await this.basePostChargeRequest<SubmitChargePhonePayload>(
+  ): Promise<TransactionResponse> {
+    return await this.basePostChargeFinalizeRequest<SubmitChargePhonePayload>(
       `${this.endpoint}/submit_phone`,
       payload
     );
   }
   async submitBirthday(
     payload: SubmitChargeBirthdayPayload
-  ): Promise<BaseChargeResponse | TransactionResponse> {
-    return await this.basePostChargeRequest<SubmitChargeBirthdayPayload>(
+  ): Promise<TransactionResponse> {
+    return await this.basePostChargeFinalizeRequest<SubmitChargeBirthdayPayload>(
       `${this.endpoint}/submit_birthday`,
       payload
     );
   }
   async submitAddress(
     payload: SubmitChargeAddressPayload
-  ): Promise<BaseChargeResponse | TransactionResponse> {
-    return await this.basePostChargeRequest<SubmitChargeAddressPayload>(
+  ): Promise<TransactionResponse> {
+    return await this.basePostChargeFinalizeRequest<SubmitChargeAddressPayload>(
       `${this.endpoint}/submit_address`,
       payload
     );
@@ -102,11 +102,23 @@ export class Charges extends BaseCharges {
   async basePostChargeRequest<T>(
     url: string,
     payload: PayloadWithAmount<T>
-  ): Promise<BaseChargeResponse | TransactionResponse> {
+  ): Promise<BaseChargeResponse> {
     if (payload && "amount" in payload) {
       payload.amount = (payload?.amount as number) * 100;
     }
-    return await Http.post<T, BaseChargeResponse | TransactionResponse>(
+    return await Http.post<T, BaseChargeResponse>(
+      url,
+      payload
+    );
+  }
+  async basePostChargeFinalizeRequest<T>(
+    url: string,
+    payload: PayloadWithAmount<T>
+  ): Promise<TransactionResponse> {
+    if (payload && "amount" in payload) {
+      payload.amount = (payload?.amount as number) * 100;
+    }
+    return await Http.post<T, TransactionResponse>(
       url,
       payload
     );
