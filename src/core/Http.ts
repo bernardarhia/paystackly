@@ -28,8 +28,17 @@ class HttpClient {
       );
       return response.data;
     } catch (error: any) {
-      return error.response.data;
+        return this.processErrorResponse(error);
     }
+  }
+
+  private processErrorResponse(error: any) {
+    if(!error) return null;
+    if(error && error.response && error.response?.data) {
+        return error.response.data
+
+    }
+    throw new Error("There was an error processing your request")
   }
 
   public async post<RequestBody, Response>(
@@ -45,7 +54,7 @@ class HttpClient {
       );
       return response.data;
     } catch (error: any) {
-      return error.response.data;
+     return this.processErrorResponse(error);
     }
   }
 
@@ -62,7 +71,7 @@ class HttpClient {
       );
       return response.data;
     } catch (error: any) {
-      return error.response.data;
+        return this.processErrorResponse(error);
     }
   }
 
@@ -79,7 +88,7 @@ class HttpClient {
       );
       return response.data;
     } catch (error: any) {
-      return error.response.data;
+        return this.processErrorResponse(error);
     }
   }
 }
