@@ -22,7 +22,7 @@ export class Charges extends BaseCharges {
   }
   async chargeWithMobileMoney(
     payload: ChargeWithMobileMoneyPayload
-  ): Promise<BaseChargeResponse> {
+  ): Promise<BaseChargeResponse | TransactionResponse> {
     return await this.basePostChargeRequest<ChargeWithMobileMoneyPayload>(
       this.endpoint,
       payload
@@ -30,7 +30,7 @@ export class Charges extends BaseCharges {
   }
   async chargeWithBank(
     payload: ChargeWithBankPayload
-  ): Promise<BaseChargeResponse> {
+  ): Promise<BaseChargeResponse | TransactionResponse> {
     return await this.basePostChargeRequest<ChargeWithBankPayload>(
       this.endpoint,
       payload
@@ -38,7 +38,7 @@ export class Charges extends BaseCharges {
   }
   async chargeWithUssd(
     payload: ChargeWithUSSDPayload
-  ): Promise<BaseChargeResponse> {
+  ): Promise<BaseChargeResponse | TransactionResponse> {
     return await this.basePostChargeRequest<ChargeWithUSSDPayload>(
       this.endpoint,
       payload
@@ -46,7 +46,7 @@ export class Charges extends BaseCharges {
   }
   async chargeWithCard(
     payload: ChargeWithCardPayload
-  ): Promise<BaseChargeResponse> {
+  ): Promise<BaseChargeResponse | TransactionResponse> {
     return await this.basePostChargeRequest<ChargeWithCardPayload>(
       this.endpoint,
       payload
