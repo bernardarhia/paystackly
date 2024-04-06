@@ -1,5 +1,11 @@
 # paystackly
 
+## 1.1.6
+
+### Patch Changes
+
+- a6167f5: proper error handling
+
 ## 1.1.5
 
 ### Patch Changes
