@@ -23,7 +23,8 @@
     "release": "npm run ci && changeset version && changeset publish",
     "report": "nyc -r text -r lcov report",
     "clean": "rm -rf ./.nyc_output ./node_modules/.cache ./coverage ./dist",
-    "minify": "for file in dist/*/**.js; do terser $file -o ${file%.js}.js --compress --mangle; done"
+    "minify": "for file in dist/*/**.js; do terser $file -o ${file%.js}.js --compress --mangle; done",
+    "add-version": "npx changeset"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.2",
