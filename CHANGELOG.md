@@ -1,5 +1,11 @@
 # paystackly
 
+## 1.1.4
+
+### Patch Changes
+
+- 8715975: fix charge api response
+
 ## 1.1.3
 
 ### Patch Changes
