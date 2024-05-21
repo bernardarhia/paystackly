@@ -1,5 +1,11 @@
 # paystackly
 
+## 1.1.7
+
+### Patch Changes
+
+- b062424: some change
+
 ## 1.1.6
 
 ### Patch Changes
