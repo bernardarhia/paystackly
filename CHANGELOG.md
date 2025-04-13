@@ -1,5 +1,11 @@
 # paystackly
 
+## 1.1.8
+
+### Patch Changes
+
+- e40ecc9: Fixed inconsistency in amount rounding
+
 ## 1.1.7
 
 ### Patch Changes
