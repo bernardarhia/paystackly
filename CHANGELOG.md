@@ -1,5 +1,11 @@
 # paystackly
 
+## 1.1.9
+
+### Patch Changes
+
+- ca2defc: fix the version dump-up
+
 ## 1.1.8
 
 ### Patch Changes
