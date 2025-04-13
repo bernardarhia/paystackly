@@ -9,3 +9,6 @@ export function formatQueryParams(params?: Record<string, any>): string {
 export function transformToCamelCase(input: string) {
   return input.replace(/^[A-Z]/, (match) => match.toLowerCase());
 }
+export const roundAmount = (amount: number): number => {
+  return Number((amount * 100).toFixed(0));
+}
