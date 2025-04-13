@@ -13,7 +13,7 @@ import {
   TransactionTotalQueryParams,
   TransactionTotalResponse,
 } from "./type";
-import { formatQueryParams } from "../utils";
+import { formatQueryParams, roundAmount } from "../utils";
 import { BaseTransactionPayload, ChargeAuthorizationPayload } from "../types";
 
 export class Transaction extends TransactionBase {
@@ -26,7 +26,8 @@ export class Transaction extends TransactionBase {
     payload: BaseTransactionPayload
   ): Promise<InitializeTransactionResponse> {
     try {
-      payload.amount = payload.amount * 100;
+      payload.amount = roundAmount(payload.amount)
+
       return await Http.post<
         BaseTransactionPayload,
         InitializeTransactionResponse
@@ -57,7 +58,7 @@ export class Transaction extends TransactionBase {
     payload: ChargeAuthorizationPayload
   ): Promise<TransactionResponse> {
     try {
-      payload.amount = payload.amount * 100;
+      payload.amount = roundAmount(payload?.amount)
       return await Http.post<ChargeAuthorizationPayload, TransactionResponse>(
         `${this.endpoint}/charge_authorization`,
         payload
@@ -93,7 +94,8 @@ export class Transaction extends TransactionBase {
   async partialDebit(
     payload: PartialDebitPayload
   ): Promise<PartialDebitResponse> {
-    payload.amount = payload.amount * 100;
+    payload.amount = roundAmount(payload.amount)
+
     return await Http.post<PartialDebitPayload, PartialDebitResponse>(
       `${this.endpoint}/partial_debit`,
       payload
