@@ -13,6 +13,7 @@ import {
 } from "./type";
 import { Http } from "../core/Http";
 import { TransactionResponse } from "../transaction";
+import { roundAmount } from "../utils";
 
 type PayloadWithAmount<T> = T & { amount?: number };
 export class Charges extends BaseCharges {
@@ -104,7 +105,7 @@ export class Charges extends BaseCharges {
     payload: PayloadWithAmount<T>
   ): Promise<BaseChargeResponse> {
     if (payload && "amount" in payload) {
-      payload.amount = (payload?.amount as number) * 100;
+      payload.amount = roundAmount(payload?.amount as number)
     }
     return await Http.post<T, BaseChargeResponse>(
       url,
@@ -116,7 +117,7 @@ export class Charges extends BaseCharges {
     payload: PayloadWithAmount<T>
   ): Promise<TransactionResponse> {
     if (payload && "amount" in payload) {
-      payload.amount = (payload?.amount as number) * 100;
+      payload.amount = roundAmount(payload?.amount as number)
     }
     return await Http.post<T, TransactionResponse>(
       url,
